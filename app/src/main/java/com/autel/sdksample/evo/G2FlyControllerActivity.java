@@ -252,7 +252,7 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
             Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
             return;
         }
-        mEvoFlyController.setVisualViewPointSpeed(Float.valueOf(value), new CallbackWithNoParam() {
+        mEvoFlyController.setVisualViewPointSpeed(Float.parseFloat(value), new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
                 logOut("setVisualViewPointSpeed onSuccess ");

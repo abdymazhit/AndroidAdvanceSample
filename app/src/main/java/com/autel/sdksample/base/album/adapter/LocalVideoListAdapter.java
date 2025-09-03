@@ -44,7 +44,7 @@ public class LocalVideoListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView = null;
+        TextView textView;
         if (null == convertView) {
             convertView = View.inflate(mContext, R.layout.spinner_item, null);
         }

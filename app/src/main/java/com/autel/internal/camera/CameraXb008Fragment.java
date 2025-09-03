@@ -117,7 +117,7 @@ public class CameraXb008Fragment extends CameraBaseFragment {
         view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(v -> {
             String NoX = spotMeteringAreaX.getText().toString();
             String NoY = spotMeteringAreaY.getText().toString();
-            xb008.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+            xb008.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.parseInt(NoX), isEmpty(NoY) ? 1 : Integer.parseInt(NoY), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
                     logOut("setSpotMeteringArea  onSuccess  ");
@@ -385,9 +385,9 @@ public class CameraXb008Fragment extends CameraBaseFragment {
                 String saturationValue = photoCustomStyleSaturation.getText().toString();
                 String sharpnessValue = photoCustomStyleSharpness.getText().toString();
 
-                xb008.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
-                        isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
-                        isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
+                xb008.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.parseInt(contrastValue),
+                        isEmpty(saturationValue) ? 2 : Integer.parseInt(saturationValue),
+                        isEmpty(sharpnessValue) ? 3 : Integer.parseInt(sharpnessValue), new CallbackWithNoParam() {
                             @Override
                             public void onFailure(AutelError error) {
                                 logOut("setPhotoStyle  description  " + error.getDescription());

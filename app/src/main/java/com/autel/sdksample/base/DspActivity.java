@@ -159,7 +159,7 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
 
         public void setRfData(List<RFData> rfData) {
             this.rfData = rfData;
-            new Handler().post(() -> notifyDataSetInvalidated());
+            new Handler().post(this::notifyDataSetInvalidated);
         }
 
         @Override

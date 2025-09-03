@@ -121,7 +121,7 @@ public class CameraR12Fragment extends CameraBaseFragment {
         initView(view);
         initClick(view);
         initR12Click(view);
-        view.postDelayed(() -> initData(), 600);
+        view.postDelayed(this::initData, 600);
 
         return view;
     }
@@ -219,7 +219,7 @@ public class CameraR12Fragment extends CameraBaseFragment {
         view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(v -> {
             String NoX = spotMeteringAreaX.getText().toString();
             String NoY = spotMeteringAreaY.getText().toString();
-            autelR12.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+            autelR12.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.parseInt(NoX), isEmpty(NoY) ? 1 : Integer.parseInt(NoY), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
                     logOut("setSpotMeteringArea  onSuccess  ");
@@ -496,9 +496,9 @@ public class CameraR12Fragment extends CameraBaseFragment {
                 String saturationValue = photoCustomStyleSaturation.getText().toString();
                 String sharpnessValue = photoCustomStyleSharpness.getText().toString();
 
-                autelR12.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
-                        isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
-                        isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
+                autelR12.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.parseInt(contrastValue),
+                        isEmpty(saturationValue) ? 2 : Integer.parseInt(saturationValue),
+                        isEmpty(sharpnessValue) ? 3 : Integer.parseInt(sharpnessValue), new CallbackWithNoParam() {
                             @Override
                             public void onFailure(AutelError error) {
                                 logOut("setPhotoStyle  description  " + error.getDescription());
@@ -840,7 +840,7 @@ public class CameraR12Fragment extends CameraBaseFragment {
 
         view.findViewById(R.id.setDigitalZoomScale).setOnClickListener(v -> {
             String value = digitalZoomScaleValue.getText().toString();
-            int parameter = isEmpty(value) ? 100 : Integer.valueOf(value);
+            int parameter = isEmpty(value) ? 100 : Integer.parseInt(value);
             autelR12.setDigitalZoomScale(parameter, new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {

@@ -70,10 +70,10 @@ public class XStarOrbitMissionFragment extends OrbitMissionFragment {
         orbitMission.lng = (float) autelLatLng.longitude;
 
         String valueHeight = orbitReturnHeight.getText().toString();
-        orbitMission.finishReturnHeight = isEmpty(valueHeight) ? 40 : Integer.valueOf(valueHeight);
+        orbitMission.finishReturnHeight = isEmpty(valueHeight) ? 40 : Integer.parseInt(valueHeight);
         orbitMission.finishedAction = finishedAction;
         String valueSpeed = orbitSpeed.getText().toString();
-        orbitMission.speed = isEmpty(valueSpeed) ? 1 : Float.valueOf(valueSpeed);
+        orbitMission.speed = isEmpty(valueSpeed) ? 1 : Float.parseFloat(valueSpeed);
         String valueRound = orbitCount.getText().toString();
         orbitMission.laps = isEmpty(valueRound) ? 3 : Short.valueOf(valueRound);
         String valueRadius = orbitRadius.getText().toString();

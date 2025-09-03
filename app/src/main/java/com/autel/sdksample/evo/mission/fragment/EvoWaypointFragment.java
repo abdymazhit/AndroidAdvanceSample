@@ -64,7 +64,7 @@ public class EvoWaypointFragment extends WaypointMissionFragment {
 
         ((MapActivity) Objects.requireNonNull(getActivity())).setWaypointHeightListener(() -> {
             String valueHeight = waypointHeight.getText().toString();
-            return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
+            return isEmpty(valueHeight) ? 50 : Integer.parseInt(valueHeight);
         });
         finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionAdapter = new EvoWaypointFinishActionAdapter(getContext());
@@ -93,7 +93,7 @@ public class EvoWaypointFragment extends WaypointMissionFragment {
         EvoWaypointMission waypointMission = new EvoWaypointMission();
         waypointMission.finishedAction = finishedAction;
         String valueReturnHeight = waypointReturnHeight.getText().toString();
-        waypointMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.valueOf(valueReturnHeight);
+        waypointMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.parseInt(valueReturnHeight);
         waypointMission.wpList = wayPointList;
         return waypointMission;
     }
@@ -102,7 +102,7 @@ public class EvoWaypointFragment extends WaypointMissionFragment {
     @Override
     protected void waypointAdded(AutelLatLng latLng) {
         String wHeight = waypointHeight.getText().toString();
-        EvoWaypoint waypoint = new EvoWaypoint(new AutelCoordinate3D(latLng.latitude, latLng.longitude, isEmpty(wHeight) ? 0 : Double.valueOf(wHeight)));
+        EvoWaypoint waypoint = new EvoWaypoint(new AutelCoordinate3D(latLng.latitude, latLng.longitude, isEmpty(wHeight) ? 0 : Double.parseDouble(wHeight)));
         wayPointList.add(waypoint);
     }
 

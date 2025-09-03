@@ -89,13 +89,13 @@ public class G2GimbalActivity extends GimbalActivity {
         }));
         findViewById(R.id.setGimbalAngle).setOnClickListener(v -> {
             String pitchValue = gimbalAnglePitch.getText().toString();
-            int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
+            int pitch = isEmpty(pitchValue) ? 0 : Integer.parseInt(pitchValue);
 
             String rollValue = gimbalAngleRoll.getText().toString();
-            int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
+            int roll = isEmpty(rollValue) ? 0 : Integer.parseInt(rollValue);
 
             String yawValue = gimbalAngleYaw.getText().toString();
-            int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
+            int yaw = isEmpty(yawValue) ? 0 : Integer.parseInt(yawValue);
 
             GimbalAngleData angleData = new GimbalAngleData();
             angleData.setPitch(pitch);
@@ -105,13 +105,13 @@ public class G2GimbalActivity extends GimbalActivity {
         });
         findViewById(R.id.setGimbalAngleSpeed).setOnClickListener(v -> {
             String pitchValue = gimbalAnglePitchSpeed.getText().toString();
-            int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
+            int pitch = isEmpty(pitchValue) ? 0 : Integer.parseInt(pitchValue);
 
             String rollValue = gimbalAngleRollSpeed.getText().toString();
-            int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
+            int roll = isEmpty(rollValue) ? 0 : Integer.parseInt(rollValue);
 
             String yawValue = gimbalAngleYawSpeed.getText().toString();
-            int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
+            int yaw = isEmpty(yawValue) ? 0 : Integer.parseInt(yawValue);
 
             GimbalAngleSpeed angleSpeed = new GimbalAngleSpeed();
             angleSpeed.setPitchSpeed(pitch);
@@ -147,11 +147,11 @@ public class G2GimbalActivity extends GimbalActivity {
 
         findViewById(R.id.setRollAdjustData).setOnClickListener(v -> {
             String value = ((EditText) findViewById(R.id.rollAdjustDataValue)).getText().toString();
-            if ("".equals(value)) {
+            if (value.isEmpty()) {
                 return;
             }
 
-            mXStarEvoGimbal.setRollAdjustData(Float.valueOf(value), new CallbackWithNoParam() {
+            mXStarEvoGimbal.setRollAdjustData(Float.parseFloat(value), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
                     logOut("setRollAdjustData onSuccess ");

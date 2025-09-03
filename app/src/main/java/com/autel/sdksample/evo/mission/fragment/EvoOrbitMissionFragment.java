@@ -136,18 +136,18 @@ public class EvoOrbitMissionFragment extends OrbitMissionFragment {
         orbitMission.longitude = autelLatLng.longitude;
 
         String valueReturnHeight = orbitReturnHeight.getText().toString();
-        orbitMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.valueOf(valueReturnHeight);
+        orbitMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.parseInt(valueReturnHeight);
         orbitMission.finishedAction = finishedAction;
         String valueSpeed = orbitSpeed.getText().toString();
-        orbitMission.speed = isEmpty(valueSpeed) ? 1 : Integer.valueOf(valueSpeed);
+        orbitMission.speed = isEmpty(valueSpeed) ? 1 : Integer.parseInt(valueSpeed);
         String valueRound = orbitCount.getText().toString();
-        orbitMission.cycles = isEmpty(valueRound) ? 3 : Integer.valueOf(valueRound);
+        orbitMission.cycles = isEmpty(valueRound) ? 3 : Integer.parseInt(valueRound);
         String valueRadius = orbitRadius.getText().toString();
-        orbitMission.radius = isEmpty(valueRadius) ? 3 : Integer.valueOf(valueRadius);
+        orbitMission.radius = isEmpty(valueRadius) ? 3 : Integer.parseInt(valueRadius);
         String valueHeight = orbitHeight.getText().toString();
-        orbitMission.altitude = isEmpty(valueHeight) ? 3 : Integer.valueOf(valueHeight);
+        orbitMission.altitude = isEmpty(valueHeight) ? 3 : Integer.parseInt(valueHeight);
         String valueRemainDegree = orbitRemainDegree.getText().toString();
-        orbitMission.remainDegree = isEmpty(valueRemainDegree) ? 3 : Integer.valueOf(valueRemainDegree);
+        orbitMission.remainDegree = isEmpty(valueRemainDegree) ? 3 : Integer.parseInt(valueRemainDegree);
 
         orbitMission.mRotateDirection = rotateDirection;
         orbitMission.mHeadingDirection = headingDirection;

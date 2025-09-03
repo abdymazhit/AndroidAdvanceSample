@@ -117,7 +117,7 @@ public class XStarGimbalActivity extends GimbalActivity {
 
         findViewById(R.id.setGimbalAngle).setOnClickListener(v -> {
             String value = gimbalAngle.getText().toString();
-            mXStarGimbal.setGimbalAngle(isEmpty(value) ? 10 : Integer.valueOf(value));
+            mXStarGimbal.setGimbalAngle(isEmpty(value) ? 10 : Integer.parseInt(value));
         });
 
         gimbalAngleWithFineTuning = findViewById(R.id.gimbalAngleWithFineTuning);
@@ -149,7 +149,7 @@ public class XStarGimbalActivity extends GimbalActivity {
 
         findViewById(R.id.setGimbalAngleWithFineTuning).setOnClickListener(v -> {
             String value = gimbalAngleWithFineTuning.getText().toString();
-            mXStarGimbal.setGimbalAngleWithSpeed(isEmpty(value) ? -10 : Integer.valueOf(value));
+            mXStarGimbal.setGimbalAngleWithSpeed(isEmpty(value) ? -10 : Integer.parseInt(value));
         });
 
         findViewById(R.id.setGimbalStateListener).setOnClickListener(v -> mXStarGimbal.setGimbalStateListener(new CallbackWithOneParam<GimbalState>() {

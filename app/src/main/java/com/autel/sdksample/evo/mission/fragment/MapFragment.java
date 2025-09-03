@@ -170,8 +170,6 @@ public class MapFragment extends Fragment {
         mapViewUtil = MapViewUtilFactory.instanceMapViewUtil(AutelConfigManager.instance().getAppContext());
         mapViewUtil.initMap(() -> {
             isMapReadyState = true;
-            if(isWaitForMapReadyState){
-            }
             registerNetLocationGps();
         });
         mapViewUtil.onCreate(savedInstanceState);

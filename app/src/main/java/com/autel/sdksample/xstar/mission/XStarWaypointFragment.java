@@ -63,7 +63,7 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
 
         ((MapActivity) Objects.requireNonNull(getActivity())).setWaypointHeightListener(() -> {
             String valueHeight = waypointHeight.getText().toString();
-            return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
+            return isEmpty(valueHeight) ? 50 : Integer.parseInt(valueHeight);
         });
         finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionAdapter = new WaypointFinishActionAdapter(getContext());
@@ -92,9 +92,9 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
         WaypointMission waypointMission = new WaypointMission();
         waypointMission.finishedAction = finishedAction;
         String valueSpeed = waypointSpeed.getText().toString();
-        waypointMission.speed = isEmpty(valueSpeed) ? 4 : Integer.valueOf(valueSpeed);
+        waypointMission.speed = isEmpty(valueSpeed) ? 4 : Integer.parseInt(valueSpeed);
         String valueReturnHeight = waypointReturnHeight.getText().toString();
-        waypointMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.valueOf(valueReturnHeight);
+        waypointMission.finishReturnHeight = isEmpty(valueReturnHeight) ? 40 : Integer.parseInt(valueReturnHeight);
 
         waypointMission.wpList = wayPointList;
         return waypointMission;
@@ -104,7 +104,7 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
     @Override
     protected void waypointAdded(AutelLatLng latLng) {
         String wHeight = waypointHeight.getText().toString();
-        Waypoint waypoint = new Waypoint(new AutelCoordinate3D(latLng.latitude, latLng.longitude, isEmpty(wHeight) ? 0 : Double.valueOf(wHeight)));
+        Waypoint waypoint = new Waypoint(new AutelCoordinate3D(latLng.latitude, latLng.longitude, isEmpty(wHeight) ? 0 : Double.parseDouble(wHeight)));
         wayPointList.add(waypoint);
     }
 

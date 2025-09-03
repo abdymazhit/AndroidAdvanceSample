@@ -231,7 +231,7 @@ public class CameraXT706Fragment extends CameraBaseFragment {
         view.findViewById(R.id.setHistogramListener).setOnClickListener(v -> xt706.setHistogramListener(new CallbackWithOneParam<int[]>() {
             @Override
             public void onSuccess(int[] ints) {
-                StringBuffer stringBuffer = new StringBuffer("{");
+                StringBuilder stringBuffer = new StringBuilder("{");
                 for (int item : ints) {
                     stringBuffer.append(item);
                     stringBuffer.append(",");
@@ -272,7 +272,7 @@ public class CameraXT706Fragment extends CameraBaseFragment {
 
         view.findViewById(R.id.setDigitalZoomScale).setOnClickListener(v -> {
             String value = digitalZoomScaleValue.getText().toString();
-            int parameter = isEmpty(value) ? 100 : Integer.valueOf(value);
+            int parameter = isEmpty(value) ? 100 : Integer.parseInt(value);
             xt706.setDigitalZoomScale(parameter, new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
@@ -339,7 +339,7 @@ public class CameraXT706Fragment extends CameraBaseFragment {
         view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(v -> {
             String NoX = spotMeteringAreaX.getText().toString();
             String NoY = spotMeteringAreaY.getText().toString();
-            xt706.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+            xt706.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.parseInt(NoX), isEmpty(NoY) ? 1 : Integer.parseInt(NoY), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
                     logOut("setSpotMeteringArea  onSuccess  ");
@@ -471,7 +471,7 @@ public class CameraXT706Fragment extends CameraBaseFragment {
 
         view.findViewById(R.id.setWhiteBalance).setOnClickListener(v -> {
             String colorValueStr = ((EditText) view.findViewById(R.id.colorTemperatureValue)).getText().toString();
-            int colorValue = isEmpty(colorValueStr) ? 2000 : Integer.valueOf(colorValueStr);
+            int colorValue = isEmpty(colorValueStr) ? 2000 : Integer.parseInt(colorValueStr);
             WhiteBalance cameraWhiteBalance = new WhiteBalance();
             cameraWhiteBalance.type = cameraWhiteBalanceType;
             cameraWhiteBalance.colorTemperature = colorValue;
@@ -584,9 +584,9 @@ public class CameraXT706Fragment extends CameraBaseFragment {
                 String saturationValue = photoCustomStyleSaturation.getText().toString();
                 String sharpnessValue = photoCustomStyleSharpness.getText().toString();
 
-                xt706.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
-                        isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
-                        isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
+                xt706.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.parseInt(contrastValue),
+                        isEmpty(saturationValue) ? 2 : Integer.parseInt(saturationValue),
+                        isEmpty(sharpnessValue) ? 3 : Integer.parseInt(sharpnessValue), new CallbackWithNoParam() {
                             @Override
                             public void onFailure(AutelError error) {
                                 logOut("setPhotoStyle  description  " + error.getDescription());

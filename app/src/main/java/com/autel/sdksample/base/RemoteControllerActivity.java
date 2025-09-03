@@ -214,7 +214,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
                 Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
                 return;
             }
-            mController.setGimbalDialAdjustSpeed(isEmpty(value) ? 10 : Integer.valueOf(value), new CallbackWithNoParam() {
+            mController.setGimbalDialAdjustSpeed(isEmpty(value) ? 10 : Integer.parseInt(value), new CallbackWithNoParam() {
                 @Override
                 public void onFailure(AutelError rcError) {
                     logOut("setGimbalAngleWithSpeed error " + rcError.getDescription());
@@ -479,7 +479,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
             return;
         }
-        mController.setYawCoefficient(isEmpty(value) ? 0.3f : Float.valueOf(value), new CallbackWithNoParam() {
+        mController.setYawCoefficient(isEmpty(value) ? 0.3f : Float.parseFloat(value), new CallbackWithNoParam() {
             @Override
             public void onSuccess() {
                 logOut("setYawCoefficient onSuccess ");

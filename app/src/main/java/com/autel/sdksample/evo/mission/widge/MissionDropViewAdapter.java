@@ -23,7 +23,7 @@ public class MissionDropViewAdapter extends RecyclerView.Adapter<MissionDropView
     private static final int VIEW_TYPE_HAS_ARROW = 1;
     private static final int VIEW_TYPE_NORMAL = 2;
 
-    List<String> datas = new ArrayList<>();
+    List<String> datas;
     private OnItemClickListener onItemClickListener;
     private int curSelect;
 

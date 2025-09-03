@@ -52,7 +52,7 @@ public class XStarBatteryActivity extends BatteryActivity {
         findViewById(R.id.getCells).setOnClickListener(v -> mXStarBattery.getVoltageCells(new CallbackWithOneParam<int[]>() {
             @Override
             public void onSuccess(int[] data) {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < data.length; i++) {
                     sb.append("index ");
                     sb.append(i);

@@ -74,7 +74,7 @@ public class XStarFollowMissionFragment extends MissionFragment {
         followMission = FollowMission.create();
         followMission.location = mLocation;
         followMission.finishedAction = finishedAction;
-        followMission.finishReturnHeight = isEmpty(valueHeight) ? 40 : Integer.valueOf(valueHeight);
+        followMission.finishReturnHeight = isEmpty(valueHeight) ? 40 : Integer.parseInt(valueHeight);
         mMapOperator.setLocationChangeListener(location -> followMission.update(location));
         return followMission;
     }

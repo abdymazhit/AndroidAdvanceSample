@@ -116,7 +116,7 @@ public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapte
         return selectNames;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
 
         public final View view;
 

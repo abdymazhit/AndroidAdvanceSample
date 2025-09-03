@@ -150,7 +150,7 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
                 Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
                 return;
             }
-            mController.setLowBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
+            mController.setLowBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.parseFloat(value), new CallbackWithNoParam() {
                 @Override
                 public void onFailure(AutelError error) {
                     logOut("setLowBatteryNotifyThreshold  error :  " + error.getDescription());
@@ -188,7 +188,7 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
                 Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
                 return;
             }
-            mController.setCriticalBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
+            mController.setCriticalBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.parseFloat(value), new CallbackWithNoParam() {
                 @Override
                 public void onFailure(AutelError error) {
                     logOut("setCriticalBatteryNotifyThreshold  error :  " + error.getDescription());
@@ -223,7 +223,7 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
                 Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
                 return;
             }
-            mController.setDischargeDay(isEmpty(value) ? 2 : Integer.valueOf(value), new CallbackWithNoParam() {
+            mController.setDischargeDay(isEmpty(value) ? 2 : Integer.parseInt(value), new CallbackWithNoParam() {
                 @Override
                 public void onSuccess() {
 

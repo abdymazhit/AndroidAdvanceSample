@@ -92,7 +92,7 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView = null;
+        TextView textView;
         if (null == convertView) {
             convertView = View.inflate(mContext, R.layout.album_item, null);
         }
@@ -152,17 +152,17 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
 
     @Override
     public void started(int task_id) {
-        handler.post(() -> notifyDataSetChanged());
+        handler.post(this::notifyDataSetChanged);
     }
 
     @Override
     public void progress(int task_id, long receive_length, long total_length) {
-        handler.post(() -> notifyDataSetChanged());
+        handler.post(this::notifyDataSetChanged);
     }
 
     @Override
     public void completed(int task_id, String path) {
-        handler.post(() -> notifyDataSetChanged());
+        handler.post(this::notifyDataSetChanged);
     }
 
     @Override

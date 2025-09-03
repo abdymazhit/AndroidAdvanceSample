@@ -560,7 +560,7 @@ public class GMapModel implements MapModelImpl {
             if(waypoints.isEmpty() && !path.isEmpty()){
                 Point point = new Point((int) path.get(0).getLat4Drone(), (int) path.get(0).getLng4Drone());
                 LatLng homepoint = pj.fromScreenLocation(point);
-                homeLocation = new AutelLatLng(homepoint.latitude,homepoint.longitude);
+                new AutelLatLng(homepoint.latitude, homepoint.longitude);
             }
 
             for (int i = 0; i < path.size(); i++) {
@@ -569,7 +569,6 @@ public class GMapModel implements MapModelImpl {
 
                 //Check validation of each latlng
                 int temp =  1;
-                pre = ll;
                 tempWaypoints.add(ll);
             }
 

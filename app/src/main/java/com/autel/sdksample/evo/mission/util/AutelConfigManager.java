@@ -1,6 +1,7 @@
 package com.autel.sdksample.evo.mission.util;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 /**
@@ -8,21 +9,18 @@ import android.content.Context;
  */
 @SuppressWarnings("DefaultFileTemplate")
 public class AutelConfigManager {
-    private static AutelConfigManager autelConfigManager;
 
     private AutelConfigManager() {
 
     }
 
+    private static final class AutelConfigManagerHolder {
+        @SuppressLint("StaticFieldLeak")
+        static final AutelConfigManager autelConfigManager = new AutelConfigManager();
+    }
+
     public static AutelConfigManager instance() {
-        if (null == autelConfigManager) {
-            synchronized (AutelConfigManager.class) {
-                if (null == autelConfigManager) {
-                    autelConfigManager = new AutelConfigManager();
-                }
-            }
-        }
-        return autelConfigManager;
+        return AutelConfigManagerHolder.autelConfigManager;
     }
     private Context mContext;
 
