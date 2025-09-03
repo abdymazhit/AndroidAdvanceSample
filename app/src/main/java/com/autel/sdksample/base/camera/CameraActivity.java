@@ -52,15 +52,15 @@ public class CameraActivity extends AppCompatActivity {
         setTitle("Camera");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        cameraType = (TextView) findViewById(R.id.camera_type);
-        cameraLogOutput = (TextView) findViewById(R.id.camera_log_output);
+        cameraType = findViewById(R.id.camera_type);
+        cameraLogOutput = findViewById(R.id.camera_log_output);
         BaseProduct product = ((TestApplication) getApplicationContext()).getCurrentProduct();
         if (null != product) {
             autelCameraManager = product.getCameraManager();
         }
         changePage(CameraNotConnectFragment.class);
 //        initListener();
-        codecView = (AutelCodecView) findViewById(R.id.codecView);
+        codecView = findViewById(R.id.codecView);
 
         findViewById(R.id.camera_type).setOnClickListener(v -> changeSize());
 

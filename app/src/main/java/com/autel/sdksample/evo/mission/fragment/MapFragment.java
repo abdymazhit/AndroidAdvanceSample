@@ -155,11 +155,11 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
         contentView = (ViewGroup) inflater.inflate(R.layout.fragment_map,null);
-        FrameLayout map_container = (FrameLayout) contentView.findViewById(R.id.map_container);
+        FrameLayout map_container = contentView.findViewById(R.id.map_container);
         map_container.addView(mapViewUtil.getMapView());
         curOrientation = getDisplayRotate();
         Bundle bundle = getArguments();
-        mGestureView = (AutelCustomGestureOverlayView) contentView.findViewById(R.id.map_customgestureoverlayview);
+        mGestureView = contentView.findViewById(R.id.map_customgestureoverlayview);
         mGestureView.init(getActivity());
         return contentView;
     }
@@ -533,7 +533,6 @@ public class MapFragment extends Fragment {
         mGPSListener = event -> {
             switch (event) {
                 case GpsStatus.GPS_EVENT_STARTED:
-                    break;
 
                 case GpsStatus.GPS_EVENT_FIRST_FIX:
                     break;

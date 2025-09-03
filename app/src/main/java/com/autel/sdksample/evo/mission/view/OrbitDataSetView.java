@@ -84,9 +84,9 @@ public class OrbitDataSetView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mission_container, null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup) view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showOrbitDataSetView();
     }
@@ -103,13 +103,13 @@ public class OrbitDataSetView extends FrameLayout {
         View contentView = inflater.inflate(R.layout.orbit_data_set_content, null);
         if (baseView == null) {
             baseView = inflater.inflate(R.layout.orbit_data_set_base_content, null);
-            orbitBasicSpeedNum = (TextView) baseView.findViewById(R.id.orbit_speed_num);
+            orbitBasicSpeedNum = baseView.findViewById(R.id.orbit_speed_num);
             orbitBasicSpeedNum.setText(MissionConstant.getDefaultSpeed() + TransformUtils.getSpeedUnitStrEn());
-            orbitBasicSeekBar = (SeekBar) baseView.findViewById(R.id.common_mission_seekbar);
+            orbitBasicSeekBar = baseView.findViewById(R.id.common_mission_seekbar);
             orbitBasicSeekBar.setProgress((int)(MissionConstant.getOrbitSpeedLimitMin() * 10 + MissionConstant.getDefaultSpeed() * 10));
-            TextView radiusLimitTv = (TextView) baseView.findViewById(R.id.orbit_radius_limit);
+            TextView radiusLimitTv = baseView.findViewById(R.id.orbit_radius_limit);
             radiusLimitTv.setText("("+MissionConstant.getOrbitRadiusLimitMin() + "-" + MissionConstant.getOrbitRadiusLimitMax() + ")");
-            TextView speedLimitTv = (TextView)baseView.findViewById(R.id.orbit_speed_limit);
+            TextView speedLimitTv = baseView.findViewById(R.id.orbit_speed_limit);
             speedLimitTv.setText("("+MissionConstant.getOrbitSpeedLimitMin() + "-" + MissionConstant.getOrbitSpeedLimitMax() + ")");
         }
         if (advanceView == null) {
@@ -118,8 +118,8 @@ public class OrbitDataSetView extends FrameLayout {
             initAdvanceView();
             prepareAdvanceView();
         }
-        AutelSegmentedGroup orbitRb = (AutelSegmentedGroup) contentView.findViewById(R.id.orbit_rb);
-        final ViewGroup orbitDataSetContainer = (ViewGroup) contentView.findViewById(R.id.orbit_execute_remote_container);
+        AutelSegmentedGroup orbitRb = contentView.findViewById(R.id.orbit_rb);
+        final ViewGroup orbitDataSetContainer = contentView.findViewById(R.id.orbit_execute_remote_container);
         orbitRb.setOnCheckedChangeListener((group, checkedId) -> onBasicAdvancedChanged(checkedId, orbitDataSetContainer, baseView, advanceView));
         orbitRb.check(R.id.rb_left_btn);
         orbitDataSetContainer.removeAllViews();
@@ -128,7 +128,7 @@ public class OrbitDataSetView extends FrameLayout {
         prepareBaseView(baseView); // Base Flight Direction
 
         View bottomView = inflater.inflate(R.layout.common_mission_bottom, null);
-        TextView bottomText = (TextView) bottomView.findViewById(R.id.bottom_title);
+        TextView bottomText = bottomView.findViewById(R.id.bottom_title);
         bottomText.setText(R.string.mission_start);
         bottomView.setOnClickListener(v -> {
             if (orbitSetViewListener != null) {
@@ -142,40 +142,40 @@ public class OrbitDataSetView extends FrameLayout {
 
     private void initAdvanceView() {
         View altitudeView = advanceView.findViewById(R.id.orbit_advance_altitude_seekbar);
-        TextView altitudeLimitTv = (TextView)altitudeView.findViewById(R.id.oribit_advance_item_limit);
+        TextView altitudeLimitTv = altitudeView.findViewById(R.id.oribit_advance_item_limit);
         altitudeLimitTv.setText("(" + MissionConstant.getOrbitAltitudeLimitMin() + "-" + MissionConstant.getOrbitAltitudeLimitMax() + ")");
-        altitudeNumTv = (TextView)altitudeView.findViewById(R.id.oribit_advance_item_num);
+        altitudeNumTv = altitudeView.findViewById(R.id.oribit_advance_item_num);
         altitudeNumTv.setText(MissionConstant.getOrbitAltitudeDefault() + TransformUtils.getUnitMeterStrEn());
-        altitudeSeekBar = (SeekBar) altitudeView.findViewById(R.id.common_mission_seekbar);
+        altitudeSeekBar = altitudeView.findViewById(R.id.common_mission_seekbar);
         altitudeSeekBar.setProgress( MissionConstant.getOrbitAltitudeDefault() - MissionConstant.getOrbitAltitudeLimitMin());
 
         View radiusView = advanceView.findViewById(R.id.orbit_advance_radius_seekbar);
-        TextView radiusLimitTv = (TextView)radiusView.findViewById(R.id.oribit_advance_item_limit);
+        TextView radiusLimitTv = radiusView.findViewById(R.id.oribit_advance_item_limit);
         radiusLimitTv.setText("(" + MissionConstant.getOrbitRadiusLimitMin() + "-" + MissionConstant.getOrbitRadiusLimitMax() + ")");
-        TextView radiusTitleTv = (TextView) radiusView.findViewById(R.id.orbit_advance_item_title);
+        TextView radiusTitleTv = radiusView.findViewById(R.id.orbit_advance_item_title);
         radiusTitleTv.setText(R.string.radius);
-        radiusNumTv = (TextView) radiusView.findViewById(R.id.oribit_advance_item_num);
+        radiusNumTv = radiusView.findViewById(R.id.oribit_advance_item_num);
         radiusNumTv.setText(MissionConstant.getOrbitRadiusDefault() + TransformUtils.getUnitMeterStrEn());
-        radiusSeekBar = (SeekBar) radiusView.findViewById(R.id.common_mission_seekbar);
+        radiusSeekBar = radiusView.findViewById(R.id.common_mission_seekbar);
         radiusSeekBar.setProgress(MissionConstant.getOrbitRadiusDefault() - MissionConstant.getOrbitRadiusLimitMin());
 
         View speedView = advanceView.findViewById(R.id.orbit_advance_speed_seekbar);
-        TextView speedLimitTv = (TextView)speedView.findViewById(R.id.oribit_advance_item_limit);
+        TextView speedLimitTv = speedView.findViewById(R.id.oribit_advance_item_limit);
         speedLimitTv.setText("(" + MissionConstant.getOrbitSpeedLimitMin() + "-" + MissionConstant.getOrbitSpeedLimitMax() + ")");
-        TextView speedTitleTv = (TextView) speedView.findViewById(R.id.orbit_advance_item_title);
+        TextView speedTitleTv = speedView.findViewById(R.id.orbit_advance_item_title);
         speedTitleTv.setText(R.string.speed);
-        speedNumTv = (TextView) speedView.findViewById(R.id.oribit_advance_item_num);
+        speedNumTv = speedView.findViewById(R.id.oribit_advance_item_num);
         speedNumTv.setText(MissionConstant.getDefaultSpeed() + TransformUtils.getSpeedUnitStrEn());
-        speedSeekBar = (SeekBar) speedView.findViewById(R.id.common_mission_seekbar);
+        speedSeekBar = speedView.findViewById(R.id.common_mission_seekbar);
         speedSeekBar.setProgress((int)(MissionConstant.getOrbitSpeedLimitMin() * 10 + MissionConstant.getDefaultSpeed() * 10));
 
         View rotationView = advanceView.findViewById(R.id.orbit_advance_rotation_seekbar);
-        TextView rotationLimitTv = (TextView)rotationView.findViewById(R.id.oribit_advance_item_limit);
+        TextView rotationLimitTv = rotationView.findViewById(R.id.oribit_advance_item_limit);
         rotationLimitTv.setText("(" + MissionConstant.getOrbitRotationLimitMin() + "-" + MissionConstant.getOrbitRotationLimitMax() + ")");
-        TextView rotationTitleTv = (TextView) rotationView.findViewById(R.id.orbit_advance_item_title);
+        TextView rotationTitleTv = rotationView.findViewById(R.id.orbit_advance_item_title);
         rotationTitleTv.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_rotation));
-        rotationNumTv = (TextView) rotationView.findViewById(R.id.oribit_advance_item_num);
-        rotationSeekBar = (SeekBar) rotationView.findViewById(R.id.common_mission_seekbar);
+        rotationNumTv = rotationView.findViewById(R.id.oribit_advance_item_num);
+        rotationSeekBar = rotationView.findViewById(R.id.common_mission_seekbar);
         rotationNumTv.setText(MissionConstant.getOrbitRotationDefault() + "");
         rotationSeekBar.setProgress(MissionConstant.getOrbitRadiusDefault() - MissionConstant.getOrbitRotationLimitMin());
 
@@ -221,7 +221,7 @@ public class OrbitDataSetView extends FrameLayout {
             }
         });
 
-        baseFlightDirectionDropSelectView = (MissionDropSelectView) basicView.findViewById(R.id.base_flight_direction_drop_select_view);
+        baseFlightDirectionDropSelectView = basicView.findViewById(R.id.base_flight_direction_drop_select_view);
         baseFlightDirectionDropSelectView.setOnItemClickListener(position -> {
             if(orbitSetViewListener != null){
                 OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
@@ -349,9 +349,9 @@ public class OrbitDataSetView extends FrameLayout {
             }
         });
 
-        TextView directionTitle = (TextView) advanceView.findViewById(R.id.flight_direction_title);
+        TextView directionTitle = advanceView.findViewById(R.id.flight_direction_title);
         directionTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.flight_direction));
-        flightDirectionDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.flight_direction_drop_select_view);
+        flightDirectionDropSelectView = advanceView.findViewById(R.id.flight_direction_drop_select_view);
         flightDirectionDropSelectView.setOnItemClickListener(position -> {
             if(orbitSetViewListener != null){
                 OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
@@ -372,9 +372,9 @@ public class OrbitDataSetView extends FrameLayout {
         flightDirectionDropSelectView.setDatas(datas);
         flightDirectionDropSelectView.notifyDataChange(AdvancedItemEnum.ORBIT_FLIGHT_DIRECTION);
 
-        TextView headingTv = (TextView) advanceView.findViewById(R.id.heading_title);
+        TextView headingTv = advanceView.findViewById(R.id.heading_title);
         headingTv.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_heading));
-        headingDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.heading_drop_select_view);
+        headingDropSelectView = advanceView.findViewById(R.id.heading_drop_select_view);
         headingDropSelectView.setOnItemClickListener(position -> {
             if(orbitSetViewListener != null){
                 OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
@@ -408,9 +408,9 @@ public class OrbitDataSetView extends FrameLayout {
         headingDropSelectView.notifyDataChange(AdvancedItemEnum.ORBIT_HEADING);
 
 
-        TextView entryPointTitle = (TextView) advanceView.findViewById(R.id.entry_point_title);
+        TextView entryPointTitle = advanceView.findViewById(R.id.entry_point_title);
         entryPointTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_entry_point));
-        entryPointDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.entry_point_drop_select_view);
+        entryPointDropSelectView = advanceView.findViewById(R.id.entry_point_drop_select_view);
         entryPointDropSelectView.setOnItemClickListener(position -> {
             if(orbitSetViewListener != null){
                 OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
@@ -443,9 +443,9 @@ public class OrbitDataSetView extends FrameLayout {
         entryPointDropSelectView.setDatas(datas2);
         entryPointDropSelectView.notifyDataChange(AdvancedItemEnum.ORBIT_ENTRY_POINT);
 
-        TextView completionTitle = (TextView) advanceView.findViewById(R.id.completion_title);
+        TextView completionTitle = advanceView.findViewById(R.id.completion_title);
         completionTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_completion));
-        completionDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.completion_drop_select_view);
+        completionDropSelectView = advanceView.findViewById(R.id.completion_drop_select_view);
         completionDropSelectView.setOnItemClickListener(position -> {
             if(orbitSetViewListener != null){
                 OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
@@ -505,7 +505,7 @@ public class OrbitDataSetView extends FrameLayout {
 
     public void showOrbitRadius(String orbitRadiusStr, int missionTextColor) {
         if(baseView != null){
-            TextView textView = (TextView)baseView.findViewById(R.id.orbit_radius_num);
+            TextView textView = baseView.findViewById(R.id.orbit_radius_num);
             textView.setText(orbitRadiusStr);
             switch (missionTextColor){
                 case MissionConstant.MISSION_TEXT_COLOR_BLUE:

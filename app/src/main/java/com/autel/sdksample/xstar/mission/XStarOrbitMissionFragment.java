@@ -36,12 +36,12 @@ public class XStarOrbitMissionFragment extends OrbitMissionFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_orbit);
-        orbitSpeed = (EditText) view.findViewById(R.id.orbitSpeed);
-        orbitReturnHeight = (EditText) view.findViewById(R.id.orbitReturnHeight);
-        orbitCount = (EditText) view.findViewById(R.id.orbitCount);
-        orbitRadius = (EditText) view.findViewById(R.id.orbitRadius);
+        orbitSpeed = view.findViewById(R.id.orbitSpeed);
+        orbitReturnHeight = view.findViewById(R.id.orbitReturnHeight);
+        orbitCount = view.findViewById(R.id.orbitCount);
+        orbitRadius = view.findViewById(R.id.orbitRadius);
 
-        finishActionSpinner = (Spinner) view.findViewById(R.id.finishAction);
+        finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionAdapter = new OrbitFinishActionAdapter(getContext());
         finishActionSpinner.setAdapter(finishActionAdapter);
         finishActionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

@@ -58,14 +58,14 @@ public class EvoOrbitMissionFragment extends OrbitMissionFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_orbit);
-        orbitSpeed = (EditText) view.findViewById(R.id.orbitSpeed);
-        orbitReturnHeight = (EditText) view.findViewById(R.id.orbitReturnHeight);
-        orbitCount = (EditText) view.findViewById(R.id.orbitCount);
-        orbitRadius = (EditText) view.findViewById(R.id.orbitRadius);
-        orbitHeight = (EditText) view.findViewById(R.id.orbitHeight);
-        orbitRemainDegree = (EditText) view.findViewById(R.id.orbitRemainDegree);
+        orbitSpeed = view.findViewById(R.id.orbitSpeed);
+        orbitReturnHeight = view.findViewById(R.id.orbitReturnHeight);
+        orbitCount = view.findViewById(R.id.orbitCount);
+        orbitRadius = view.findViewById(R.id.orbitRadius);
+        orbitHeight = view.findViewById(R.id.orbitHeight);
+        orbitRemainDegree = view.findViewById(R.id.orbitRemainDegree);
 
-        finishActionSpinner = (Spinner) view.findViewById(R.id.finishAction);
+        finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionAdapter = new OrbitFinishActionAdapter(container.getContext());
         finishActionSpinner.setAdapter(finishActionAdapter);
         finishActionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,7 +79,7 @@ public class EvoOrbitMissionFragment extends OrbitMissionFragment {
 
             }
         });
-        entryDirectionSpinner = (Spinner) view.findViewById(R.id.entryDirection);
+        entryDirectionSpinner = view.findViewById(R.id.entryDirection);
         entryDirectionAdapter = new EvoEntryDirectionAdapter(container.getContext());
         entryDirectionSpinner.setAdapter(entryDirectionAdapter);
         entryDirectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -93,7 +93,7 @@ public class EvoOrbitMissionFragment extends OrbitMissionFragment {
 
             }
         });
-        headingDirectionSpinner = (Spinner) view.findViewById(R.id.headingDirection);
+        headingDirectionSpinner = view.findViewById(R.id.headingDirection);
         headingDirectionAdapter = new EvoHeadingDirectionAdapter(container.getContext());
         headingDirectionSpinner.setAdapter(headingDirectionAdapter);
         headingDirectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -107,7 +107,7 @@ public class EvoOrbitMissionFragment extends OrbitMissionFragment {
 
             }
         });
-        rotateDirectionSpinner = (Spinner) view.findViewById(R.id.rotateDirection);
+        rotateDirectionSpinner = view.findViewById(R.id.rotateDirection);
         rotateDirectionAdapter = new EvoRotateDirectionAdapter(container.getContext());
         rotateDirectionSpinner.setAdapter(rotateDirectionAdapter);
         rotateDirectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

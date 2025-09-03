@@ -46,7 +46,7 @@ public class SelectorAdapter<T> extends BaseAdapter {
             convertView = View.inflate(mContext, R.layout.spinner_item, null);
 
         }
-        textView = (TextView) convertView.findViewById(R.id.spinner_item_text);
+        textView = convertView.findViewById(R.id.spinner_item_text);
 
         if (position < elementList.size() && position >= 0) {
             textView.setText(elementList.get(position).toString());

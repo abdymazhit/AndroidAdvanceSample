@@ -254,8 +254,8 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         }));
 
-        final EditText digitalZoomScaleValue = (EditText) view.findViewById(R.id.digitalZoomScaleValue);
-        final TextView digitalZoomScaleRange = (TextView) view.findViewById(R.id.digitalZoomScaleRange);
+        final EditText digitalZoomScaleValue = view.findViewById(R.id.digitalZoomScaleValue);
+        final TextView digitalZoomScaleRange = view.findViewById(R.id.digitalZoomScaleRange);
         digitalZoomScaleValue.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1069,7 +1069,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         }));
 
-        videoResolutionAndFrameRateList = (Spinner) view.findViewById(R.id.videoResolutionAndFrameRateList);
+        videoResolutionAndFrameRateList = view.findViewById(R.id.videoResolutionAndFrameRateList);
         videoResolutionFpsAdapter = new VideoResolutionFpsAdapter(getContext());
         view.findViewById(R.id.getVideoStandard).callOnClick();
     }
@@ -1112,7 +1112,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
 
     private void initView(final View parentView) {
 
-        Spinner autoPIVTimelapseIntervalList = (Spinner) parentView.findViewById(R.id.autoPIVTimelapseIntervalList);
+        Spinner autoPIVTimelapseIntervalList = parentView.findViewById(R.id.autoPIVTimelapseIntervalList);
         autoPIVTimelapseIntervalList.setAdapter(new VideoSnapshotTimeIntervalAdapter(getContext()));
         autoPIVTimelapseIntervalList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1126,7 +1126,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner pivModeList = (Spinner) parentView.findViewById(R.id.PIVModeList);
+        Spinner pivModeList = parentView.findViewById(R.id.PIVModeList);
         pivModeList.setAdapter(new PIVModeAdapter(getContext()));
         pivModeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1140,7 +1140,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner realTimeVideoResolutionList = (Spinner) parentView.findViewById(R.id.realTimeVideoResolutionList);
+        Spinner realTimeVideoResolutionList = parentView.findViewById(R.id.realTimeVideoResolutionList);
         realTimeVideoResolutionList.setAdapter(new RealTimeResolutionAdapter(getContext()));
         realTimeVideoResolutionList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1154,7 +1154,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner videoEncodeList = (Spinner) parentView.findViewById(R.id.videoEncodeList);
+        Spinner videoEncodeList = parentView.findViewById(R.id.videoEncodeList);
         videoEncodeList.setAdapter(new VideoEncodeAdapter(getContext()));
         videoEncodeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1168,7 +1168,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner aspectRatioList = (Spinner) parentView.findViewById(R.id.aspectRatioList);
+        Spinner aspectRatioList = parentView.findViewById(R.id.aspectRatioList);
         AspectRatioAdapter aspectRatioAdapter = new AspectRatioAdapter(getContext());
         aspectRatioAdapter.setData(Arrays.asList(rangeManager.getPhotoAspectRatio()));
         aspectRatioList.setAdapter(aspectRatioAdapter);
@@ -1184,7 +1184,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner photoFormatList = (Spinner) parentView.findViewById(R.id.photoFormatList);
+        Spinner photoFormatList = parentView.findViewById(R.id.photoFormatList);
         photoFormatList.setAdapter(new PhotoFormatAdapter(getContext()));
         photoFormatList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1198,7 +1198,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner videoStandardList = (Spinner) parentView.findViewById(R.id.videoStandardList);
+        Spinner videoStandardList = parentView.findViewById(R.id.videoStandardList);
         videoStandardList.setAdapter(new VideoStandardAdapter(getContext()));
         videoStandardList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1212,7 +1212,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner videoFormatList = (Spinner) parentView.findViewById(R.id.videoFormatList);
+        Spinner videoFormatList = parentView.findViewById(R.id.videoFormatList);
         videoFormatList.setAdapter(new VideoFormatAdapter(getContext()));
         videoFormatList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1226,7 +1226,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner photoAEBCountList = (Spinner) parentView.findViewById(R.id.photoAEBCountList);
+        Spinner photoAEBCountList = parentView.findViewById(R.id.photoAEBCountList);
         photoAEBCountList.setAdapter(new PhotoAEBCountAdapter(getContext()));
         photoAEBCountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1240,7 +1240,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        photoTimelapseIntervalList = (Spinner) parentView.findViewById(R.id.photoTimelapseIntervalList);
+        photoTimelapseIntervalList = parentView.findViewById(R.id.photoTimelapseIntervalList);
 
         photoTimelapseIntervalList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1254,7 +1254,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner photoBurstCountList = (Spinner) parentView.findViewById(R.id.photoBurstCountList);
+        Spinner photoBurstCountList = parentView.findViewById(R.id.photoBurstCountList);
         photoBurstCountList.setAdapter(new PhotoBurstAdapter(getContext()));
         photoBurstCountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1268,11 +1268,11 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        photoCustomStyleContrast = (EditText) parentView.findViewById(R.id.photoCustomStyleContrast);
-        photoCustomStyleSaturation = (EditText) parentView.findViewById(R.id.photoCustomStyleSaturation);
-        photoCustomStyleSharpness = (EditText) parentView.findViewById(R.id.photoCustomStyleSharpness);
+        photoCustomStyleContrast = parentView.findViewById(R.id.photoCustomStyleContrast);
+        photoCustomStyleSaturation = parentView.findViewById(R.id.photoCustomStyleSaturation);
+        photoCustomStyleSharpness = parentView.findViewById(R.id.photoCustomStyleSharpness);
 
-        Spinner photoStyleList = (Spinner) parentView.findViewById(R.id.photoStyleList);
+        Spinner photoStyleList = parentView.findViewById(R.id.photoStyleList);
         photoStyleList.setAdapter(new PhotoStyleAdapter(getContext()));
         photoStyleList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1295,7 +1295,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        exposureValueList = (Spinner) parentView.findViewById(R.id.exposureValueList);
+        exposureValueList = parentView.findViewById(R.id.exposureValueList);
         exposureValueList.setAdapter(new ExposureValueAdapter(getContext()));
         exposureValueList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1309,7 +1309,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        motionDelayValueList = (Spinner) parentView.findViewById(R.id.motionDelayShotList);
+        motionDelayValueList = parentView.findViewById(R.id.motionDelayShotList);
         motionDelayValueList.setAdapter(new MotionDelayShotValueAdapter(getContext()));
         motionDelayValueList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1323,7 +1323,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        cameraPatternValueList = (Spinner) parentView.findViewById(R.id.cameraPatternList);
+        cameraPatternValueList = parentView.findViewById(R.id.cameraPatternList);
         cameraPatternValueList.setAdapter(new CameraPatternValueAdapter(getContext()));
         cameraPatternValueList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1337,7 +1337,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        shutterList = (Spinner) parentView.findViewById(R.id.shutterList);
+        shutterList = parentView.findViewById(R.id.shutterList);
         shutterSpeedAdapter = new ShutterSpeedAdapter(getContext());
         shutterList.setAdapter(shutterSpeedAdapter);
         shutterList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1352,7 +1352,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner ISOList = (Spinner) parentView.findViewById(R.id.ISOList);
+        Spinner ISOList = parentView.findViewById(R.id.ISOList);
         ISOList.setAdapter(new ISOValueAdapter(getContext(), Arrays.asList(rangeManager.getCameraISO(false))));
         ISOList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1366,7 +1366,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        colorStyle = (Spinner) parentView.findViewById(R.id.colorStyleList);
+        colorStyle = parentView.findViewById(R.id.colorStyleList);
         colorStyle.setAdapter(new ColorStyleAdapter(getContext()));
         colorStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1380,7 +1380,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner whiteBalanceTypeList = (Spinner) parentView.findViewById(R.id.whiteBalanceTypeList);
+        Spinner whiteBalanceTypeList = parentView.findViewById(R.id.whiteBalanceTypeList);
         WhiteBalanceTypeAdapter whiteBalanceTypeAdapter = new WhiteBalanceTypeAdapter(getContext());
         whiteBalanceTypeAdapter.setData(Arrays.asList(rangeManager.getCameraWhiteBalanceType()));
         whiteBalanceTypeList.setAdapter(whiteBalanceTypeAdapter);
@@ -1388,7 +1388,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 cameraWhiteBalanceType = (WhiteBalanceType) parent.getAdapter().getItem(position);
-                EditText colorTempView = ((EditText) parentView.findViewById(R.id.colorTemperatureValue));
+                EditText colorTempView = parentView.findViewById(R.id.colorTemperatureValue);
                 if (cameraWhiteBalanceType == WhiteBalanceType.CUSTOM) {
                     RangePair<Integer> colorTemp = rangeManager.getColorTemperature();
 
@@ -1406,7 +1406,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner antiFlickerList = (Spinner) parentView.findViewById(R.id.antiFlickerList);
+        Spinner antiFlickerList = parentView.findViewById(R.id.antiFlickerList);
         antiFlickerList.setAdapter(new AntiFlickerAdapter(getContext()));
         antiFlickerList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1420,7 +1420,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        Spinner autoExposureLockStateList = (Spinner) parentView.findViewById(R.id.autoExposureLockStateList);
+        Spinner autoExposureLockStateList = parentView.findViewById(R.id.autoExposureLockStateList);
         autoExposureLockStateList.setAdapter(new AutoExposureLockStateAdapter(getContext()));
         autoExposureLockStateList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1435,7 +1435,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
         });
 
 
-        exposureModeList = (Spinner) parentView.findViewById(R.id.exposureModeList);
+        exposureModeList = parentView.findViewById(R.id.exposureModeList);
         exposureModeList.setAdapter(new ExposureModeAdapter(getContext(), Arrays.asList(rangeManager.getCameraExposureMode())));
         exposureModeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -1449,10 +1449,10 @@ public class CameraXT701Fragment extends CameraBaseFragment {
             }
         });
 
-        spotMeteringAreaX = (EditText) parentView.findViewById(R.id.spotMeteringAreaX);
-        spotMeteringAreaY = (EditText) parentView.findViewById(R.id.spotMeteringAreaY);
-        motionInterval = (EditText) parentView.findViewById(R.id.interval);
-        motionDuration = (EditText) parentView.findViewById(R.id.duration);
+        spotMeteringAreaX = parentView.findViewById(R.id.spotMeteringAreaX);
+        spotMeteringAreaY = parentView.findViewById(R.id.spotMeteringAreaY);
+        motionInterval = parentView.findViewById(R.id.interval);
+        motionDuration = parentView.findViewById(R.id.duration);
 
     }
 }

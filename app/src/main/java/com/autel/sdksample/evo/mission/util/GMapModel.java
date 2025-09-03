@@ -847,9 +847,11 @@ public class GMapModel implements MapModelImpl {
                 this.orbitAdvanceDataBean.setBasicMode(true);
                 break;
             case OrbitAdvanceDataBean.TYPE_BASIC_SPEED_CHANGE:
+            case OrbitAdvanceDataBean.TYPE_ADVANCE_SPEED:
                 this.orbitAdvanceDataBean.setSpeed(orbitAdvanceDataBean.getSpeed());
                 break;
             case OrbitAdvanceDataBean.TYPE_BASIC_FLIGHT_DIRECTION:
+            case OrbitAdvanceDataBean.TYPE_ADVANCE_FLIGHT_DIRECTION:
                 this.orbitAdvanceDataBean.setFlightDirection(orbitAdvanceDataBean.getFlightDirection());
                 break;
             case OrbitAdvanceDataBean.TYPE_ADVANCE_MODE:
@@ -869,14 +871,8 @@ public class GMapModel implements MapModelImpl {
             case OrbitAdvanceDataBean.TYPE_ADVANCE_RADIUS:
                 this.orbitAdvanceDataBean.setRadius(orbitAdvanceDataBean.getRadius());
                 break;
-            case OrbitAdvanceDataBean.TYPE_ADVANCE_SPEED:
-                this.orbitAdvanceDataBean.setSpeed(orbitAdvanceDataBean.getSpeed());
-                break;
             case OrbitAdvanceDataBean.TYPE_ADVANCE_ROTATION:
                 this.orbitAdvanceDataBean.setRotation(orbitAdvanceDataBean.getRotation());
-                break;
-            case OrbitAdvanceDataBean.TYPE_ADVANCE_FLIGHT_DIRECTION:
-                this.orbitAdvanceDataBean.setFlightDirection(orbitAdvanceDataBean.getFlightDirection());
                 break;
             case OrbitAdvanceDataBean.TYPE_ADVANCE_HEADING:
                 this.orbitAdvanceDataBean.setHeading(orbitAdvanceDataBean.getHeading());

@@ -59,7 +59,7 @@ public class MissionDropSelectView extends FrameLayout {
         this.removeAllViews();
         unpressView = LayoutInflater.from(context).inflate(R.layout.mission_drop_unpress_view, this, true);
         setPressViewHeight(AdvancedItemEnum.DEFAULT, unpressView);
-        selectTv = (TextView) unpressView.findViewById(R.id.orbit_position_select_one_tv);
+        selectTv = unpressView.findViewById(R.id.orbit_position_select_one_tv);
         selectTv.setText(datas.get(position));
         curSelet = position;
         unpressView.setOnClickListener(v -> showPressView(itemEnum));
@@ -74,7 +74,7 @@ public class MissionDropSelectView extends FrameLayout {
         //根据itemEnum设置不同的view高度
         setPressViewHeight(itemEnum, pressView);
         pressView.setBackgroundResource(R.drawable.mission_pop_bg);
-        RecyclerView missionDropRv = (RecyclerView) pressView.findViewById(R.id.mission_drop_rv);
+        RecyclerView missionDropRv = pressView.findViewById(R.id.mission_drop_rv);
         missionDropRv.addItemDecoration(new ListItemDecoration(mContext, LinearLayoutManager.VERTICAL));
         missionDropRv.setLayoutManager(new LinearLayoutManager(mContext));
         MissionDropViewAdapter adapter = new MissionDropViewAdapter(datas);

@@ -42,11 +42,11 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
 
     @Override
     protected void initUi() {
-        lowBatteryNotifyThreshold = (EditText) findViewById(R.id.lowBatteryNotifyThreshold);
-        criticalBatteryNotifyThreshold = (EditText) findViewById(R.id.criticalBatteryNotifyThreshold);
-        dischargeDay = (EditText) findViewById(R.id.dischargeDay);
+        lowBatteryNotifyThreshold = findViewById(R.id.lowBatteryNotifyThreshold);
+        criticalBatteryNotifyThreshold = findViewById(R.id.criticalBatteryNotifyThreshold);
+        dischargeDay = findViewById(R.id.dischargeDay);
 
-        final TextView lowBatteryRange = (TextView) findViewById(R.id.lowBatteryRange);
+        final TextView lowBatteryRange = findViewById(R.id.lowBatteryRange);
         lowBatteryNotifyThreshold.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,7 +72,7 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
             }
         });
 
-        final TextView criticalBatteryRange = (TextView) findViewById(R.id.criticalBatteryRange);
+        final TextView criticalBatteryRange = findViewById(R.id.criticalBatteryRange);
         criticalBatteryNotifyThreshold.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -97,7 +97,7 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
 
             }
         });
-        final TextView dischargeDayRange = (TextView) findViewById(R.id.dischargeDayRange);
+        final TextView dischargeDayRange = findViewById(R.id.dischargeDayRange);
         dischargeDay.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -63,7 +63,7 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
 //            }
 //        });
 
-        visualSettingEnableState = (Switch) findViewById(R.id.visualSettingEnableState);
+        visualSettingEnableState = findViewById(R.id.visualSettingEnableState);
 
         ((Spinner) findViewById(R.id.visualSettingList)).setAdapter(new VisualSettingSwitchBladeAdapter(this));
         ((Spinner) findViewById(R.id.visualSettingList)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

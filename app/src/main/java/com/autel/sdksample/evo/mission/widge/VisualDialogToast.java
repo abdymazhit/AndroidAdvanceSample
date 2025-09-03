@@ -34,10 +34,10 @@ public class VisualDialogToast {
         dialog.setCancelable(false);
         Objects.requireNonNull(dialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-        mTextViewTitle = (TextView) mView.findViewById(R.id.tv_title_content);
-        mTextview1 = (TextView) mView.findViewById(R.id.tv_cancel);
-        mTextview2 = (TextView) mView.findViewById(R.id.tv_select_new_target);
-        mTextview3 = (TextView) mView.findViewById(R.id.tv_exit_flight_mode);
+        mTextViewTitle = mView.findViewById(R.id.tv_title_content);
+        mTextview1 = mView.findViewById(R.id.tv_cancel);
+        mTextview2 = mView.findViewById(R.id.tv_select_new_target);
+        mTextview3 = mView.findViewById(R.id.tv_exit_flight_mode);
         mTextview1.setOnClickListener(v -> {
             if (null != listener) {
                 listener.onClickView1();

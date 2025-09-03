@@ -38,7 +38,7 @@ public abstract class GimbalActivity extends BaseActivity<AutelGimbal> {
     protected void initUi() {
 
 
-        gimbalWorkModeList = (Spinner) findViewById(R.id.gimbalWorkModeList);
+        gimbalWorkModeList = findViewById(R.id.gimbalWorkModeList);
         gimbalWorkModeList.setAdapter(new GimbalModeAdapter(this));
         gimbalWorkModeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

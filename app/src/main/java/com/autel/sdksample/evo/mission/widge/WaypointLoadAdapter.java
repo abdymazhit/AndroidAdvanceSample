@@ -38,7 +38,7 @@ public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         ((TextView)holder.view.findViewById(R.id.item_name_tv)).setText(names.get(position).getName());
-        final SwipeMenuLayout swipeMenuLayout = (SwipeMenuLayout) holder.view.findViewById(R.id.swipe_layout);
+        final SwipeMenuLayout swipeMenuLayout = holder.view.findViewById(R.id.swipe_layout);
         holder.view.findViewById(R.id.content).setOnClickListener(v -> {
             if(itemClickListener != null){
                 itemClickListener.onItemClick(names.get(holder.getAdapterPosition()).getName());
@@ -57,7 +57,7 @@ public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapte
                 itemClickListener.onItemDeleteClick(names.get(holder.getAdapterPosition()).getName());
             }
         });
-        CheckBox checkBox = (CheckBox) holder.view.findViewById(R.id.item_check_box);
+        CheckBox checkBox = holder.view.findViewById(R.id.item_check_box);
         if(checkState){
             checkBox.setVisibility(View.VISIBLE);
             checkBox.setChecked(names.get(position).isCheckState());

@@ -57,12 +57,12 @@ public class G2GimbalActivity extends GimbalActivity {
     @Override
     protected void initUi() {
         super.initUi();
-        gimbalAnglePitch = (EditText) findViewById(R.id.gimbalAnglePitch);
-        gimbalAngleRoll = (EditText) findViewById(R.id.gimbalAngleRoll);
-        gimbalAngleYaw = (EditText) findViewById(R.id.gimbalAngleYaw);
-        gimbalAnglePitchSpeed = (EditText) findViewById(R.id.gimbalAnglePitchSpeed);
-        gimbalAngleRollSpeed = (EditText) findViewById(R.id.gimbalAngleRollSpeed);
-        gimbalAngleYawSpeed = (EditText) findViewById(R.id.gimbalAngleYawSpeed);
+        gimbalAnglePitch = findViewById(R.id.gimbalAnglePitch);
+        gimbalAngleRoll = findViewById(R.id.gimbalAngleRoll);
+        gimbalAngleYaw = findViewById(R.id.gimbalAngleYaw);
+        gimbalAnglePitchSpeed = findViewById(R.id.gimbalAnglePitchSpeed);
+        gimbalAngleRollSpeed = findViewById(R.id.gimbalAngleRollSpeed);
+        gimbalAngleYawSpeed = findViewById(R.id.gimbalAngleYawSpeed);
         findViewById(R.id.setGimbalAngleListener).setOnClickListener(v -> mXStarEvoGimbal.setAngleListener(new CallbackWithOneParam<EvoAngleInfo>() {
 
             @Override
@@ -119,7 +119,7 @@ public class G2GimbalActivity extends GimbalActivity {
             angleSpeed.setYawSpeed(yaw);
             mXStarEvoGimbal.setGimbalAngleWithSpeed(pitch);
         });
-        gimbalAxisTypeList = (Spinner) findViewById(R.id.gimbalAxisTypeList);
+        gimbalAxisTypeList = findViewById(R.id.gimbalAxisTypeList);
         gimbalAxisTypeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

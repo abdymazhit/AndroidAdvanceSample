@@ -56,7 +56,7 @@ public class OrbitFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.inflater = inflater;
         View view = inflater.inflate(R.layout.fragment_orbit_content,container,false);
-        containerView = (ViewGroup) view.findViewById(R.id.orbit_view_container);
+        containerView = view.findViewById(R.id.orbit_view_container);
         orbitPositionSetView = new OrbitPositionSetView(Objects.requireNonNull(container).getContext());
         orbitDataSetView = new OrbitDataSetView(container.getContext());
         orbitExecutedView = new OrbitExecuteView(container.getContext());

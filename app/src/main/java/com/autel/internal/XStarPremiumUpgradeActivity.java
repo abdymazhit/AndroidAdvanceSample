@@ -126,7 +126,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
         upgradeFile = new File(UPGRADE_FILE_DIR, FILE_NAME);
         AutelLog.e("CYK:init:", "FILE_LENGTH:" + upgradeFile.length());
 
-        Button buttonGetVersion = (Button) findViewById(R.id.getFirmwareVersion);
+        Button buttonGetVersion = findViewById(R.id.getFirmwareVersion);
         buttonGetVersion.setOnClickListener(v -> {
             String language = getResources().getConfiguration().locale.getLanguage();
 
@@ -170,7 +170,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
             });
         });
 
-        btn = (Button) findViewById(R.id.downloadFile);
+        btn = findViewById(R.id.downloadFile);
         btn.setOnClickListener(v -> {
             getHttpDownloadManager(context).addDownloadCallback(XStarPremiumUpgradeActivity.this);
             downloadLayout.removeAllViews();
@@ -193,12 +193,12 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
             }
         });
 
-        Button buttonStart = (Button) findViewById(R.id.startupgrade);
+        Button buttonStart = findViewById(R.id.startupgrade);
         buttonStart.setOnClickListener(v -> {
 
             String s = "";
             try {
-                s = readTextFromSDcard(new FileInputStream(new File(UPGRADE_FILE_DIR + File.separator + JSON_HEAD)));
+                s = readTextFromSDcard(new FileInputStream(UPGRADE_FILE_DIR + File.separator + JSON_HEAD));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -222,12 +222,12 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
             });
         });
 
-        cameraText = (TextView) findViewById(R.id.camera_progress);
-        dspText = (TextView) findViewById(R.id.dsp_progress);
-        dsp_rcText = (TextView) findViewById(R.id.dsp_rc_progress);
-        rc_playerText = (TextView) findViewById(R.id.rc_player_progress);
-        urlText = (TextView) findViewById(R.id.firmwareVersion);
-        downloadLayout = (LinearLayout) findViewById(R.id.downloadLayout);
+        cameraText = findViewById(R.id.camera_progress);
+        dspText = findViewById(R.id.dsp_progress);
+        dsp_rcText = findViewById(R.id.dsp_rc_progress);
+        rc_playerText = findViewById(R.id.rc_player_progress);
+        urlText = findViewById(R.id.firmwareVersion);
+        downloadLayout = findViewById(R.id.downloadLayout);
     }
 
     private String readTextFromSDcard(InputStream is) throws Exception {
@@ -382,7 +382,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
     }
 
     private int getMin() {
-        return dirFiles.size() > 4 ? 4 : dirFiles.size();
+        return Math.min(dirFiles.size(), 4);
     }
 
     @Override

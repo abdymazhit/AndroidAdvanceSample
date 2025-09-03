@@ -58,9 +58,9 @@ public class WaypointLoadView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.waypoint_file_load_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         fetchFileData();
         showWaypointFileSystemView();
@@ -103,9 +103,9 @@ public class WaypointLoadView extends FrameLayout {
                 waypointLoadViewListener.exitClick();
             }
         });
-        TextView titleTv = (TextView) titleView.findViewById(R.id.mission_title);
+        TextView titleTv = titleView.findViewById(R.id.mission_title);
         titleTv.setText(R.string.waypoint_load);
-        TextView editTv = (TextView) titleView.findViewById(R.id.common_save);
+        TextView editTv = titleView.findViewById(R.id.common_save);
         editTv.setText("edit");
         editTv.setOnClickListener(v -> {
             if(waypointLoadViewListener != null){
@@ -120,7 +120,7 @@ public class WaypointLoadView extends FrameLayout {
         });
 
         waypointLoadAdapter.setCheckState(false);
-        RecyclerView loadRv = (RecyclerView) contentView.findViewById(R.id.load_rv);
+        RecyclerView loadRv = contentView.findViewById(R.id.load_rv);
         loadRv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false));
         loadRv.addItemDecoration(new ListItemDecoration(context, LinearLayoutManager.VERTICAL));
         loadRv.setAdapter(waypointLoadAdapter);
@@ -133,14 +133,14 @@ public class WaypointLoadView extends FrameLayout {
     private void showHaveNoDataView(){
         contentContainer.removeAllViews();
         View contentView = inflater.inflate(R.layout.waypoint_file_system_no_data_layout,null);
-        TextView tipTv = (TextView) contentView.findViewById(R.id.tip_tv);
+        TextView tipTv = contentView.findViewById(R.id.tip_tv);
         tipTv.setText(R.string.waypoint_no_file_tip);
         contentContainer.addView(contentView);
     }
 
     private void showMutiChoiceView() {
         View mutiTitleView = inflater.inflate(R.layout.waypoint_checkbox_title,null);
-        final CheckBox mutiCheckBox = (CheckBox) mutiTitleView.findViewById(R.id.all_check);
+        final CheckBox mutiCheckBox = mutiTitleView.findViewById(R.id.all_check);
         mutiCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             waypointLoadAdapter.checkAll(isChecked);
             if(isChecked){
@@ -159,7 +159,7 @@ public class WaypointLoadView extends FrameLayout {
         });
 
         View mutiBottomView = inflater.inflate(R.layout.common_mission_bottom,null);
-        bottomTv = (TextView) mutiBottomView.findViewById(R.id.bottom_title);
+        bottomTv = mutiBottomView.findViewById(R.id.bottom_title);
         bottomTv.setText("Delete");
         mutiBottomView.setOnClickListener(v -> {
             if(waypointLoadViewListener != null){

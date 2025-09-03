@@ -57,9 +57,9 @@ public class OrbitExecuteView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mission_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showOrbitExecuteView();
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -88,9 +88,9 @@ public class OrbitExecuteView extends FrameLayout {
     public void showOrbitExecuteView(){
         clearView();
         View titleView = inflater.inflate(R.layout.common_mission_title_with_hide,null);
-        TextView commonTitle = (TextView) titleView.findViewById(R.id.common_title);
+        TextView commonTitle = titleView.findViewById(R.id.common_title);
         commonTitle.setText(R.string.mission_orbit);
-        TextView commonHide = (TextView)titleView.findViewById(R.id.common_hide);
+        TextView commonHide = titleView.findViewById(R.id.common_hide);
         commonHide.setText(R.string.mission_hide);
         commonHide.setOnClickListener(v -> {
             if(orbitExecuteViewListener != null){
@@ -98,14 +98,14 @@ public class OrbitExecuteView extends FrameLayout {
             }
         });
         View contentView = inflater.inflate(R.layout.oribit_execute_content,null);
-        up_tv = (TextView)contentView.findViewById(R.id.up_tv);
-        down_tv = (TextView)contentView.findViewById(R.id.down_tv);
-        left_tv = (TextView)contentView.findViewById(R.id.left_tv);
-        right_tv = (TextView)contentView.findViewById(R.id.right_tv);
+        up_tv = contentView.findViewById(R.id.up_tv);
+        down_tv = contentView.findViewById(R.id.down_tv);
+        left_tv = contentView.findViewById(R.id.left_tv);
+        right_tv = contentView.findViewById(R.id.right_tv);
         left_img = contentView.findViewById(R.id.left_img);
         right_img = contentView.findViewById(R.id.right_img);
 
-        orbit_rb = (AutelSegmentedGroup)contentView.findViewById(R.id.orbit_rb);
+        orbit_rb = contentView.findViewById(R.id.orbit_rb);
         orbit_rb.setOnCheckedChangeListener((group, checkedId) -> {
             if(checkedId == R.id.rb_left_btn){
                 showLeftStick(OrbitExecuteView.this.remoteControllerCommandStickMode);
@@ -126,7 +126,7 @@ public class OrbitExecuteView extends FrameLayout {
                 orbitExecuteViewListener.exitClick();
             }
         });
-        TextView bottomTitle = (TextView) bottomView.findViewById(R.id.bottom_title);
+        TextView bottomTitle = bottomView.findViewById(R.id.bottom_title);
         bottomTitle.setText(R.string.mission_exit);
         bottomTitle.setTextColor(AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.red));
         titleContainer.addView(titleView);

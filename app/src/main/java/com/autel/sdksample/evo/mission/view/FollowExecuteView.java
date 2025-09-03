@@ -50,9 +50,9 @@ public class FollowExecuteView extends FrameLayout {
     private void initView(final Context context) {
         inflater = LayoutInflater.from(context);
         ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_mission_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showFollowExecuteView();
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -85,7 +85,7 @@ public class FollowExecuteView extends FrameLayout {
         contentContainer.removeAllViews();
         View executeTitle = inflater.inflate(R.layout.common_mission_title_with_hide,null);
         ((TextView)executeTitle.findViewById(R.id.common_title)).setText(R.string.mission_follow);
-        TextView hideBtn = (TextView) executeTitle.findViewById(R.id.common_hide);
+        TextView hideBtn = executeTitle.findViewById(R.id.common_hide);
         hideBtn.setText(R.string.mission_hide);
         hideBtn.setOnClickListener(v -> {
             if(followExecuteListener != null){
@@ -93,7 +93,7 @@ public class FollowExecuteView extends FrameLayout {
             }
         });
         View bottomView = inflater.inflate(R.layout.common_mission_bottom,null);
-        TextView bottomTitle = (TextView) bottomView.findViewById(R.id.bottom_title);
+        TextView bottomTitle = bottomView.findViewById(R.id.bottom_title);
         bottomTitle.setText(R.string.mission_exit);
         bottomView.setOnClickListener(v -> {
             if(followExecuteListener != null){
@@ -101,7 +101,7 @@ public class FollowExecuteView extends FrameLayout {
             }
         });
         View contentView = inflater.inflate(R.layout.follow_execute_view,null);
-        distanceTv2 = (TextView) contentView.findViewById(R.id.distance_tv);
+        distanceTv2 = contentView.findViewById(R.id.distance_tv);
         contentView.findViewById(R.id.face_me_btn).setOnClickListener(v -> {
             if(followExecuteListener != null){
                 followExecuteListener.onFaceMeClick();

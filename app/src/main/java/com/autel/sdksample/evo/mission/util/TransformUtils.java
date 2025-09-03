@@ -338,9 +338,6 @@ public class TransformUtils {
         }
 
         switch (count){
-            case 0:
-                unitStr = "B";
-                break;
             case 1:
                 unitStr = "KB";
                 break;
@@ -356,6 +353,7 @@ public class TransformUtils {
             case 5:
                 unitStr = "PB";
                 break;
+            case 0:
             default:
                 unitStr = "B";
                 break;

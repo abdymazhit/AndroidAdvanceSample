@@ -96,7 +96,7 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
         if (null == convertView) {
             convertView = View.inflate(mContext, R.layout.album_item, null);
         }
-        textView = (TextView) convertView.findViewById(R.id.spinner_item_text);
+        textView = convertView.findViewById(R.id.spinner_item_text);
         String originUrl = elementList.get(position).getOriginalMedia();
         if (position < elementList.size() && position >= 0) {
             textView.setText(originUrl);

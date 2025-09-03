@@ -65,7 +65,7 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
             String valueHeight = waypointHeight.getText().toString();
             return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
         });
-        finishActionSpinner = (Spinner) view.findViewById(R.id.finishAction);
+        finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionAdapter = new WaypointFinishActionAdapter(getContext());
         finishActionSpinner.setAdapter(finishActionAdapter);
         finishActionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,9 +80,9 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
             }
         });
 
-        waypointSpeed = (EditText) view.findViewById(R.id.waypointSpeed);
-        waypointReturnHeight = (EditText) view.findViewById(R.id.waypointReturnHeight);
-        waypointHeight = (EditText) view.findViewById(R.id.waypointHeight);
+        waypointSpeed = view.findViewById(R.id.waypointSpeed);
+        waypointReturnHeight = view.findViewById(R.id.waypointReturnHeight);
+        waypointHeight = view.findViewById(R.id.waypointHeight);
 
         return view;
     }

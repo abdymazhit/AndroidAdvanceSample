@@ -47,9 +47,9 @@ public class FollowStartView extends FrameLayout{
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_mission_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showFollowStartView();
     }
@@ -71,7 +71,7 @@ public class FollowStartView extends FrameLayout{
             }
         });
         View contentView = inflater.inflate(R.layout.follow_start_view,null);
-        distanceTv = (TextView) contentView.findViewById(R.id.distance_tv);
+        distanceTv = contentView.findViewById(R.id.distance_tv);
         titleContainer.addView(startTitle);
         bottomContainer.addView(bottomView);
         contentContainer.addView(contentView);

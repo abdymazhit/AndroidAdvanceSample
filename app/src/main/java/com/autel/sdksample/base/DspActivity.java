@@ -46,11 +46,11 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
 
     @Override
     protected void initUi() {
-        ssidName = (EditText) findViewById(R.id.SSIDName);
-        ssidPwd = (EditText) findViewById(R.id.SSIDPwd);
+        ssidName = findViewById(R.id.SSIDName);
+        ssidPwd = findViewById(R.id.SSIDPwd);
 
         rfListAdapter = new RFListAdapter(this);
-        dspRFList = (Spinner) findViewById(R.id.dspRFList);
+        dspRFList = findViewById(R.id.dspRFList);
         dspRFList.setAdapter(rfListAdapter);
         dspRFList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

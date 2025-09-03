@@ -48,7 +48,7 @@ public class LocalVideoListAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = View.inflate(mContext, R.layout.spinner_item, null);
         }
-        textView = (TextView) convertView.findViewById(R.id.spinner_item_text);
+        textView = convertView.findViewById(R.id.spinner_item_text);
 
         if (position < mediaInfos.size() && position >= 0) {
             textView.setText(mediaInfos.get(position).getAbsolutePath());

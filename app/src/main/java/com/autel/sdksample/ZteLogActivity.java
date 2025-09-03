@@ -27,7 +27,7 @@ public class ZteLogActivity extends AppCompatActivity implements Handler.Callbac
         mHandlerTheard = new HandlerThread("zteLog Thread");
         mHandlerTheard.start();
         mHandler = new Handler(this);
-        aSwitch = (Switch) findViewById(R.id.switch1);
+        aSwitch = findViewById(R.id.switch1);
         ZteLogUtils.deleteBeforeFile();
         aSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){

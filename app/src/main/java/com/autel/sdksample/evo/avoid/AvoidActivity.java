@@ -21,9 +21,9 @@ public class AvoidActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_avoid);
         avoidView = new AutelAvoidView();
-        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE,(ImageView) findViewById(R.id.avoid_img_1));
-        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE,(ImageView) findViewById(R.id.avoid_img_2));
-        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE,(ImageView) findViewById(R.id.avoid_img_3));
-        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE,(ImageView) findViewById(R.id.avoid_img_4));
+        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE, findViewById(R.id.avoid_img_1));
+        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE, findViewById(R.id.avoid_img_2));
+        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE, findViewById(R.id.avoid_img_3));
+        avoidView.setAvoidImg(AutelAvoidView.STATE_ONE, findViewById(R.id.avoid_img_4));
     }
 }

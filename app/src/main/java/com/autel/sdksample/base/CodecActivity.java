@@ -35,7 +35,7 @@ public class CodecActivity extends BaseActivity<AutelCodec> {
 
     @Override
     protected void initUi() {
-        content_layout = (RelativeLayout) findViewById(R.id.content_layout);
+        content_layout = findViewById(R.id.content_layout);
 
         isCodecing = false;
         initClick();

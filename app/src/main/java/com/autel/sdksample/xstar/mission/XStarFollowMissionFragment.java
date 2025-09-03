@@ -49,9 +49,9 @@ public class XStarFollowMissionFragment extends MissionFragment {
             }
             Log.v("followTest", "location " + location);
         });
-        followReturnHeight = (EditText) view.findViewById(R.id.followReturnHeight);
+        followReturnHeight = view.findViewById(R.id.followReturnHeight);
         finishActionAdapter = new FollowFinishActionAdapter(getContext());
-        finishActionSpinner = (Spinner) view.findViewById(R.id.finishAction);
+        finishActionSpinner = view.findViewById(R.id.finishAction);
         finishActionSpinner.setAdapter(finishActionAdapter);
         finishActionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override

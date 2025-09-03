@@ -68,10 +68,8 @@ public class MissionOperatorFragment extends Fragment {
         if (null != product) {
             switch (product.getType()) {
                 case X_STAR:
-                    return product.getMissionManager();
-                case PREMIUM:
-                    return product.getMissionManager();
                 case EVO:
+                case PREMIUM:
                     return product.getMissionManager();
             }
 
@@ -118,10 +116,10 @@ public class MissionOperatorFragment extends Fragment {
         });
 
         final Context applicationContext = Objects.requireNonNull(getActivity()).getApplicationContext();
-        progressBarDownload = (ProgressBar) view.findViewById(R.id.progressBarDownload);
-        progressBarPrepare = (ProgressBar) view.findViewById(R.id.progressBarPrepare);
+        progressBarDownload = view.findViewById(R.id.progressBarDownload);
+        progressBarPrepare = view.findViewById(R.id.progressBarPrepare);
 
-        missionPrepare = (Button) view.findViewById(R.id.missionPrepare);
+        missionPrepare = view.findViewById(R.id.missionPrepare);
         missionPrepare.setOnClickListener(v -> {
             if (null != missionManager) {
                 progressBarPrepare.setVisibility(View.VISIBLE);
@@ -147,7 +145,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        missionStart = (Button) view.findViewById(R.id.missionStart);
+        missionStart = view.findViewById(R.id.missionStart);
         missionStart.setOnClickListener(v -> {
             if (null != missionManager) {
                 missionManager.startMission("",new CallbackWithNoParam() {
@@ -164,7 +162,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        missionPause = (Button) view.findViewById(R.id.missionPause);
+        missionPause = view.findViewById(R.id.missionPause);
         missionPause.setOnClickListener(v -> {
             if (null != missionManager) {
                 missionManager.pauseMission(new CallbackWithNoParam() {
@@ -181,7 +179,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        missionResume = (Button) view.findViewById(R.id.missionResume);
+        missionResume = view.findViewById(R.id.missionResume);
         missionResume.setOnClickListener(v -> {
             if (null != missionManager) {
                 missionManager.resumeMission("",new CallbackWithNoParam() {
@@ -198,7 +196,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        missionCancel = (Button) view.findViewById(R.id.missionCancel);
+        missionCancel = view.findViewById(R.id.missionCancel);
         missionCancel.setOnClickListener(v -> {
             if (null != missionManager) {
                 missionManager.cancelMission(new CallbackWithNoParam() {
@@ -215,7 +213,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        missionDownload = (Button) view.findViewById(R.id.missionDownload);
+        missionDownload = view.findViewById(R.id.missionDownload);
         missionDownload.setOnClickListener(v -> {
             if (null != missionManager) {
                 progressBarDownload.setVisibility(View.VISIBLE);
@@ -277,7 +275,7 @@ public class MissionOperatorFragment extends Fragment {
                 ((MapActivity) getActivity()).updateLogInfo(null != state ? state.toString() : "UNKNOWN");
             }
         });
-        final TextView layoutShowState = (TextView)view.findViewById(R.id.layoutShowState);
+        final TextView layoutShowState = view.findViewById(R.id.layoutShowState);
         layoutShowState.setOnClickListener(v -> {
             int distance = view.findViewById(R.id.operatorScroll).getWidth();
             Log.v("showhide", "x  : "+view.getX());

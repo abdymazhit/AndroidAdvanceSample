@@ -54,7 +54,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
 
     @Override
     protected void initUi() {
-        languageSpinner = (Spinner) findViewById(R.id.languageSpinner);
+        languageSpinner = findViewById(R.id.languageSpinner);
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -67,7 +67,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        rfSpinner = (Spinner) findViewById(R.id.rfSpinner);
+        rfSpinner = findViewById(R.id.rfSpinner);
         rfSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -80,7 +80,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        teachingModeSpinner = (Spinner) findViewById(R.id.teachingModeSpinner);
+        teachingModeSpinner = findViewById(R.id.teachingModeSpinner);
         teachingModeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -103,7 +103,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        lengthUnitSpinner = (Spinner) findViewById(R.id.lengthUnitSpinner);
+        lengthUnitSpinner = findViewById(R.id.lengthUnitSpinner);
         lengthUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -126,7 +126,7 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        commandStickModeSpinner = (Spinner) findViewById(R.id.commandStickModeSpinner);
+        commandStickModeSpinner = findViewById(R.id.commandStickModeSpinner);
         commandStickModeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -149,8 +149,8 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        final TextView yawCoefficientRange = (TextView) findViewById(R.id.yawCoefficientRange);
-        yawCoefficientValue = (EditText) findViewById(R.id.yawCoefficientValue);
+        final TextView yawCoefficientRange = findViewById(R.id.yawCoefficientRange);
+        yawCoefficientValue = findViewById(R.id.yawCoefficientValue);
         yawCoefficientValue.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -177,8 +177,8 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        dialAdjustSpeed = (EditText) findViewById(R.id.dialAdjustSpeed);
-        final TextView dialAdjustSpeedRange = (TextView) findViewById(R.id.dialAdjustSpeedRange);
+        dialAdjustSpeed = findViewById(R.id.dialAdjustSpeed);
+        final TextView dialAdjustSpeedRange = findViewById(R.id.dialAdjustSpeedRange);
         dialAdjustSpeed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

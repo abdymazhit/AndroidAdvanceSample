@@ -51,9 +51,9 @@ public class WaypointAllSelectView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mission_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showWaypointAllSelectView();
     }
@@ -64,13 +64,13 @@ public class WaypointAllSelectView extends FrameLayout {
         titleView.findViewById(R.id.common_save).setVisibility(INVISIBLE);
         ((TextView)titleView.findViewById(R.id.mission_title)).setText(R.string.waypoint);
         View contentView = inflater.inflate(R.layout.waypoint_all_select_content,null);
-        selectNum = (TextView) contentView.findViewById(R.id.select_num_tv);
+        selectNum = contentView.findViewById(R.id.select_num_tv);
         initAltitudeAdvance(contentView);
         initSpeedAdvance(contentView);
 
         View bottomView = inflater.inflate(R.layout.common_mission_bottom_two_btn,null);
-        TextView btnLeft = (TextView) bottomView.findViewById(R.id.btn_left);
-        btnRight = (TextView)bottomView.findViewById(R.id.btn_right);
+        TextView btnLeft = bottomView.findViewById(R.id.btn_left);
+        btnRight = bottomView.findViewById(R.id.btn_right);
         btnLeft.setText("Ok");
         btnLeft.setOnClickListener(v -> {
             if(waypointAllSelectViewListener != null){
@@ -111,12 +111,12 @@ public class WaypointAllSelectView extends FrameLayout {
 
     private void initAltitudeAdvance(View advanceView) {
         View altitudeView = advanceView.findViewById(R.id.waypoint_all_select_altitude);
-        TextView limitView = (TextView) altitudeView.findViewById(R.id.oribit_advance_item_limit);
+        TextView limitView = altitudeView.findViewById(R.id.oribit_advance_item_limit);
         limitView.setText("(" + MissionConstant.getWaypointAltitudeLimitMin() + "-" + MissionConstant.getWaypointAltitudeLimitMax() + ")");
-        SeekBar altitudeSeekBar = (SeekBar) altitudeView.findViewById(R.id.common_mission_seekbar);
+        SeekBar altitudeSeekBar = altitudeView.findViewById(R.id.common_mission_seekbar);
         altitudeSeekBar.setMax(MissionConstant.getWaypointAltitudeLimitMax() - MissionConstant.getWaypointAltitudeLimitMin());
         altitudeSeekBar.setProgress(MissionConstant.getWaypointDefaultAltitude());
-        final TextView altitudeTv = (TextView) altitudeView.findViewById(R.id.oribit_advance_item_num);
+        final TextView altitudeTv = altitudeView.findViewById(R.id.oribit_advance_item_num);
         altitudeTv.setText(MissionConstant.getWaypointDefaultAltitude() + TransformUtils.getUnitMeterStrEn());
         altitudeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -138,14 +138,14 @@ public class WaypointAllSelectView extends FrameLayout {
 
     private void initSpeedAdvance(View advanceView) {
         View speedView = advanceView.findViewById(R.id.waypoint_all_select_speed);
-        TextView titleView = (TextView) speedView.findViewById(R.id.orbit_advance_item_title);
+        TextView titleView = speedView.findViewById(R.id.orbit_advance_item_title);
         titleView.setText(R.string.speed);
-        TextView limitView = (TextView)speedView.findViewById(R.id.oribit_advance_item_limit);
+        TextView limitView = speedView.findViewById(R.id.oribit_advance_item_limit);
         limitView.setText("(" + MissionConstant.getOrbitSpeedLimitMin() + "-" + MissionConstant.getOrbitSpeedLimitMax() + ")");
-        SeekBar speedSeekBar = (SeekBar) speedView.findViewById(R.id.common_mission_seekbar);
+        SeekBar speedSeekBar = speedView.findViewById(R.id.common_mission_seekbar);
         speedSeekBar.setMax((int) (MissionConstant.getWaypointSpeedLimitMax()*10 - MissionConstant.getWaypointSpeedLimitMin() * 10));
         speedSeekBar.setProgress((MissionConstant.getWaypointSpeedDefault() * 10));
-        final TextView speedTv = (TextView) speedView.findViewById(R.id.oribit_advance_item_num);
+        final TextView speedTv = speedView.findViewById(R.id.oribit_advance_item_num);
         speedTv.setText(MissionConstant.getWaypointSpeedDefault() + TransformUtils.getSpeedUnitStrEn());
         speedSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

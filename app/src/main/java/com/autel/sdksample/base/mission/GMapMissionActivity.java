@@ -36,7 +36,7 @@ public class GMapMissionActivity extends MapActivity {
         MapsInitializer.initialize(this);
         super.onCreate(savedInstanceState);
         setMapContentView(R.layout.activity_mission_gmap);
-        gMapView = (MapView) findViewById(R.id.gMapView);
+        gMapView = findViewById(R.id.gMapView);
         try {
             gMapView.onCreate(savedInstanceState);
         } catch (Exception e) {

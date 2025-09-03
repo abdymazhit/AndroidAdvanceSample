@@ -52,9 +52,9 @@ public class OrbitPositionSetView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mission_container, null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup) view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showOrbitPositionSetView();
     }
@@ -69,8 +69,8 @@ public class OrbitPositionSetView extends FrameLayout {
             }
         });
         View contentView = inflater.inflate(R.layout.orbit_position_set_content, null);
-        missionDropSelectView = (MissionDropSelectView) contentView.findViewById(R.id.mission_drop_select_view);
-        orbitSetPositionTip = (TextView) contentView.findViewById(R.id.orbit_set_position_tip);
+        missionDropSelectView = contentView.findViewById(R.id.mission_drop_select_view);
+        orbitSetPositionTip = contentView.findViewById(R.id.orbit_set_position_tip);
         missionDropSelectView.setOnItemClickListener(position -> {
             if (orbitPositionSetViewListener != null) {
                 orbitPositionSetViewListener.positionSetWayItemClick(position);
@@ -97,15 +97,13 @@ public class OrbitPositionSetView extends FrameLayout {
 
     public void showObitSetTip(int position) {
         switch (position) {
-            case 0:
-                orbitSetPositionTip.setText(R.string.orbit_position0_set_tip);
-                break;
             case 1:
                 orbitSetPositionTip.setText(R.string.orbit_position1_set_tip);
                 break;
             case 2:
                 orbitSetPositionTip.setText(R.string.orbit_position2_set_tip);
                 break;
+            case 0:
             default:
                 orbitSetPositionTip.setText(R.string.orbit_position0_set_tip);
                 break;

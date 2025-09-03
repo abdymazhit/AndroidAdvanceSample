@@ -49,9 +49,9 @@ public class XStarGimbalActivity extends GimbalActivity {
         super.initUi();
 
 
-        gimbalAngle = (EditText) findViewById(R.id.gimbalAngle);
+        gimbalAngle = findViewById(R.id.gimbalAngle);
 
-        rollAdjustList = (Spinner) findViewById(R.id.rollAdjustList);
+        rollAdjustList = findViewById(R.id.rollAdjustList);
         rollAdjustList.setAdapter(new RollAdjustAdapter(this));
         rollAdjustList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -65,7 +65,7 @@ public class XStarGimbalActivity extends GimbalActivity {
             }
         });
 
-        final TextView gimbalAngleRange = (TextView) findViewById(R.id.gimbalAngleRange);
+        final TextView gimbalAngleRange = findViewById(R.id.gimbalAngleRange);
         gimbalAngle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -120,8 +120,8 @@ public class XStarGimbalActivity extends GimbalActivity {
             mXStarGimbal.setGimbalAngle(isEmpty(value) ? 10 : Integer.valueOf(value));
         });
 
-        gimbalAngleWithFineTuning = (EditText) findViewById(R.id.gimbalAngleWithFineTuning);
-        final TextView angleWithFineTuningRange = (TextView) findViewById(R.id.angleWithFineTuningRange);
+        gimbalAngleWithFineTuning = findViewById(R.id.gimbalAngleWithFineTuning);
+        final TextView angleWithFineTuningRange = findViewById(R.id.angleWithFineTuningRange);
         gimbalAngleWithFineTuning.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

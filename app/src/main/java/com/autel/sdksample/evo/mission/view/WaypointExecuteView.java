@@ -50,9 +50,9 @@ public class WaypointExecuteView extends FrameLayout {
     private void initView(Context context) {
         inflater = LayoutInflater.from(context);
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_mission_container,null);
-        titleContainer = (FrameLayout) view.findViewById(R.id.title_container);
-        bottomContainer = (FrameLayout) view.findViewById(R.id.bottom_container);
-        contentContainer = (ViewGroup)view.findViewById(R.id.content_container);
+        titleContainer = view.findViewById(R.id.title_container);
+        bottomContainer = view.findViewById(R.id.bottom_container);
+        contentContainer = view.findViewById(R.id.content_container);
         this.addView(view);
         showWaypointExecuteView();
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -81,7 +81,7 @@ public class WaypointExecuteView extends FrameLayout {
         clearView();
         View titleView = inflater.inflate(R.layout.common_mission_title_with_hide,null);
         ((TextView)titleView.findViewById(R.id.common_title)).setText(R.string.waypoint);
-        TextView saveBtn = (TextView) titleView.findViewById(R.id.common_hide);
+        TextView saveBtn = titleView.findViewById(R.id.common_hide);
         saveBtn.setText("Save");
         saveBtn.setOnClickListener(v -> {
             if(waypointExecuteListener != null){
@@ -90,10 +90,10 @@ public class WaypointExecuteView extends FrameLayout {
         });
 
         View contentView = inflater.inflate(R.layout.waypoint_execute_content,null);
-        nextIndexTv = (TextView) contentView.findViewById(R.id.next_waypoint_index_tv);
-        distanceTv = (TextView)contentView.findViewById(R.id.distance_to_next_waypoint_tv);
+        nextIndexTv = contentView.findViewById(R.id.next_waypoint_index_tv);
+        distanceTv = contentView.findViewById(R.id.distance_to_next_waypoint_tv);
         View bottomView = inflater.inflate(R.layout.common_mission_bottom,null);
-        TextView bottomBtn = (TextView) bottomView.findViewById(R.id.bottom_title);
+        TextView bottomBtn = bottomView.findViewById(R.id.bottom_title);
         bottomBtn.setText(R.string.mission_exit);
         bottomBtn.setTextColor(AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.red));
         bottomBtn.setOnClickListener(v -> {

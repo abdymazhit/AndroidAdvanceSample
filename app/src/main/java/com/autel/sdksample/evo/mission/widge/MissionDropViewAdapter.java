@@ -80,7 +80,7 @@ public class MissionDropViewAdapter extends RecyclerView.Adapter<MissionDropView
 
         public MissionDropViewHolder(View itemView) {
             super(itemView);
-            this.titleView = (TextView) itemView.findViewById(R.id.mission_drop_item_title);
+            this.titleView = itemView.findViewById(R.id.mission_drop_item_title);
             itemView.setOnClickListener(v -> {
                 int position = MissionDropViewHolder.this.getAdapterPosition();
                 if (onItemClickListener != null) {

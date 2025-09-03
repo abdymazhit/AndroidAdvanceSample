@@ -50,19 +50,19 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
     @Override
     protected void initUi() {
-        beginnerSwitch = (Switch) findViewById(R.id.beginnerSwitch);
+        beginnerSwitch = findViewById(R.id.beginnerSwitch);
         beginnerSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> setBeginnerModeState(isChecked));
 
-        fcMaxHeight = (EditText) findViewById(R.id.fcMaxHeight);
-        fcMaxRange = (EditText) findViewById(R.id.fcMaxRange);
-        fcReturnHeight = (EditText) findViewById(R.id.fcReturnHeight);
-        fcHorizontalSpeed = (EditText) findViewById(R.id.fcHorizontalSpeed);
-        locationAsHomePoint_la = (EditText) findViewById(R.id.locationAsHomePoint_la);
-        locationAsHomePoint_lon = (EditText) findViewById(R.id.locationAsHomePoint_lon);
+        fcMaxHeight = findViewById(R.id.fcMaxHeight);
+        fcMaxRange = findViewById(R.id.fcMaxRange);
+        fcReturnHeight = findViewById(R.id.fcReturnHeight);
+        fcHorizontalSpeed = findViewById(R.id.fcHorizontalSpeed);
+        locationAsHomePoint_la = findViewById(R.id.locationAsHomePoint_la);
+        locationAsHomePoint_lon = findViewById(R.id.locationAsHomePoint_lon);
 
-        attiModeSwitch = (Switch) findViewById(R.id.attiModeSwitch);
+        attiModeSwitch = findViewById(R.id.attiModeSwitch);
         attiModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> setAttiModeEnable(isChecked));
-        fcLedPilotLamp = (Spinner) findViewById(R.id.fcLedPilotLamp);
+        fcLedPilotLamp = findViewById(R.id.fcLedPilotLamp);
         fcLedPilotLamp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -88,7 +88,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
             }
         });
 
-        final TextView returnHeightRangeNotify = (TextView) findViewById(R.id.returnHeightRangeNotify);
+        final TextView returnHeightRangeNotify = findViewById(R.id.returnHeightRangeNotify);
         fcReturnHeight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,7 +121,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
             }
         });
 
-        final TextView maxHeightRange = (TextView) findViewById(R.id.maxHeightRange);
+        final TextView maxHeightRange = findViewById(R.id.maxHeightRange);
         fcMaxHeight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -150,7 +150,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
             }
         });
 
-        final TextView maxRangeRange = (TextView) findViewById(R.id.maxRangeRange);
+        final TextView maxRangeRange = findViewById(R.id.maxRangeRange);
         fcMaxRange.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -184,7 +184,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
         });
 
 
-        final TextView fcHorizontalSpeedValue = (TextView) findViewById(R.id.fcHorizontalSpeedValue);
+        final TextView fcHorizontalSpeedValue = findViewById(R.id.fcHorizontalSpeedValue);
         fcHorizontalSpeed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

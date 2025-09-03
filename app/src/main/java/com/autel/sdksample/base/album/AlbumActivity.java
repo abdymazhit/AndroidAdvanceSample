@@ -76,7 +76,7 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
 
     @Override
     protected void initUi() {
-        mediaList = (Spinner) findViewById(R.id.mediaList);
+        mediaList = findViewById(R.id.mediaList);
         mediaList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -89,7 +89,7 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
             }
         });
 
-        videoResolutionFromHttpHeaderList = (Spinner) findViewById(R.id.videoResolutionFromHttpHeaderList);
+        videoResolutionFromHttpHeaderList = findViewById(R.id.videoResolutionFromHttpHeaderList);
         videoResolutionFromHttpHeaderList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,7 +101,7 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
 
             }
         });
-        videoResolutionFromLocalFileList = (Spinner) findViewById(R.id.videoResolutionFromLocalFileList);
+        videoResolutionFromLocalFileList = findViewById(R.id.videoResolutionFromLocalFileList);
         videoResolutionFromLocalFileList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,7 +114,7 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
             }
         });
 
-        videoDownloadList = (Spinner) findViewById(R.id.videoDownloadList);
+        videoDownloadList = findViewById(R.id.videoDownloadList);
         videoDownloadList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

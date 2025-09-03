@@ -43,7 +43,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         ((LinearLayout) findViewById(R.id.base_layout)).addView(View.inflate(this, getCustomViewResId(), null));
         initUi();
-        log_output = (TextView) findViewById(R.id.log_output);
+        log_output = findViewById(R.id.log_output);
         log_output.setMovementMethod(ScrollingMovementMethod.getInstance());
         requestFocus(log_output);
     }

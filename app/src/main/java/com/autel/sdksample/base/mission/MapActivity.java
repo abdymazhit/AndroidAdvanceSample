@@ -100,7 +100,7 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
 
 
     private void initUi() {
-        missionTypeSpinner = (Spinner) findViewById(R.id.missionTypeSpinner);
+        missionTypeSpinner = findViewById(R.id.missionTypeSpinner);
         missionTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,8 +114,8 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
 
             }
         });
-        flyModeInfo = (TextView) findViewById(R.id.flyModeInfo);
-        logInfo = (TextView) findViewById(R.id.logInfo);
+        flyModeInfo = findViewById(R.id.flyModeInfo);
+        logInfo = findViewById(R.id.logInfo);
         logInfo.setOnClickListener(v -> {
             long current = System.currentTimeMillis();
             if (current - clickStamp < 1500) {
@@ -123,8 +123,8 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
             }
             clickStamp = current;
         });
-        missionModeInfo = (TextView) findViewById(R.id.missionInfo);
-        flyControllerInfo = (TextView) findViewById(R.id.flyControllerInfo);
+        missionModeInfo = findViewById(R.id.missionInfo);
+        flyControllerInfo = findViewById(R.id.flyControllerInfo);
         ((Switch) findViewById(R.id.flyInfoSwitch)).setOnCheckedChangeListener((buttonView, isChecked) -> {
             flyInfoShow = isChecked;
             flyControllerInfo.setVisibility(isChecked ? View.VISIBLE : View.GONE);
