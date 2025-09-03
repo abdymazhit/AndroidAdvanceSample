@@ -41,8 +41,8 @@ class MathUtil {
     /**
      * Restrict x to the range [low, high].
      */
-    static double clamp(double x, double low, double high) {
-        return x < low ? low : (x > high ? high : x);
+    static double clamp(double x) {
+        return x < (double) 0 ? (double) 0 : (x > (double) 1 ? (double) 1 : x);
     }
     
     /**

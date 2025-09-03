@@ -44,7 +44,7 @@ public class AMapMissionActivity extends MapActivity {
     }
 
 
-    protected ArrayList<Marker> mMarkerList = new ArrayList<>();
+    protected final ArrayList<Marker> mMarkerList = new ArrayList<>();
 
     @Override
     public void addWayPointMarker(double lat, double lot) {

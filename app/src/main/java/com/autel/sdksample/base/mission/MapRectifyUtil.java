@@ -151,10 +151,10 @@ public class MapRectifyUtil {
 
     private static class Rectangle {
 
-        public double East;
-        public double North;
-        public double South;
-        public double West;
+        public final double East;
+        public final double North;
+        public final double South;
+        public final double West;
 
         public Rectangle(double paramDouble1, double paramDouble2, double paramDouble3, double paramDouble4) {
 

@@ -71,7 +71,8 @@ public class TestApplication extends Application {
             }
         });
 
-        AutelConfigManager.instance().init(this);
+        AutelConfigManager.instance();
+        AutelConfigManager.init(this);
     }
 
     public BaseProduct getCurrentProduct() {
@@ -83,7 +84,7 @@ public class TestApplication extends Application {
     }
 
     public class EHandle implements Thread.UncaughtExceptionHandler {
-        Thread.UncaughtExceptionHandler defaultExceptionHandler;
+        final Thread.UncaughtExceptionHandler defaultExceptionHandler;
 
         public EHandle(Thread.UncaughtExceptionHandler defaultExceptionHandler) {
             this.defaultExceptionHandler = defaultExceptionHandler;

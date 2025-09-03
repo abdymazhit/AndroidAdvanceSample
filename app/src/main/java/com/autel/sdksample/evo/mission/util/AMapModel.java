@@ -478,7 +478,7 @@ public class AMapModel implements MapModelImpl {
     public boolean setMissionLimitCircle(int circleRadius) {
         if(homeMarker != null && homeMarker.getPosition() != null){
             if(limitCircle == null){
-                limitCircle = addCircle(homeMarker.getPosition(),circleRadius,AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.blue),5);
+                limitCircle = addCircle(homeMarker.getPosition(),circleRadius,AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.blue));
             }else{
                 limitCircle.setCenter(homeMarker.getPosition());
             }
@@ -974,11 +974,11 @@ public class AMapModel implements MapModelImpl {
     }
 
     private PolylineOptions e(int color) {
-        return this.d(color, 10);
+        return this.d(color);
     }
 
-    private PolylineOptions d(int color, int width) {
-        return (new PolylineOptions()).width((float) width).color(color).geodesic(true);
+    private PolylineOptions d(int color) {
+        return (new PolylineOptions()).width((float) 10).color(color).geodesic(true);
     }
 
     private class OnScaleIdleRun implements  Runnable{
@@ -1081,12 +1081,12 @@ public class AMapModel implements MapModelImpl {
         return polyline;
     }
 
-    private Circle addCircle(LatLng latlng, int radius, int strokeColor, float strokeWidth){
+    private Circle addCircle(LatLng latlng, int radius, int strokeColor){
         CircleOptions circleOptions = new CircleOptions();
         circleOptions.center(latlng);
         circleOptions.radius(radius);
         circleOptions.strokeColor(strokeColor);
-        circleOptions.strokeWidth(strokeWidth);
+        circleOptions.strokeWidth((float) 5);
         return aMap.addCircle(circleOptions);
     }
 

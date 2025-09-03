@@ -22,7 +22,7 @@ import java.util.List;
 public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapter.ViewHolder> {
 
     List<MissionFileBean> names = new ArrayList<>();
-    List<String> selectNames = new ArrayList<>();
+    final List<String> selectNames = new ArrayList<>();
     private boolean checkState;
     private CheckChangeListener checkChangeListener;
     private ItemClickListener itemClickListener;

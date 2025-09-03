@@ -38,7 +38,7 @@ public class ProductActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
     private int index;
     private long timeStamp;
-    static AtomicBoolean hasInitProductListener = new AtomicBoolean(false);
+    static final AtomicBoolean hasInitProductListener = new AtomicBoolean(false);
     private final String fileConfig1 = "/sdcard/anddev/autel288_7.cfg";
     private final String fileConfig2 = "/sdcard/anddev/autel288_7_final.weights";
     private final String fileConfig3 = "/sdcard/anddev/autel13.cfg";

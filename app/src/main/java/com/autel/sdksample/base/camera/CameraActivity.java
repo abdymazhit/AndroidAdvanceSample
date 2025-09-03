@@ -36,7 +36,7 @@ public class CameraActivity extends AppCompatActivity {
     TextView cameraLogOutput;
     AutelBaseCamera currentCamera;
     AutelCameraManager autelCameraManager;
-    protected Handler handler = new Handler() {
+    protected final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             String text = (String) msg.obj;

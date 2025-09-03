@@ -46,7 +46,7 @@ public class AutelCustomGestureOverlayView extends GestureOverlayView {
 
     public void init(Context context){
         this.mContext = context;
-        toleranceInPixels = scaleDpToPixels(TOLERANCE);
+        toleranceInPixels = scaleDpToPixels();
         this.addOnGestureListener(new OnGestureListener() {
 
             @Override
@@ -99,11 +99,11 @@ public class AutelCustomGestureOverlayView extends GestureOverlayView {
         setEnabled(false);
     }
 
-    private int scaleDpToPixels(double value){
+    private int scaleDpToPixels(){
         // / get the density of current monitor
         final float scale = getResources().getDisplayMetrics().density;
-        AutelLog.d(TAG, "   tag :    " + (int) Math.round(value * scale));
-        return (int) Math.round(value * scale);
+        AutelLog.d(TAG, "   tag :    " + (int) Math.round((double) AutelCustomGestureOverlayView.TOLERANCE * scale));
+        return (int) Math.round((double) AutelCustomGestureOverlayView.TOLERANCE * scale);
     }
 
     // all points
@@ -301,6 +301,6 @@ class LineObject{
         this.end = end;
     }
 
-    int start;
-    int end;
+    final int start;
+    final int end;
 }

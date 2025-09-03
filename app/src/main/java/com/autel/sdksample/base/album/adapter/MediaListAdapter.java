@@ -28,8 +28,8 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
         Media
     }
 
-    public static String[] videos = new String[]{"mp4", "mov", "MP4", "MOV", ".video"};
-    public static String[] photos = new String[]{"jpg", "JPG", "dng", "DNG", "png", "PNG", ".photo"};
+    public static final String[] videos = new String[]{"mp4", "mov", "MP4", "MOV", ".video"};
+    public static final String[] photos = new String[]{"jpg", "JPG", "dng", "DNG", "png", "PNG", ".photo"};
 
     private MediaType mediaType = MediaType.Media;
 
@@ -143,7 +143,7 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
         return Environment.getExternalStorageDirectory() + File.separator + rootName;
     }
 
-    Handler handler = new Handler(Looper.myLooper());
+    final Handler handler = new Handler(Looper.myLooper());
 
     @Override
     public void createdTask(DownloadTask task, Object object) {

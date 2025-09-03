@@ -74,7 +74,7 @@ public class MissionDropViewAdapter extends RecyclerView.Adapter<MissionDropView
     }
 
     public class MissionDropViewHolder extends RecyclerView.ViewHolder {
-        public TextView titleView;
+        public final TextView titleView;
 
         public MissionDropViewHolder(View itemView) {
             super(itemView);

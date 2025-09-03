@@ -22,7 +22,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity {
     private TextView log_output;
     protected T mController;
 
-    Handler handler = new Handler() {
+    final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             String text = (String) msg.obj;

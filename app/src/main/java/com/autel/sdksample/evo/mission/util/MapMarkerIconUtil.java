@@ -33,8 +33,8 @@ public class MapMarkerIconUtil {
         return MapImageUtil.drawableToBitmap(R.mipmap.drone_location_icon);
     }
 
-    public static float[] lableOrigin = new float[2];
-    public static float[] markerTextOrigin = new float[2];
+    public static final float[] lableOrigin = new float[2];
+    public static final float[] markerTextOrigin = new float[2];
 
     static {
         //初始化markerTextOrigin

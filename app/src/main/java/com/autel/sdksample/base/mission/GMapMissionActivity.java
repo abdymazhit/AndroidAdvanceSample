@@ -143,7 +143,7 @@ public class GMapMissionActivity extends MapActivity {
     }
 
 
-    protected ArrayList<Marker> mMarkerList = new ArrayList<>();
+    protected final ArrayList<Marker> mMarkerList = new ArrayList<>();
 
     Marker mOrbitMarker;
 
@@ -192,11 +192,10 @@ public class GMapMissionActivity extends MapActivity {
         return mGmap.addMarker(markerOption);
     }
 
-    private Polyline addWayPointLine(LatLng start, LatLng end) {
+    private void addWayPointLine(LatLng start, LatLng end) {
         Polyline a = mGmap.addPolyline((new PolylineOptions()).add(start, end));
         a.setColor(Color.GREEN);
         a.setWidth(10);
-        return a;
     }
 
     Marker mDroneMarker;

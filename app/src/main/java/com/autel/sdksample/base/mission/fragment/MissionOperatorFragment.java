@@ -362,7 +362,7 @@ public class MissionOperatorFragment extends Fragment {
             missionManager.setRealTimeInfoListener(null);
         }
     }
-    Handler mHandler = new Handler(Looper.getMainLooper());
+    final Handler mHandler = new Handler(Looper.getMainLooper());
     private void toastView(final AutelError autelError){
         mHandler.post(new Runnable() {
             @Override
