@@ -48,6 +48,8 @@ import com.autel.sdksample.xstar.mission.XStarOrbitMissionFragment;
 import com.autel.sdksample.xstar.mission.XStarWaypointFragment;
 import com.autel.util.log.AutelLog;
 
+import java.util.Objects;
+
 
 public abstract class MapActivity extends FragmentActivity implements MapOperator {
     public interface LocationChangeListener {
@@ -197,7 +199,7 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
     }
 
     public AutelMission createMission() {
-        return ((MissionFragment) getSupportFragmentManager().findFragmentById(R.id.mission_item_content)).createAutelMission();
+        return ((MissionFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.mission_item_content))).createAutelMission();
     }
 
     protected void setMapContentView(@LayoutRes int layoutResID) {
@@ -259,17 +261,17 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
             }
 
             @Override
-            public void onProviderEnabled(String provider) {
+            public void onProviderEnabled(@NonNull String provider) {
                 AutelLog.e("PhoneGPS", "onProviderEnabled  " + provider);
             }
 
             @Override
-            public void onProviderDisabled(String provider) {
+            public void onProviderDisabled(@NonNull String provider) {
                 AutelLog.e("PhoneGPS", "onProviderDisabled  " + provider);
             }
 
             @Override
-            public void onLocationChanged(Location location) {
+            public void onLocationChanged(@NonNull Location location) {
                 notifyPhoneLocationChanged(location);
             }
         };
@@ -277,7 +279,7 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
         netLocationListener = new LocationListener() {
 
             @Override
-            public void onLocationChanged(Location location) {
+            public void onLocationChanged(@NonNull Location location) {
                 notifyPhoneLocationChanged(location);
             }
 
@@ -287,12 +289,12 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
             }
 
             @Override
-            public void onProviderEnabled(String provider) {
+            public void onProviderEnabled(@NonNull String provider) {
 
             }
 
             @Override
-            public void onProviderDisabled(String provider) {
+            public void onProviderDisabled(@NonNull String provider) {
 
             }
         };

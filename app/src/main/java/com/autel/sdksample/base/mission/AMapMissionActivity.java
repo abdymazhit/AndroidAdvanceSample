@@ -73,20 +73,15 @@ public class AMapMissionActivity extends MapActivity {
         if (null != mOrbitMarker) {
             mOrbitMarker.destroy();
         }
-        if (null != polyLines) {
-            for (Polyline line : polyLines) {
-                line.remove();
-            }
-            polyLines.clear();
-
+        for (Polyline line : polyLines) {
+            line.remove();
         }
+        polyLines.clear();
 
-        if (null != mMarkerList) {
-            for (Marker marker : mMarkerList) {
-                marker.destroy();
-            }
-            mMarkerList.clear();
+        for (Marker marker : mMarkerList) {
+            marker.destroy();
         }
+        mMarkerList.clear();
     }
 
     private final List<Polyline> polyLines = new ArrayList<>();

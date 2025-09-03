@@ -566,12 +566,8 @@ public class AMapModel implements MapModelImpl {
 
                 //Check validation of each latlng
                 int temp =  1;
-                if( temp >= 0){
-                    pre = ll;
-                    tempWaypoints.add(ll);
-                }else{
-                    return;
-                }
+                pre = ll;
+                tempWaypoints.add(ll);
             }
 
             //Add valide waypoints to  map

@@ -65,7 +65,7 @@ public class OrbitExecuteView extends FrameLayout {
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
             @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
                 if ((e2.getX() - e1.getX()) > 70 && (e2.getY() - e1.getY()) < 200 && (e1.getY() - e2.getY()) < 200) {
                     //右滑
                     //OrbitExecuteView.this.animate().translationX(OrbitExecuteView.this.getWidth()).start();

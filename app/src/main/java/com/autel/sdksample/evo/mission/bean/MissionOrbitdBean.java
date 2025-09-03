@@ -1,5 +1,7 @@
 package com.autel.sdksample.evo.mission.bean;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by A15387 on 2017/11/27.
  */
@@ -156,6 +158,7 @@ public class MissionOrbitdBean {
             this.EntryDirection = EntryDirection;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "ParamsBean{" +

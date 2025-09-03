@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autel.sdksample.R;
@@ -27,6 +28,7 @@ public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapte
     private CheckChangeListener checkChangeListener;
     private ItemClickListener itemClickListener;
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.waypoint_load_item,parent,false);

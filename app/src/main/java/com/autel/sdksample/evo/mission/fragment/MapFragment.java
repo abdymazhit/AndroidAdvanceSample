@@ -43,6 +43,7 @@ import com.autel.sdksample.evo.mission.widge.AutelCustomGestureOverlayView;
 import com.autel.sdksample.evo.mission.widge.GestureCallbacks;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -77,8 +78,6 @@ public class MapFragment extends Fragment {
     private final int curMapType = MapConstant.MAP_TYPE_SATELLITE;
 
     public void connect(AutelProductType type) {
-        if(type != AutelProductType.UNKNOWN){
-        }
     }
 
     public void disconnect() {
@@ -103,7 +102,7 @@ public class MapFragment extends Fragment {
 
         }
         @Override
-        public void onLocationChanged(Location location) {
+        public void onLocationChanged(@NonNull Location location) {
             PhoneGPS.setPhoneGPS(location);
         }
 
@@ -113,12 +112,12 @@ public class MapFragment extends Fragment {
         }
 
         @Override
-        public void onProviderEnabled(String provider) {
+        public void onProviderEnabled(@NonNull String provider) {
 
         }
 
         @Override
-        public void onProviderDisabled(String provider) {
+        public void onProviderDisabled(@NonNull String provider) {
 
         }
     }
@@ -133,7 +132,7 @@ public class MapFragment extends Fragment {
         }
 
         @Override
-        public void onLocationChanged(Location location) {
+        public void onLocationChanged(@NonNull Location location) {
         }
 
         @Override
@@ -142,12 +141,12 @@ public class MapFragment extends Fragment {
         }
 
         @Override
-        public void onProviderEnabled(String provider) {
+        public void onProviderEnabled(@NonNull String provider) {
 
         }
 
         @Override
-        public void onProviderDisabled(String provider) {
+        public void onProviderDisabled(@NonNull String provider) {
 
         }
     }
@@ -529,7 +528,7 @@ public class MapFragment extends Fragment {
 
     private void initPhoneGPS() {
 
-        getActivity().getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED), false, contentObserver);
+        Objects.requireNonNull(getActivity()).getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED), false, contentObserver);
 
         mGPSListener = event -> {
             switch (event) {
@@ -560,7 +559,7 @@ public class MapFragment extends Fragment {
     private void registerNetLocationGps(){
 
         if(isLocationPermissionAvailable(Manifest.permission.ACCESS_COARSE_LOCATION)){
-            String provider = ((LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE)).getProvider(LocationManager.NETWORK_PROVIDER).getName();
+            String provider = Objects.requireNonNull(((LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE)).getProvider(LocationManager.NETWORK_PROVIDER)).getName();
             requestLastLocationUpdatesForProvider(provider);
         }else{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -587,7 +586,7 @@ public class MapFragment extends Fragment {
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_LOW);
         criteria.setPowerRequirement(Criteria.POWER_LOW);
-        return ((LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE)).getBestProvider(criteria,true);
+        return ((LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE)).getBestProvider(criteria,true);
     }
 
     private String getHighAccuracyProvider(){
@@ -595,7 +594,7 @@ public class MapFragment extends Fragment {
     }
 
     private boolean isLocationPermissionAvailable(String locationAccessType){
-        return ActivityCompat.checkSelfPermission(getActivity(), locationAccessType) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), locationAccessType) == PackageManager.PERMISSION_GRANTED;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -633,7 +632,7 @@ public class MapFragment extends Fragment {
     }
 
     private void removeGPSListeners(){
-        getActivity().getContentResolver().unregisterContentObserver(contentObserver);
+        Objects.requireNonNull(getActivity()).getContentResolver().unregisterContentObserver(contentObserver);
 
         LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         if(locationManager != null){
@@ -650,7 +649,7 @@ public class MapFragment extends Fragment {
     }
 
     private void removeNetGPSListeners(){
-        LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
         if(locationManager != null){
             try{
                 locationManager.removeUpdates(netLocationListener);

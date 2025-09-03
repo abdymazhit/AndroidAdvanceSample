@@ -79,6 +79,7 @@ import com.autel.sdksample.base.camera.fragment.adapter.VideoStandardAdapter;
 import com.autel.sdksample.base.camera.fragment.adapter.WhiteBalanceTypeAdapter;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CameraXT701Fragment extends CameraBaseFragment {
     AutelXT701 xb015;
@@ -138,7 +139,7 @@ public class CameraXT701Fragment extends CameraBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_camera_xt701, null);
-        xb015 = (AutelXT701) ((CameraActivity) getActivity()).getCurrentCamera();
+        xb015 = (AutelXT701) ((CameraActivity) Objects.requireNonNull(getActivity())).getCurrentCamera();
         rangeManager = xb015.getParameterRangeManager();
         logOut("");
         initView(view);

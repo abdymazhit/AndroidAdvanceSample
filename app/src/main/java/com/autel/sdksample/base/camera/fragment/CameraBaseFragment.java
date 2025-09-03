@@ -19,6 +19,8 @@ import com.autel.sdk.camera.AutelBaseCamera;
 import com.autel.sdksample.R;
 import com.autel.sdksample.base.camera.CameraActivity;
 
+import java.util.Objects;
+
 public class CameraBaseFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     protected TextView log_output;
@@ -30,7 +32,7 @@ public class CameraBaseFragment extends Fragment {
 
     protected void initClick(View view) {
         log_output = (TextView) view.findViewById(R.id.camera_log_output);
-        baseCamera = ((CameraActivity) getActivity()).getCurrentCamera();
+        baseCamera = ((CameraActivity) Objects.requireNonNull(getActivity())).getCurrentCamera();
 
         mediaModeList = (Spinner) view.findViewById(R.id.mediaModeList);
         mediaModeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -235,6 +237,6 @@ public class CameraBaseFragment extends Fragment {
     }
 
     protected boolean isEmpty(String value) {
-        return null == value || "".equals(value);
+        return null == value || value.isEmpty();
     }
 }

@@ -42,7 +42,7 @@ public class TransformUtils {
 
 
 	public static double fahrenheit2Centigrade(double fahrenheit){
-		BigDecimal bg = new BigDecimal((fahrenheit - 32) / 1.8);
+		BigDecimal bg = BigDecimal.valueOf((fahrenheit - 32) / 1.8);
 		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 

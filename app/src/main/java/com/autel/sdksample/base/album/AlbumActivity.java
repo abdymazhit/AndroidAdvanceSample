@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class AlbumActivity extends BaseActivity<AutelAlbum> {
@@ -473,9 +474,9 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
     private void initLocalFileList() {
         File dir = new File(Environment.getExternalStorageDirectory().getPath() + "/album/albumtest");
         if (dir.exists()) {
-            Log.v("albumtest", "files " + dir.listFiles());
+            Log.v("albumtest", "files " + Arrays.toString(dir.listFiles()));
             if (dir.listFiles() != null) {
-                videoResolutionFromLocalFileAdapter.setRfData(Arrays.asList(dir.listFiles()));
+                videoResolutionFromLocalFileAdapter.setRfData(Arrays.asList(Objects.requireNonNull(dir.listFiles())));
                 videoResolutionFromLocalFileList.setAdapter(videoResolutionFromLocalFileAdapter);
             }
         }

@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.autel.sdksample.R;
 
+import java.util.Objects;
+
 
 /**
  * Created by A13087 on 2017/10/27.
@@ -30,7 +32,7 @@ public class VisualDialogToast {
         mView = View.inflate(context, R.layout.visual_view_toast, null);
         dialog.setContentView(mView);
         dialog.setCancelable(false);
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        Objects.requireNonNull(dialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
         mTextViewTitle = (TextView) mView.findViewById(R.id.tv_title_content);
         mTextview1 = (TextView) mView.findViewById(R.id.tv_cancel);

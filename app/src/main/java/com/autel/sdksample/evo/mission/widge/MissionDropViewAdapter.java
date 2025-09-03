@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autel.sdksample.R;
@@ -30,8 +31,9 @@ public class MissionDropViewAdapter extends RecyclerView.Adapter<MissionDropView
         this.datas = datas;
     }
 
+    @NonNull
     @Override
-    public MissionDropViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MissionDropViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MissionDropViewHolder missionDropViewHolder = null;
         switch (viewType) {
             case VIEW_TYPE_HAS_ARROW:

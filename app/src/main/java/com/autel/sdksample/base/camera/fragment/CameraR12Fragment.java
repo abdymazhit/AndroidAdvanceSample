@@ -64,6 +64,7 @@ import com.autel.sdksample.base.camera.fragment.adapter.VideoStandardAdapter;
 import com.autel.sdksample.base.camera.fragment.adapter.WhiteBalanceTypeAdapter;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CameraR12Fragment extends CameraBaseFragment {
     AutelR12 autelR12;
@@ -114,7 +115,7 @@ public class CameraR12Fragment extends CameraBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_camera_r12, null);
-        autelR12 = (AutelR12) ((CameraActivity) getActivity()).getCurrentCamera();
+        autelR12 = (AutelR12) ((CameraActivity) Objects.requireNonNull(getActivity())).getCurrentCamera();
         rangeManager = autelR12.getParameterRangeManager();
         logOut("");
         initView(view);

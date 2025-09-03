@@ -105,8 +105,10 @@ public class GMapMissionActivity extends MapActivity {
         AutelLatLng all = MapRectifyUtil.wgs2gcj(new AutelLatLng(location.getLatitude(), location.getLongitude()));
         LatLng latLng = new LatLng(all.getLatitude(), all.getLongitude());
 //        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        if (mGmap == null || mGmap.getCameraPosition() == null) {
+        if (mGmap == null) {
             return;
+        } else {
+            mGmap.getCameraPosition();
         }
         if (isFirstChangeToPhone) {
             CameraPosition cp = new CameraPosition(latLng,
@@ -203,9 +205,8 @@ public class GMapMissionActivity extends MapActivity {
                 degree = degree + 360;
             }
             if (mDroneMarker != null) {
-                if (mGmap.getCameraPosition() != null) {
-                    mDroneMarker.setRotation((float) degree);
-                }
+                mGmap.getCameraPosition();
+                mDroneMarker.setRotation((float) degree);
             }
         }
     }

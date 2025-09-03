@@ -21,6 +21,8 @@ import com.autel.sdksample.base.mission.MapOperator;
 import com.autel.sdksample.base.mission.adapter.FollowFinishActionAdapter;
 import com.autel.sdksample.base.mission.fragment.MissionFragment;
 
+import java.util.Objects;
+
 
 public class XStarFollowMissionFragment extends MissionFragment {
     private Spinner finishActionSpinner;
@@ -40,7 +42,7 @@ public class XStarFollowMissionFragment extends MissionFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_follow);
-        ((MapActivity) getActivity()).setLocationChangeListener(location -> {
+        ((MapActivity) Objects.requireNonNull(getActivity())).setLocationChangeListener(location -> {
             mLocation = location;
             if (null != followMission) {
                 followMission.update(location);
@@ -89,6 +91,6 @@ public class XStarFollowMissionFragment extends MissionFragment {
 
     public void onDestroy() {
         super.onDestroy();
-        ((MapActivity) getActivity()).setLocationChangeListener(null);
+        ((MapActivity) Objects.requireNonNull(getActivity())).setLocationChangeListener(null);
     }
 }

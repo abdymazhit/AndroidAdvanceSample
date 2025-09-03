@@ -121,10 +121,10 @@ public class TestApplication extends Application {
 
                 FileOutputStream excep = this.getExceptionFileStream();
                 StringBuilder sb = new StringBuilder();
-                sb.append("android sdk version = " + Build.VERSION.SDK_INT + "\n");
-                sb.append("phoneType = " + Build.MODEL + "\n");
-                sb.append(appId + " " + appVersion + "\n");
-                sb.append("error occured Time = " + getTimeStamp() + "\n\n");
+                sb.append("android sdk version = ").append(Build.VERSION.SDK_INT).append("\n");
+                sb.append("phoneType = ").append(Build.MODEL).append("\n");
+                sb.append(appId).append(" ").append(appVersion).append("\n");
+                sb.append("error occured Time = ").append(getTimeStamp()).append("\n\n");
                 StringWriter writer = new StringWriter();
                 PrintWriter printWriter = new PrintWriter(writer);
                 this.exception.printStackTrace(printWriter);

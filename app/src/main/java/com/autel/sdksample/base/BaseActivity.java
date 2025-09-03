@@ -72,6 +72,6 @@ public abstract class BaseActivity<T> extends AppCompatActivity {
     }
 
     protected boolean isEmpty(String value) {
-        return null == value || "".equals(value);
+        return null == value || value.isEmpty();
     }
 }

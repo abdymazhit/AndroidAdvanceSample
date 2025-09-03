@@ -141,10 +141,6 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
                 String value = maxHeightRange.getText().toString();
                 if (isEmpty(value) && null != mController) {
-                    if (mController == null) {
-                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                        return;
-                    }
                     FlyControllerParameterRangeManager parameterRangeManager = mController.getParameterRangeManager();
                     if (null != parameterRangeManager) {
                         RangePair<Float> support = parameterRangeManager.getHeightRange();

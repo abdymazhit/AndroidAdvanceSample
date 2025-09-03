@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -37,6 +38,7 @@ import com.autel.sdksample.TestApplication;
 import com.autel.sdksample.base.mission.MapActivity;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class MissionOperatorFragment extends Fragment {
@@ -56,13 +58,13 @@ public class MissionOperatorFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return createView(R.layout.fragment_mission_menu);
     }
 
     protected MissionManager getMissionManager() {
         BaseProduct
-                product = ((TestApplication) getActivity().getApplicationContext()).getCurrentProduct();
+                product = ((TestApplication) Objects.requireNonNull(getActivity()).getApplicationContext()).getCurrentProduct();
         if (null != product) {
             switch (product.getType()) {
                 case X_STAR:
@@ -115,7 +117,7 @@ public class MissionOperatorFragment extends Fragment {
             }
         });
 
-        final Context applicationContext = getActivity().getApplicationContext();
+        final Context applicationContext = Objects.requireNonNull(getActivity()).getApplicationContext();
         progressBarDownload = (ProgressBar) view.findViewById(R.id.progressBarDownload);
         progressBarPrepare = (ProgressBar) view.findViewById(R.id.progressBarPrepare);
 
@@ -293,11 +295,11 @@ public class MissionOperatorFragment extends Fragment {
     }
 
     private void showDownloadMission(String info) {
-        ((MapActivity) getActivity()).updateLogInfo(info);
+        ((MapActivity) Objects.requireNonNull(getActivity())).updateLogInfo(info);
     }
 
     protected boolean isEmpty(String value) {
-        return null == value || "".equals(value);
+        return null == value || value.isEmpty();
     }
 
     public void onDestroy() {

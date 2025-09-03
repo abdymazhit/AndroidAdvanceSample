@@ -20,6 +20,7 @@ import com.autel.sdksample.base.adapter.SelectorAdapter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements HttpDownloadCallback {
     public enum MediaType {
@@ -137,7 +138,7 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
         return Environment.getExternalStorageDirectory() + File.separator + rootName;
     }
 
-    final Handler handler = new Handler(Looper.myLooper());
+    final Handler handler = new Handler(Objects.requireNonNull(Looper.myLooper()));
 
     @Override
     public void createdTask(DownloadTask task, Object object) {

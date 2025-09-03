@@ -8,6 +8,8 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.NonNull;
+
 import com.autel.common.mission.AutelCoordinate3D;
 import com.autel.sdksample.R;
 import com.autel.sdksample.base.mission.AutelLatLng;
@@ -108,7 +110,8 @@ public class GMapModel implements MapModelImpl {
 
     @Override
     public void rotateMap(float degree) {
-        if (gMap != null && gMap.getCameraPosition() != null) {
+        if (gMap != null) {
+            gMap.getCameraPosition();
             LatLng ll = new LatLng(TransformUtils.doubleFormat(gMap.getCameraPosition().target.latitude, 5), TransformUtils.doubleFormat(gMap.getCameraPosition().target.longitude, 5));
             CameraPosition cp = new CameraPosition(
                     ll,
@@ -247,9 +250,8 @@ public class GMapModel implements MapModelImpl {
             return;
         }
         if (!isCompassEnable) { //当地图没有开启跟随指南针旋转的时候执行以下方法
-            if (gMap.getCameraPosition() != null) {
-                droneMarker.setRotation((float) yaw - gMap.getCameraPosition().bearing);
-            }
+            gMap.getCameraPosition();
+            droneMarker.setRotation((float) yaw - gMap.getCameraPosition().bearing);
         } else {
             droneMarker.setRotation((float) (compassRotateDegree + yaw));
         }
@@ -287,8 +289,10 @@ public class GMapModel implements MapModelImpl {
 
     @Override
     public void initMapToPhoneLocation() {
-        if (gMap == null || gMap.getCameraPosition() == null) {
+        if (gMap == null) {
             return;
+        } else {
+            gMap.getCameraPosition();
         }
         if(isFirstChangeToPhone){
             if(phoneMarker != null){
@@ -466,10 +470,11 @@ public class GMapModel implements MapModelImpl {
 
     @Override
     public boolean setMissionLimitCircle(int circleRadius) {
-        if(homeMarker != null && homeMarker.getPosition() != null){
-            if(limitCircle == null){
-                limitCircle = addCircle(homeMarker.getPosition(),circleRadius,AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.blue));
-            }else{
+        if(homeMarker != null) {
+            homeMarker.getPosition();
+            if (limitCircle == null) {
+                limitCircle = addCircle(homeMarker.getPosition(), circleRadius, AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.blue));
+            } else {
                 limitCircle.setCenter(homeMarker.getPosition());
             }
             return true;
@@ -564,12 +569,8 @@ public class GMapModel implements MapModelImpl {
 
                 //Check validation of each latlng
                 int temp =  1;
-                if( temp >= 0){
-                    pre = ll;
-                    tempWaypoints.add(ll);
-                }else{
-                    return;
-                }
+                pre = ll;
+                tempWaypoints.add(ll);
             }
 
             //Add valide waypoints to  map
@@ -591,7 +592,7 @@ public class GMapModel implements MapModelImpl {
             private LatLng startPosition;
 
             @Override
-            public void onMarkerDragStart(Marker marker) {
+            public void onMarkerDragStart(@NonNull Marker marker) {
                 int curDragWaypoint = waypoints.indexOf(marker);
                 AutelGPSLatLng autelGPSLatLng = AutelGPSLatLng.createFromDrone(new AutelCoordinate3D(waypointBeans.get(curDragWaypoint).getLatitude() * 1e-7,
                         waypointBeans.get(curDragWaypoint).getLongitude() * 1e-7));
@@ -601,7 +602,7 @@ public class GMapModel implements MapModelImpl {
             }
 
             @Override
-            public void onMarkerDrag(Marker marker) {
+            public void onMarkerDrag(@NonNull Marker marker) {
                 int curDragWaypoint = waypoints.indexOf(marker);
                 if(homeMarker != null){
                     int distance = DistanceUtils.distanceBetweenPoints(homeMarker.getPosition().latitude,
@@ -617,7 +618,7 @@ public class GMapModel implements MapModelImpl {
             }
 
             @Override
-            public void onMarkerDragEnd(Marker marker) {
+            public void onMarkerDragEnd(@NonNull Marker marker) {
                 int curDragWaypoint = waypoints.indexOf(marker);
                 if(homeMarker != null){
                     int distance = DistanceUtils.distanceBetweenPoints(homeMarker.getPosition().latitude,
@@ -899,8 +900,10 @@ public class GMapModel implements MapModelImpl {
 
     @Override
     public boolean initMapToNetLocation(AutelGPSLatLng netLocation) {
-        if (gMap == null || gMap.getCameraPosition() == null) {
+        if (gMap == null) {
             return false;
+        } else {
+            gMap.getCameraPosition();
         }
         if(isFirstChangeToNet){
             if(netLocation != null){

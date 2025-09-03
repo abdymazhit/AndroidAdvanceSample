@@ -2,6 +2,7 @@ package com.autel.sdksample.base.mission.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -26,7 +27,7 @@ public abstract class MissionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return createView(R.layout.fragment_mission_menu);
     }
 
@@ -53,6 +54,6 @@ public abstract class MissionFragment extends Fragment {
         super.onDestroy();
     }
     protected boolean isEmpty(String value) {
-        return null == value || "".equals(value);
+        return null == value || value.isEmpty();
     }
 }

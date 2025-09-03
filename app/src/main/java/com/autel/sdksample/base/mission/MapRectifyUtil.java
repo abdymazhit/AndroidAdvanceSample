@@ -49,6 +49,7 @@ public class MapRectifyUtil {
                 for (Rectangle anExclude : exclude) {
                     if (InRectangle(anExclude, autelLatLng)) {
                         isInChina = false;
+                        break;
                     }
                 }
             }

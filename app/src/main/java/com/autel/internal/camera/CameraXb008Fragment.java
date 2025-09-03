@@ -57,6 +57,7 @@ import com.autel.sdksample.base.camera.fragment.adapter.VideoStandardAdapter;
 import com.autel.sdksample.base.camera.fragment.adapter.WhiteBalanceTypeAdapter;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class CameraXb008Fragment extends CameraBaseFragment {
     AutelXB008 xb008;
@@ -102,7 +103,7 @@ public class CameraXb008Fragment extends CameraBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_camera_xb008, null);
-        xb008 = (AutelXB008) ((CameraActivity) getActivity()).getCurrentCamera();
+        xb008 = (AutelXB008) ((CameraActivity) Objects.requireNonNull(getActivity())).getCurrentCamera();
         rangeManager = xb008.getParameterRangeManager();
         logOut("");
         initView(view);

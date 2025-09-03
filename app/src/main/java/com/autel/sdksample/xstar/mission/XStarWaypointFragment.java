@@ -25,6 +25,7 @@ import com.autel.sdksample.base.mission.fragment.WaypointMissionFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -60,7 +61,7 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_waypoint);
 
-        ((MapActivity) getActivity()).setWaypointHeightListener(() -> {
+        ((MapActivity) Objects.requireNonNull(getActivity())).setWaypointHeightListener(() -> {
             String valueHeight = waypointHeight.getText().toString();
             return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
         });

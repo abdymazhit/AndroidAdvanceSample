@@ -20,6 +20,8 @@ import com.autel.sdksample.evo.mission.view.OrbitPositionSetView;
 import com.autel.sdksample.evo.mission.widge.MissionDropSelectView;
 import com.autel.sdksample.evo.mission.widge.VisualDialogToast;
 
+import java.util.Objects;
+
 
 /**
  * Created by A15387 on 2017/10/19.
@@ -55,7 +57,7 @@ public class OrbitFragment extends Fragment {
         this.inflater = inflater;
         View view = inflater.inflate(R.layout.fragment_orbit_content,container,false);
         containerView = (ViewGroup) view.findViewById(R.id.orbit_view_container);
-        orbitPositionSetView = new OrbitPositionSetView(container.getContext());
+        orbitPositionSetView = new OrbitPositionSetView(Objects.requireNonNull(container).getContext());
         orbitDataSetView = new OrbitDataSetView(container.getContext());
         orbitExecutedView = new OrbitExecuteView(container.getContext());
 
@@ -155,19 +157,19 @@ public class OrbitFragment extends Fragment {
             case 0:
                 curPointSetWay = POINT_WAY_AIRCRAFT;
                 //mRequestManager.enableGetPointFromMap(MapConstant.MAP_CLICK_MODE_NULL);
-                ((MapFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG)).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_NULL);
+                ((MapFragment) Objects.requireNonNull(getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG))).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_NULL);
                 //mRequestManager.removeOrbitPoint();
                 break;
             case 1:
                 curPointSetWay = POINT_WAY_PHONE;
                 //mRequestManager.enableGetPointFromMap(MapConstant.MAP_CLICK_MODE_NULL);
-                ((MapFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG)).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_NULL);
+                ((MapFragment) Objects.requireNonNull(getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG))).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_NULL);
                 //mRequestManager.removeOrbitPoint();
                 break;
             case 2:
                 curPointSetWay = POINT_WAY_MAP;
                 //mRequestManager.enableGetPointFromMap(MapConstant.MAP_CLICK_MODE_ORBIT);
-                ((MapFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG)).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_ORBIT);
+                ((MapFragment) Objects.requireNonNull(getActivity().getSupportFragmentManager().findFragmentByTag(MapFragment.TAG))).setOnMapClickListener(MapConstant.MAP_CLICK_MODE_ORBIT);
                 break;
         }
     }
@@ -181,19 +183,17 @@ public class OrbitFragment extends Fragment {
 
     private void exitFragment() {
         //mRequestManager.clearOrbitMode();
-        getActivity().getSupportFragmentManager().beginTransaction().remove(OrbitFragment.this).commit();
+        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().remove(OrbitFragment.this).commit();
     }
 
     public void hideOrShowFragment() {
         if(this.isHidden()){
-            getFragmentManager().beginTransaction().show(this).commit();
+            Objects.requireNonNull(getFragmentManager()).beginTransaction().show(this).commit();
             if(isSlideHide){
                 if(orbitExecutedView != null){
                     orbitExecutedView.setX(0);
                 }
             }
-        }else{
-
         }
     }
 
