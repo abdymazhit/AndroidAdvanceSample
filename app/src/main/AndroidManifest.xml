@@ -111,7 +111,7 @@
             android:name=".evo.visual.DynamicTrackActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="landscape" />
-        <activity android:name=".ZteLogActivity"></activity>
+        <activity android:name=".ZteLogActivity" />
     </application>
 
 </manifest>

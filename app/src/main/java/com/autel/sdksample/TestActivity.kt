@@ -64,41 +64,56 @@ class TestActivity : AppCompatActivity() {
     }
 
 
-    fun setResetFactory(view: View) {
+    fun setResetFactory() {
         var deviceType: DeviceType = DeviceType.UNKNOWN
-        if (index == 0) {
-            deviceType = DeviceType.ALL
-        } else if (index == 1) {
-            deviceType = DeviceType.DEV_UAV
-        } else if (index == 2) {
-            deviceType = DeviceType.DEV_DSP
-        } else if (index == 3) {
-            deviceType = DeviceType.DEV_DSP_RC
-        } else if (index == 4) {
-            deviceType = DeviceType.DEV_RC_PLAYER
-        } else if (index == 5) {
-            deviceType = DeviceType.DEV_ESC_PITCH
-        } else if (index == 6) {
-            deviceType = DeviceType.DEV_ESC_ROLL
-        } else if (index == 7) {
-            deviceType = DeviceType.DEV_ESC_YAW
-        } else if (index == 8) {
-            deviceType = DeviceType.DEV_BATTERY
-        } else if (index == 9) {
-            deviceType = DeviceType.DEV_GIMBAL
-        } else if (index == 10) {
-            deviceType = DeviceType.DEV_RC_ANDROID
-        } else if (index == 11) {
-            deviceType = DeviceType.DEV_RC
-        } else if (index == 12) {
-            deviceType = DeviceType.DEV_MOVIDIUS_1
-        } else if (index == 13) {
-            deviceType = DeviceType.DEV_CAMERA
+        when (index) {
+            0 -> {
+                deviceType = DeviceType.ALL
+            }
+            1 -> {
+                deviceType = DeviceType.DEV_UAV
+            }
+            2 -> {
+                deviceType = DeviceType.DEV_DSP
+            }
+            3 -> {
+                deviceType = DeviceType.DEV_DSP_RC
+            }
+            4 -> {
+                deviceType = DeviceType.DEV_RC_PLAYER
+            }
+            5 -> {
+                deviceType = DeviceType.DEV_ESC_PITCH
+            }
+            6 -> {
+                deviceType = DeviceType.DEV_ESC_ROLL
+            }
+            7 -> {
+                deviceType = DeviceType.DEV_ESC_YAW
+            }
+            8 -> {
+                deviceType = DeviceType.DEV_BATTERY
+            }
+            9 -> {
+                deviceType = DeviceType.DEV_GIMBAL
+            }
+            10 -> {
+                deviceType = DeviceType.DEV_RC_ANDROID
+            }
+            11 -> {
+                deviceType = DeviceType.DEV_RC
+            }
+            12 -> {
+                deviceType = DeviceType.DEV_MOVIDIUS_1
+            }
+            13 -> {
+                deviceType = DeviceType.DEV_CAMERA
+            }
         }
         DspRFManager2.getInstance().resetFactory(deviceType, object : CallbackWithOneParam<Boolean> {
             override fun onSuccess(data: Boolean?) {
                 Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(this@TestActivity, "onSuccess " + data, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@TestActivity, "onSuccess $data", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -112,7 +127,7 @@ class TestActivity : AppCompatActivity() {
 
     var index = 0
     private fun setListener() {
-        (findViewById(R.id.resetGimbalAngle) as Button)?.setOnClickListener {
+        (findViewById<Button>(R.id.resetGimbalAngle)!!).setOnClickListener {
             GimbalManager2.getInstance().resetGimbalAngle(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -127,7 +142,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setGimbalAngleRange) as TextView)?.setOnClickListener {
+        (findViewById<TextView>(R.id.setGimbalAngleRange)!!).setOnClickListener {
             GimbalManager2.getInstance().queryGimbalAngleRange(object : CallbackWithOneParam<GimbalAngleRangeImpl> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -156,7 +171,7 @@ class TestActivity : AppCompatActivity() {
 
             })
         }
-        (findViewById(R.id.setGimbalAngleMax) as TextView)?.setOnClickListener {
+        (findViewById<TextView>(R.id.setGimbalAngleMax)!!).setOnClickListener {
             GimbalManager2.getInstance().setGimbalAngleMax(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -171,7 +186,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setGimbalAngleMin) as TextView)?.setOnClickListener {
+        (findViewById<TextView>(R.id.setGimbalAngleMin)!!).setOnClickListener {
             GimbalManager2.getInstance().setGimbalAngleMin(GimbalAxisType.PITCH, object : CallbackWithOneParam<GimbalCmdInfo> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -189,18 +204,18 @@ class TestActivity : AppCompatActivity() {
 
 
 
-        (findViewById(R.id.queryBatteryInfo) as Button)?.setOnClickListener {
+        (findViewById<Button>(R.id.queryBatteryInfo)!!).setOnClickListener {
             BatteryRequestManager2.getInstance().queryBatteryInfo(object : CallbackWithOneParam<BatteryInfoCmdParams> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "queryBatteryInfo recv onFailure ")
                 }
 
                 override fun onSuccess(data: BatteryInfoCmdParams?) {
-                    Log.d(TAG, "queryBatteryInfo recv data->" + data.toString())
+                    Log.d(TAG, "queryBatteryInfo recv data->$data")
                 }
             })
         }
-        (findViewById(R.id.setBattery) as Button)?.setOnClickListener {
+        (findViewById<Button>(R.id.setBattery)!!).setOnClickListener {
             BatteryRequestManager2.getInstance().setBatteryDisCharge(2, object : CallbackWithOneParam<CommandInfoInternal> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "setBatteryDischargeDay recv onFailure ")
@@ -211,10 +226,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.queryBatteryHistory) as Button)?.setOnClickListener {
+        (findViewById<Button>(R.id.queryBatteryHistory)!!).setOnClickListener {
             BatteryRequestManager2.getInstance().queryBatteryHistory(object : CallbackWithOneParam<IntArray> {
                 override fun onSuccess(data: IntArray) {
-                    Log.d(TAG, "queryBatteryHistory recv data->" + data.toString())
+                    Log.d(TAG, "queryBatteryHistory recv data->$data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -222,14 +237,14 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setLowBatteryWarning) as Button)?.setOnClickListener {
+        (findViewById<Button>(R.id.setLowBatteryWarning)!!).setOnClickListener {
             BatteryRequestManager2.getInstance().setLowBatteryWarning(0.25f, object : CallbackWithOneParam<Float> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "queryBatteryHistory recv onFailure ")
                 }
 
                 override fun onSuccess(data: Float?) {
-                    Log.d(TAG, "queryBatteryHistory recv data->" + data.toString())
+                    Log.d(TAG, "queryBatteryHistory recv data->$data")
                 }
             })
         }
@@ -259,12 +274,12 @@ class TestActivity : AppCompatActivity() {
 
 
     private fun initView() {
-        (findViewById(R.id.queryVisual) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.queryVisual)!!).setOnClickListener {
             VisualModelManager.instance().setViewpointTargetAreaListener(TAG, object : CallbackWithOneParam<ViewpointInfo> {
                 override fun onSuccess(data: ViewpointInfo?) {
                     if (data != null) {
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(this@TestActivity, "onSuccess " + data.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@TestActivity, "onSuccess $data", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         Handler(Looper.getMainLooper()).post {
@@ -280,12 +295,12 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setviewpointcoor) as Button).setOnClickListener {
+        (findViewById<Button>(R.id.setviewpointcoor)!!).setOnClickListener {
             VisualModelManager.instance().setVisualViewPointCoord(300, 240, object : CallbackWithOneParam<VisualSettingAckInfo> {
                 override fun onSuccess(data: VisualSettingAckInfo?) {
                     if (data != null) {
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(this@TestActivity, "onSuccess " + data.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@TestActivity, "onSuccess $data", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         Handler(Looper.getMainLooper()).post {
@@ -301,12 +316,12 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setResolutionAngle) as Button).setOnClickListener {
+        (findViewById<Button>(R.id.setResolutionAngle)!!).setOnClickListener {
             VisualModelManager.instance().setVisualResolutionAngle(495, 500, object : CallbackWithOneParam<VisualSettingAckInfo> {
                 override fun onSuccess(data: VisualSettingAckInfo?) {
                     if (data != null) {
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(this@TestActivity, "onSuccess " + data.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@TestActivity, "onSuccess $data", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         Handler(Looper.getMainLooper()).post {
@@ -322,7 +337,7 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.setVisual) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.setVisual)!!).setOnClickListener {
             VisualModelManager.instance().setVisualSettingSwitchblade(VisualSettingSwitchblade.RADAR_MAP.cmdValue, true, object : CallbackWithOneParam<VisualSettingAckInfo> {
                 override fun onSuccess(data: VisualSettingAckInfo?) {
                     if (data?.ack == 0) {
@@ -382,7 +397,7 @@ class TestActivity : AppCompatActivity() {
 //            })
         }
 
-        (findViewById(R.id.getAircraftVersion) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.getAircraftVersion)!!).setOnClickListener {
             FirmwareManager.instance().getDeviceFirmwareInfo(object : CallbackWithOneParam<List<FirmwareDeviceInfo.VersionBean>> {
                 override fun onFailure(error: AutelError?) {
                     Handler(Looper.getMainLooper()).post {
@@ -399,7 +414,7 @@ class TestActivity : AppCompatActivity() {
             })
         }
         var status = false
-        (findViewById(R.id.getRemoteVersion) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.getRemoteVersion)!!).setOnClickListener {
             when (status) {
                 true -> {
                     DspRFManager2.getInstance().setVideoLinkStatus(true, object : CallbackWithOneParam<Boolean> {
@@ -412,7 +427,7 @@ class TestActivity : AppCompatActivity() {
                         override fun onSuccess(data: Boolean?) {
                             status = false
                             Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(this@TestActivity, "setVideoLinkStatus " + data, Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@TestActivity, "setVideoLinkStatus $data", Toast.LENGTH_LONG).show()
                             }
                         }
                     })
@@ -428,7 +443,7 @@ class TestActivity : AppCompatActivity() {
                         override fun onSuccess(data: Boolean?) {
                             status = true
                             Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(this@TestActivity, "setVideoLinkStatus " + data, Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@TestActivity, "setVideoLinkStatus $data", Toast.LENGTH_LONG).show()
                             }
                         }
                     })
@@ -437,7 +452,7 @@ class TestActivity : AppCompatActivity() {
 
         }
 
-        (findViewById(R.id.textView2) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView2)!!).setOnClickListener {
             GimbalManager2.getInstance().addGimbalAngleListener("addGimbalAngleListener", object : CallbackWithOneParam<GimbalAngle> {
                 override fun onSuccess(data: GimbalAngle?) {
                     Log.d(TAG, "data:" + data?.toString())
@@ -448,25 +463,25 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView3) as TextView).setOnClickListener {
-            var angle = GimbalAngleData()
+        (findViewById<TextView>(R.id.textView3)!!).setOnClickListener {
+            val angle = GimbalAngleData()
             angle.yaw = 100f
             angle.roll = 120f
             angle.pitch = 120f
             Log.d("Gimbal", "send msg json:")
             GimbalManager2.getInstance().setGimbalAngle(angle)
         }
-        (findViewById(R.id.textView4) as TextView).setOnClickListener {
-            var speed = GimbalAngleSpeed()
+        (findViewById<TextView>(R.id.textView4)!!).setOnClickListener {
+            val speed = GimbalAngleSpeed()
             speed.yawSpeed = 100
             speed.rollSpeed = 120
             speed.pitchSpeed = 120f
             GimbalManager2.getInstance().setGimbalAngleSpeed(speed)
         }
-        (findViewById(R.id.textView5) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView5)!!).setOnClickListener {
             FlyControllerManager2.getInstance().addLocalCoordinateInfoListener("setAltitudeAndSpeedInfoListener", object : CallbackWithOneParam<LocalCoordinateInfoImpl> {
                 override fun onSuccess(data: LocalCoordinateInfoImpl) {
-                    Log.d(TAG, "addLocalCoordinateInfoListener data " + data.toString())
+                    Log.d(TAG, "addLocalCoordinateInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -474,10 +489,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView6) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView6)!!).setOnClickListener {
             FlyControllerManager2.getInstance().addGPSInfoListener("addGPSInfoListener", object : CallbackWithOneParam<GPSInfoInternal> {
                 override fun onSuccess(data: GPSInfoInternal) {
-                    Log.d(TAG, "addGPSInfoListener data " + data.toString())
+                    Log.d(TAG, "addGPSInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -485,10 +500,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView7) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView7)!!).setOnClickListener {
             FlyControllerManager2.getInstance().addAttitudeInfoListener("addAttitudeInfoListener", object : CallbackWithOneParam<AttitudeInfoInternal> {
                 override fun onSuccess(data: AttitudeInfoInternal) {
-                    Log.d(TAG, "addAttitudeInfoListener data " + data.toString())
+                    Log.d(TAG, "addAttitudeInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -496,10 +511,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView8) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView8)!!).setOnClickListener {
             FlyControllerManager2.getInstance().addImuStatusListener("addImuStatusListener", object : CallbackWithOneParam<ImuStateInfoImpl> {
                 override fun onSuccess(data: ImuStateInfoImpl) {
-                    Log.d(TAG, "addImuStatusListener data " + data.toString())
+                    Log.d(TAG, "addImuStatusListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -507,10 +522,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView9) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView9)!!).setOnClickListener {
             FlyControllerManager2.getInstance().setMaxRange(100.0f, object : CallbackWithOneParam<Float> {
                 override fun onSuccess(data: Float?) {
-                    Log.d(TAG, "setMaxRange data " + data)
+                    Log.d(TAG, "setMaxRange data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -518,10 +533,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView10) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView10)!!).setOnClickListener {
             MissionCommonManager2.getInstance().addMissionCurrentInfoListener("addMissionCurrentInfoListener", object : CallbackWithOneParam<CurrentMission> {
                 override fun onSuccess(data: CurrentMission?) {
-                    Log.d(TAG, "addMissionCurrentInfoListener data " + data.toString())
+                    Log.d(TAG, "addMissionCurrentInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -529,10 +544,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView11) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView11)!!).setOnClickListener {
             MissionCommonManager2.getInstance().addMissionFollowMeListener("addMissionFollowMeListener", object : CallbackWithOneParam<FollowMeInfoInternal> {
                 override fun onSuccess(data: FollowMeInfoInternal?) {
-                    Log.d(TAG, "addMissionFollowMeListener data " + data.toString())
+                    Log.d(TAG, "addMissionFollowMeListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -540,10 +555,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView12) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView12)!!).setOnClickListener {
             MissionCommonManager2.getInstance().addMissionHotPointListener("addMissionHotPointListener", object : CallbackWithOneParam<HotPointInfoInternal> {
                 override fun onSuccess(data: HotPointInfoInternal?) {
-                    Log.d(TAG, "addMissionHotPointListener data " + data.toString())
+                    Log.d(TAG, "addMissionHotPointListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -552,10 +567,10 @@ class TestActivity : AppCompatActivity() {
             })
         }
 
-        (findViewById(R.id.textView13) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView13)!!).setOnClickListener {
             DspRFManager2.getInstance().setVideoRateInfoListener(object : CallbackWithOneParam<VideoRateInfoImpl> {
                 override fun onSuccess(data: VideoRateInfoImpl?) {
-                    Log.d(TAG, "setVideoRateInfoListener data " + data.toString())
+                    Log.d(TAG, "setVideoRateInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -563,10 +578,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView14) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView14)!!).setOnClickListener {
             DspRFManager2.getInstance().setReportBertInfoListener(object : CallbackWithOneParam<ReportBertInfo> {
                 override fun onSuccess(data: ReportBertInfo?) {
-                    Log.d(TAG, "setReportBertInfoListener data " + data.toString())
+                    Log.d(TAG, "setReportBertInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -574,10 +589,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView15) as TextView).setOnClickListener {
-            DspRFManager2.getInstance().addSignalStregthListener("addSignalStregthListener", object : CallbackWithOneParam<SignalStrengthReport> {
+        (findViewById<TextView>(R.id.textView15)!!).setOnClickListener {
+            DspRFManager2.getInstance().addSignalStregthListener("addSignalStrengthListener", object : CallbackWithOneParam<SignalStrengthReport> {
                 override fun onSuccess(data: SignalStrengthReport?) {
-                    Log.d(TAG, "setReportBertInfoListener data " + data.toString())
+                    Log.d(TAG, "setReportBertInfoListener data $data")
                 }
 
                 override fun onFailure(error: AutelError) {
@@ -585,10 +600,10 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        var request: CameraXb015? = CameraFactory.getCameraProduct(Xb015::class.java)
+        val request: CameraXb015? = CameraFactory.getCameraProduct(Xb015::class.java)
         var index = 0
-        (findViewById(R.id.ll0) as TextView).setOnClickListener {
-            var flag = (index % 2 == 0)
+        (findViewById<TextView>(R.id.ll0)!!).setOnClickListener {
+            val flag = (index % 2 == 0)
             index++
             request?.setProductSubtitleSNEnable(flag, object : CallbackWithNoParam {
                 override fun onFailure(error: AutelError?) {
@@ -599,18 +614,18 @@ class TestActivity : AppCompatActivity() {
 
                 override fun onSuccess() {
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "setSubtitleEnable onSuccess " + flag, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "setSubtitleEnable onSuccess $flag", Toast.LENGTH_LONG).show()
                     }
                 }
             })
         }
-        (findViewById(R.id.ll1) as LinearLayout).setOnClickListener {
-            var value = findViewById(R.id.editText1) as EditText
+        (findViewById<LinearLayout>(R.id.ll1)!!).setOnClickListener {
+            val value: EditText = findViewById(R.id.editText1)
 
             FlyControllerManager2.getInstance().setFlightControllerDirect(Integer.parseInt(value.text.toString()), object : CallbackWithOneParam<Boolean> {
                 override fun onSuccess(data: Boolean?) {
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "setSubtitleEnable onSuccess " + data, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "setSubtitleEnable onSuccess $data", Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -622,9 +637,9 @@ class TestActivity : AppCompatActivity() {
 
             })
         }
-        (findViewById(R.id.textView16) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView16)!!).setOnClickListener {
             val waypointMission = EvoWaypointMission()
-            waypointMission.avoidanceMode = com.autel.common.mission.evo.ObstacleAvoidanceMode.CLIMB_FIRST
+            waypointMission.avoidanceMode = ObstacleAvoidanceMode.CLIMB_FIRST
             waypointMission.obstacleAvoidanceTimeout = 2
             waypointMission.remoteControlLostSignalAction = RemoteControlLostSignalAction.CONTINUE
 
@@ -677,8 +692,8 @@ class TestActivity : AppCompatActivity() {
             })
         }
 
-        (findViewById(R.id.textView17) as TextView).setOnClickListener {
-            var wayParam = WaypointBean()
+        (findViewById<TextView>(R.id.textView17)!!).setOnClickListener {
+            val wayParam = WaypointBean()
             wayParam.waypointId = 8
             wayParam.latitude = 4
             wayParam.longitude = 5
@@ -695,17 +710,17 @@ class TestActivity : AppCompatActivity() {
             wayParam.cameraYaw = 123
             WayPointMissionManager2.getInstance().setWaypointInfo(wayParam)
         }
-        (findViewById(R.id.textView18) as TextView).setOnClickListener {
-            var wayParam = WaypointActionInfo()
+        (findViewById<TextView>(R.id.textView18)!!).setOnClickListener {
+            val wayParam = WaypointActionInfo()
             wayParam.missionId = 100
             wayParam.waypointId = 8
             wayParam.actionTimeout = 1
             wayParam.actionType = 1
             wayParam.actionId = 1
-            wayParam.actionParameters = listOf<Float>(100.9f, 2000.8f, 3000.2f, 800.0f, 1.0f, 0.0f, 0.0f, 0.0f)
+            wayParam.actionParameters = listOf(100.9f, 2000.8f, 3000.2f, 800.0f, 1.0f, 0.0f, 0.0f, 0.0f)
             WayPointMissionManager2.getInstance().setWaypointActionInfo(wayParam)
         }
-        (findViewById(R.id.textView19) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView19)!!).setOnClickListener {
             val orbitMission = EvoOrbitMission.createMission()
             orbitMission.finishedAction = OrbitFinishedAction.HOVER
             orbitMission.latitude = 22.5959987
@@ -737,13 +752,13 @@ class TestActivity : AppCompatActivity() {
                 override fun onSuccess(data: Boolean?) {
                     Log.d(TAG, "orbitMission onSuccess ")
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "orbitMission onSuccess " + data, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "orbitMission onSuccess $data", Toast.LENGTH_LONG).show()
                     }
                 }
 
             })
         }
-        (findViewById(R.id.textView20) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView20)!!).setOnClickListener {
             val mission = OneShotVideoMission.createMission()
             mission.finishedAction = WaypointFinishedAction.HOVER
             mission.remoteControlLostSignalAction = RemoteControlLostSignalAction.CONTINUE
@@ -769,13 +784,13 @@ class TestActivity : AppCompatActivity() {
                 override fun onSuccess(data: Boolean?) {
                     Log.d(TAG, "downloadOrbitInfo onSuccess ")
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "uploadMission onSuccess "+data, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "uploadMission onSuccess $data", Toast.LENGTH_LONG).show()
                     }
                 }
 
             })
         }
-        (findViewById(R.id.textView21) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView21)!!).setOnClickListener {
             val mission = TripodMission.createMission()
             mission.finishedAction = WaypointFinishedAction.HOVER
             mission.remoteControlLostSignalAction = RemoteControlLostSignalAction.CONTINUE
@@ -799,14 +814,14 @@ class TestActivity : AppCompatActivity() {
                 override fun onSuccess(data: Boolean?) {
                     Log.d(TAG, "downloadOrbitInfo onSuccess ")
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "uploadMission onSuccess "+data, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "uploadMission onSuccess $data", Toast.LENGTH_LONG).show()
                     }
                 }
 
             })
 
         }
-        (findViewById(R.id.textView22) as TextView).setOnClickListener {
+        (findViewById<TextView>(R.id.textView22)!!).setOnClickListener {
             val mission = ImageStabilityMission.createMission()
             mission.finishedAction = WaypointFinishedAction.HOVER
             mission.remoteControlLostSignalAction = RemoteControlLostSignalAction.CONTINUE
@@ -826,15 +841,15 @@ class TestActivity : AppCompatActivity() {
                 override fun onSuccess(data: Boolean?) {
                     Log.d(TAG, "downloadOrbitInfo onSuccess ")
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(this@TestActivity, "uploadMission onSuccess "+data, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@TestActivity, "uploadMission onSuccess $data", Toast.LENGTH_LONG).show()
                     }
                 }
 
             })
 
         }
-        (findViewById(R.id.textView40) as TextView).setOnClickListener {
-            var wayParam = MissionOperateInfoInternal()
+        (findViewById<TextView>(R.id.textView40)!!).setOnClickListener {
+            MissionOperateInfoInternal()
             MissionCommonManager2.getInstance().downloadAllMissionInfo(object : CallbackWithOneParam<MissionAllInternal> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "downloadOrbitInfo onFailure ")
@@ -851,8 +866,8 @@ class TestActivity : AppCompatActivity() {
                 }
             })
         }
-        (findViewById(R.id.textView25) as TextView).setOnClickListener {
-            var wayParam = MissionOperateInfoInternal()
+        (findViewById<TextView>(R.id.textView25)!!).setOnClickListener {
+            MissionOperateInfoInternal()
             MissionCommonManager2.getInstance().downloadAllMissionInfo(object : CallbackWithOneParam<MissionAllInternal> {
                 override fun onFailure(error: AutelError?) {
                     Log.d(TAG, "downloadAllMissionInfo onFailure ")
@@ -870,7 +885,7 @@ class TestActivity : AppCompatActivity() {
             })
 
 
-            (findViewById(R.id.textView23) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.textView23)!!).setOnClickListener {
                 val mission = TripodMission.createMission()
                 mission.finishedAction = WaypointFinishedAction.HOVER
                 mission.remoteControlLostSignalAction = RemoteControlLostSignalAction.CONTINUE
@@ -894,7 +909,7 @@ class TestActivity : AppCompatActivity() {
                     override fun onSuccess(data: Boolean?) {
                         Log.d(TAG, "downloadOrbitInfo onSuccess ")
                         Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(this@TestActivity, "uploadMission onSuccess "+data, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@TestActivity, "uploadMission onSuccess $data", Toast.LENGTH_LONG).show()
                         }
                     }
 
@@ -909,18 +924,18 @@ class TestActivity : AppCompatActivity() {
 //            wayParam.headingMode = 1
 //            MissionCommonManager2.getInstance().gpsFollowMeMission(wayParam, null)
             }
-            (findViewById(R.id.textView24) as TextView).setOnClickListener {
-                var wayParam = GpsTargetInfo()
+            (findViewById<TextView>(R.id.textView24)!!).setOnClickListener {
+                val wayParam = GpsTargetInfo()
                 wayParam.alt = 100
                 wayParam.lat = 8
                 wayParam.lon = 1
                 wayParam.precision = 1
                 MissionCommonManager2.getInstance().gpsTargetMission(wayParam)
             }
-            (findViewById(R.id.setBandModeWidthInfo) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.setBandModeWidthInfo)!!).setOnClickListener {
                 DspRFManager2.getInstance().setBandModeWidthInfo(BandMode.MODE_900M, Bandwidth.WIDTH_20M)
             }
-            (findViewById(R.id.setVideoTransferMode3) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.setVideoTransferMode3)!!).setOnClickListener {
                 DspRFManager2.getInstance().setVideoTransferMode(TransferMode.HIGH_DEFINITION, object : CallbackWithNoParam {
                     override fun onSuccess() {
                         Log.d(TAG, "setTransferMode success ")
@@ -931,7 +946,7 @@ class TestActivity : AppCompatActivity() {
                     }
                 })
             }
-            (findViewById(R.id.setVideoTransferMode1) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.setVideoTransferMode1)!!).setOnClickListener {
                 DspRFManager2.getInstance().setVideoTransferMode(TransferMode.FLUENCY, object : CallbackWithNoParam {
                     override fun onSuccess() {
                         Log.d(TAG, "setTransferMode success ")
@@ -942,7 +957,7 @@ class TestActivity : AppCompatActivity() {
                     }
                 })
             }
-            (findViewById(R.id.setVideoTransferMode2) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.setVideoTransferMode2)!!).setOnClickListener {
                 DspRFManager2.getInstance().setVideoTransferMode(TransferMode.NORMAL, object : CallbackWithNoParam {
                     override fun onSuccess() {
                         Log.d(TAG, "setTransferMode success ")
@@ -953,7 +968,7 @@ class TestActivity : AppCompatActivity() {
                     }
                 })
             }
-            (findViewById(R.id.getVideoTransferMode) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.getVideoTransferMode)!!).setOnClickListener {
                 DspRFManager2.getInstance().getVideoTransferMode(object : CallbackWithOneParam<VideoTransferModeInfo> {
                     override fun onFailure(error: AutelError?) {
 
@@ -965,7 +980,7 @@ class TestActivity : AppCompatActivity() {
                     }
                 })
             }
-            (findViewById(R.id.setBandModeWidthInfoListener) as TextView).setOnClickListener {
+            (findViewById<TextView>(R.id.setBandModeWidthInfoListener)!!).setOnClickListener {
                 DspRFManager2.getInstance().setBandModeWidthInfoListener(object : CallbackWithOneParam<BandModeWidthInfo> {
                     override fun onFailure(error: AutelError?) {
                         Log.d(TAG, "setBandModeWidthInfoListener onFailure ")
@@ -987,16 +1002,7 @@ class TestActivity : AppCompatActivity() {
 //                }
 //            })
             }
-
-
         }
-
-        fun onDestroy() {
-            super.onDestroy()
-            GimbalManager2.getInstance().removeGimbalAngleListener("addGimbalAngleListener")
-            DspRFManager2.getInstance().setBandModeWidthInfoListener(null)
-        }
-
     }
 }
 

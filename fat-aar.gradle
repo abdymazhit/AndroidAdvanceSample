@@ -390,7 +390,7 @@ task embedManifests << {
     }
 }
 
-private void save(XmlDocument xmlDocument, File out) {
+private static void save(XmlDocument xmlDocument, File out) {
     try {
         Files.write(xmlDocument.prettyPrint(), out, Charsets.UTF_8)
     } catch (IOException e) {
