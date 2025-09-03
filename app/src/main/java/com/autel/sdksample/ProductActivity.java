@@ -80,12 +80,7 @@ public class ProductActivity extends AppCompatActivity {
             public void productDisconnected() {
                 Log.v("productType", "productDisconnected ");
                 currentType = AutelProductType.UNKNOWN;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setTitle(currentType.toString());
-                    }
-                });
+                runOnUiThread(() -> setTitle(currentType.toString()));
             }
         });
         /*/

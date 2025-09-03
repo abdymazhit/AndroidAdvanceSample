@@ -41,15 +41,12 @@ public class EvoFollowMissionFragment extends MissionFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_follow);
-        ((MapActivity) getActivity()).setLocationChangeListener(new MapActivity.LocationChangeListener() {
-            @Override
-            public void locationChanged(Location location) {
-                mLocation = location;
-                if (null != followMission) {
-                    followMission.update(location);
-                }
-                Log.v("followTest", "location " + location);
+        ((MapActivity) getActivity()).setLocationChangeListener(location -> {
+            mLocation = location;
+            if (null != followMission) {
+                followMission.update(location);
             }
+            Log.v("followTest", "location " + location);
         });
         followReturnHeight = (EditText) view.findViewById(R.id.followReturnHeight);
         finishActionAdapter = new FollowFinishActionAdapter(getContext());
@@ -77,12 +74,7 @@ public class EvoFollowMissionFragment extends MissionFragment {
         followMission.location = mLocation;
         followMission.finishedAction = finishedAction;
         followMission.finishReturnHeight = isEmpty(valueHeight) ? 40 : Integer.valueOf(valueHeight);
-        mMapOperator.setLocationChangeListener(new MapActivity.LocationChangeListener() {
-            @Override
-            public void locationChanged(Location location) {
-                followMission.update(location);
-            }
-        });
+        mMapOperator.setLocationChangeListener(location -> followMission.update(location));
         return followMission;
     }
 

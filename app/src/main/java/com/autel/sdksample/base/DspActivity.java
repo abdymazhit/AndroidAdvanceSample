@@ -67,95 +67,83 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
     }
 
     private void initClick() {
-        findViewById(R.id.setCurrentRFAStart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (-1 == selectedRFHz) {
-                    logOut("setCurrentRFData  error  has not select a RF Hz");
-                    return;
-                }
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setCurrentRFData(selectedRFHz, 3, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setCurrentRFData  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setCurrentRFData  onSuccess");
-                    }
-                });
+        findViewById(R.id.setCurrentRFAStart).setOnClickListener(v -> {
+            if (-1 == selectedRFHz) {
+                logOut("setCurrentRFData  error  has not select a RF Hz");
+                return;
             }
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mController.setCurrentRFData(selectedRFHz, 3, new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setCurrentRFData  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setCurrentRFData  onSuccess");
+                }
+            });
         });
 
-        findViewById(R.id.getCurrentRFStart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getCurrentRFData(3, new CallbackWithOneParam<RFData>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getCurrentRFData  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(RFData data) {
-                        logOut("getCurrentRFData  " + data);
-                    }
-                });
+        findViewById(R.id.getCurrentRFStart).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getCurrentRFData(3, new CallbackWithOneParam<RFData>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getCurrentRFData  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(RFData data) {
+                    logOut("getCurrentRFData  " + data);
+                }
+            });
         });
 
-        findViewById(R.id.getRFListStart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getRFDataList(3, new CallbackWithOneParam<List<RFData>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getRFDataList  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<RFData> data) {
-                        rfListAdapter.setRfData(data);
-                        dspRFList.setAdapter(rfListAdapter);
-                        logOut("getRFDataList  data  " + data);
-                    }
-                });
+        findViewById(R.id.getRFListStart).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getRFDataList(3, new CallbackWithOneParam<List<RFData>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getRFDataList  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<RFData> data) {
+                    rfListAdapter.setRfData(data);
+                    dspRFList.setAdapter(rfListAdapter);
+                    logOut("getRFDataList  data  " + data);
+                }
+            });
         });
 
-        findViewById(R.id.getVersionInfo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getVersionInfo(new CallbackWithOneParam<DspVersionInfo>() {
-                    @Override
-                    public void onSuccess(DspVersionInfo dspVersionInfo) {
-                        logOut("getVersionInfo  onSuccess {" + dspVersionInfo + "}");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getVersionInfo onFailure : " + autelError.getDescription());
-                    }
-                });
-
+        findViewById(R.id.getVersionInfo).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getVersionInfo(new CallbackWithOneParam<DspVersionInfo>() {
+                @Override
+                public void onSuccess(DspVersionInfo dspVersionInfo) {
+                    logOut("getVersionInfo  onSuccess {" + dspVersionInfo + "}");
+                }
+
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("getVersionInfo onFailure : " + autelError.getDescription());
+                }
+            });
+
         });
 
     }
@@ -171,12 +159,7 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
 
         public void setRfData(List<RFData> rfData) {
             this.rfData = rfData;
-            new Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    notifyDataSetInvalidated();
-                }
-            });
+            new Handler().post(() -> notifyDataSetInvalidated());
         }
 
         @Override

@@ -130,393 +130,342 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
 
         initLocalFileList();
 
-        findViewById(R.id.getMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("getMedia  data  " + data.size());
-                        index = data.size();
-                        mediaItems = data;
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
-                    }
-                });
+        findViewById(R.id.getMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("getMedia  data  " + data.size());
+                    index = data.size();
+                    mediaItems = data;
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                    mediaListAdapter.setData(data);
+                    mediaList.setAdapter(mediaListAdapter);
+                    videoResolutionFromHttpHeaderAdapter.setData(data);
+                    videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                    videoList.setData(data);
+                    videoDownloadList.setAdapter(videoList);
+                }
+            });
         });
-        findViewById(R.id.appendMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("appendMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        index = data.size();
-                        mediaItems.addAll(data);
-                        logOut("appendMedia  data  " + mediaItems.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
-                    }
-                });
+        findViewById(R.id.appendMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("appendMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    index = data.size();
+                    mediaItems.addAll(data);
+                    logOut("appendMedia  data  " + mediaItems.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                    mediaListAdapter.setData(data);
+                    mediaList.setAdapter(mediaListAdapter);
+                    videoResolutionFromHttpHeaderAdapter.setData(data);
+                    videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                    videoList.setData(data);
+                    videoDownloadList.setAdapter(videoList);
+                }
+            });
         });
-        findViewById(R.id.getMedia_Next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMedia_Next  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        index += data.size();
-                        logOut("getMedia_Next  data  " + data);
-                        mediaItems = data;
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-
-                        mediaListAdapter.setData(data);
-                        mediaList.setAdapter(mediaListAdapter);
-                        videoResolutionFromHttpHeaderAdapter.setData(data);
-                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                        videoList.setData(data);
-                        videoDownloadList.setAdapter(videoList);
-                    }
-                });
+        findViewById(R.id.getMedia_Next).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getMedia_Next  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    index += data.size();
+                    logOut("getMedia_Next  data  " + data);
+                    mediaItems = data;
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+
+                    mediaListAdapter.setData(data);
+                    mediaList.setAdapter(mediaListAdapter);
+                    videoResolutionFromHttpHeaderAdapter.setData(data);
+                    videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                    videoList.setData(data);
+                    videoDownloadList.setAdapter(videoList);
+                }
+            });
         });
 
-        findViewById(R.id.deleteAllMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.deleteMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("deleteMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("deleteMedia  size  " + data.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                    }
-                });
+        findViewById(R.id.deleteAllMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.deleteMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("deleteMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("deleteMedia  size  " + data.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                }
+            });
         });
-        findViewById(R.id.deleteMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.deleteMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("deleteMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("deleteMedia  size  " + data.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                    }
-                });
+        findViewById(R.id.deleteMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.deleteMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("deleteMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("deleteMedia  size  " + data.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                }
+            });
         });
-        findViewById(R.id.getVideoResolutionFromHttpHeader).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoResolutionFromHttpHeader  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(VideoResolutionAndFps data) {
-                        logOut("getVideoResolutionFromHttpHeader  data size " + data);
-                    }
-                });
+        findViewById(R.id.getVideoResolutionFromHttpHeader).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getVideoResolutionFromHttpHeader  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(VideoResolutionAndFps data) {
+                    logOut("getVideoResolutionFromHttpHeader  data size " + data);
+                }
+            });
         });
 
-        findViewById(R.id.downloadVideo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (android.os.Build.VERSION.SDK_INT >= 23 && !(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
-                } else {
-                    downloadVideo();
-                }
-
+        findViewById(R.id.downloadVideo).setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= 23 && !(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
+            } else {
+                downloadVideo();
             }
+
         });
-        findViewById(R.id.getVideoResolutionFromLocalFile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                VideoResolutionAndFps data = mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
-                if (null != data) {
-                    logOut("getVideoResolutionFromLocalFile  data size " + data);
-                } else {
-                    logOut("getVideoResolutionFromLocalFile  data == null ");
-                }
+        findViewById(R.id.getVideoResolutionFromLocalFile).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            VideoResolutionAndFps data = mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
+            if (null != data) {
+                logOut("getVideoResolutionFromLocalFile  data size " + data);
+            } else {
+                logOut("getVideoResolutionFromLocalFile  data == null ");
             }
         });
 
         //=========================================FMc ================================
 
-        findViewById(R.id.getFmcMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getFMCMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("getMedia  data  " + data.size());
-                        index = data.size();
-                        mediaItems = data;
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mediaListAdapter.setData(data);
-                                mediaList.setAdapter(mediaListAdapter);
-                                videoResolutionFromHttpHeaderAdapter.setData(data);
-                                videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                                videoList.setData(data);
-                                videoDownloadList.setAdapter(videoList);
-                            }
-                        });
-                    }
-                });
+        findViewById(R.id.getFmcMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getFMCMedia(0, 10, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("getMedia  data  " + data.size());
+                    index = data.size();
+                    mediaItems = data;
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                    runOnUiThread(() -> {
+                        mediaListAdapter.setData(data);
+                        mediaList.setAdapter(mediaListAdapter);
+                        videoResolutionFromHttpHeaderAdapter.setData(data);
+                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                        videoList.setData(data);
+                        videoDownloadList.setAdapter(videoList);
+                    });
+                }
+            });
         });
-        findViewById(R.id.appendFmcMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getFMCMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("appendMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        index = data.size();
-                        mediaItems.addAll(data);
-                        logOut("appendMedia  data  " + mediaItems.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                        runOnUiThread(() -> {
-                            mediaListAdapter.setData(data);
-                            mediaList.setAdapter(mediaListAdapter);
-                            videoResolutionFromHttpHeaderAdapter.setData(data);
-                            videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                            videoList.setData(data);
-                            videoDownloadList.setAdapter(videoList);
-                        });
-
-                    }
-                });
+        findViewById(R.id.appendFmcMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getFMCMedia(mediaItems.size() - 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("appendMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    index = data.size();
+                    mediaItems.addAll(data);
+                    logOut("appendMedia  data  " + mediaItems.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                    runOnUiThread(() -> {
+                        mediaListAdapter.setData(data);
+                        mediaList.setAdapter(mediaListAdapter);
+                        videoResolutionFromHttpHeaderAdapter.setData(data);
+                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                        videoList.setData(data);
+                        videoDownloadList.setAdapter(videoList);
+                    });
+
+                }
+            });
         });
-        findViewById(R.id.getFmcMedia_Next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getFMCMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMedia_Next  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        index += data.size();
-                        logOut("getMedia_Next  data  " + data);
-                        mediaItems = data;
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                        runOnUiThread(() -> {
-                            mediaListAdapter.setData(data);
-                            mediaList.setAdapter(mediaListAdapter);
-                            videoResolutionFromHttpHeaderAdapter.setData(data);
-                            videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
-                            videoList.setData(data);
-                            videoDownloadList.setAdapter(videoList);
-                        });
-                    }
-                });
+        findViewById(R.id.getFmcMedia_Next).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getFMCMedia(index + 1, 50, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getMedia_Next  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    index += data.size();
+                    logOut("getMedia_Next  data  " + data);
+                    mediaItems = data;
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "getMedia  data  " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                    runOnUiThread(() -> {
+                        mediaListAdapter.setData(data);
+                        mediaList.setAdapter(mediaListAdapter);
+                        videoResolutionFromHttpHeaderAdapter.setData(data);
+                        videoResolutionFromHttpHeaderList.setAdapter(videoResolutionFromHttpHeaderAdapter);
+                        videoList.setData(data);
+                        videoDownloadList.setAdapter(videoList);
+                    });
+                }
+            });
         });
 
-        findViewById(R.id.deleteFmcAllMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.deleteFMCMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("deleteMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("deleteMedia  size  " + data.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                    }
-                });
+        findViewById(R.id.deleteFmcAllMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.deleteFMCMedia(mediaItems, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("deleteMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("deleteMedia  size  " + data.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                }
+            });
         });
-        findViewById(R.id.deleteFmcMedia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.deleteFMCMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("deleteMedia  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(List<MediaInfo> data) {
-                        logOut("deleteMedia  size  " + data.size());
-                        for (MediaInfo item : data) {
-                            Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
-                        }
-                    }
-                });
+        findViewById(R.id.deleteFmcMedia).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.deleteFMCMedia(deleteMedia, new CallbackWithOneParam<List<MediaInfo>>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("deleteMedia  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(List<MediaInfo> data) {
+                    logOut("deleteMedia  size  " + data.size());
+                    for (MediaInfo item : data) {
+                        Log.v(TAG, "deleteMedia  data  onFailure " + item.getOriginalMedia() + "    " + item.getFileSize() + "   " + item.getFileTimeString() + "  SmallThumbnail  " + item.getSmallThumbnail());
+                    }
+                }
+            });
         });
-        findViewById(R.id.getFmcVideoResolutionFromHttpHeader).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getFMCVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoResolutionFromHttpHeader  error  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(VideoResolutionAndFps data) {
-                        logOut("getVideoResolutionFromHttpHeader  data size " + data);
-                    }
-                });
+        findViewById(R.id.getFmcVideoResolutionFromHttpHeader).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getFMCVideoResolutionFromHttpHeader(resolutionFromHttpHeader, new CallbackWithOneParam<VideoResolutionAndFps>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getVideoResolutionFromHttpHeader  error  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(VideoResolutionAndFps data) {
+                    logOut("getVideoResolutionFromHttpHeader  data size " + data);
+                }
+            });
         });
 
-        findViewById(R.id.downloadFmcVideo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (android.os.Build.VERSION.SDK_INT >= 23 && !(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
-                } else {
-                    downloadVideo();
-                }
-
+        findViewById(R.id.downloadFmcVideo).setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= 23 && !(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
+            } else {
+                downloadVideo();
             }
+
         });
-        findViewById(R.id.getFmcVideoResolutionFromLocalFile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                VideoResolutionAndFps data =
-                mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
-                if (null != data) {
-                    logOut("getVideoResolutionFromLocalFile  data size " + data);
-                } else {
-                    logOut("getVideoResolutionFromLocalFile  data == null ");
-                }
+        findViewById(R.id.getFmcVideoResolutionFromLocalFile).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            VideoResolutionAndFps data =
+            mController.getVideoResolutionFromLocalFile(resolutionFromLocalFile);
+            if (null != data) {
+                logOut("getVideoResolutionFromLocalFile  data size " + data);
+            } else {
+                logOut("getVideoResolutionFromLocalFile  data == null ");
             }
         });
     }

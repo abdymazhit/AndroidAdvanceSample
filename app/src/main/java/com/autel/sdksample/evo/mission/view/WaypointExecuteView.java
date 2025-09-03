@@ -83,12 +83,9 @@ public class WaypointExecuteView extends FrameLayout {
         ((TextView)titleView.findViewById(R.id.common_title)).setText(R.string.waypoint);
         TextView saveBtn = (TextView) titleView.findViewById(R.id.common_hide);
         saveBtn.setText("Save");
-        saveBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointExecuteListener != null){
-                    waypointExecuteListener.saveClick();
-                }
+        saveBtn.setOnClickListener(v -> {
+            if(waypointExecuteListener != null){
+                waypointExecuteListener.saveClick();
             }
         });
 
@@ -99,20 +96,14 @@ public class WaypointExecuteView extends FrameLayout {
         TextView bottomBtn = (TextView) bottomView.findViewById(R.id.bottom_title);
         bottomBtn.setText(R.string.mission_exit);
         bottomBtn.setTextColor(AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.red));
-        bottomBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointExecuteListener != null){
-                    waypointExecuteListener.exitClick();
-                }
+        bottomBtn.setOnClickListener(v -> {
+            if(waypointExecuteListener != null){
+                waypointExecuteListener.exitClick();
             }
         });
-        contentView.findViewById(R.id.pause_btn).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointExecuteListener != null){
-                    waypointExecuteListener.pauseClick();
-                }
+        contentView.findViewById(R.id.pause_btn).setOnClickListener(v -> {
+            if(waypointExecuteListener != null){
+                waypointExecuteListener.pauseClick();
             }
         });
 

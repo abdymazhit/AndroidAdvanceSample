@@ -29,19 +29,16 @@ public class GmapViewUtilImpl implements MapViewUtilImpl {
 
     @Override
     public void initMap(final MapFragment.OnMapReadyCallBack onMapReadyCallBack) {
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                gMap = googleMap;
-                gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                UiSettings gmsSetting = gMap.getUiSettings();
-                gmsSetting.setZoomControlsEnabled(false);
-                gmsSetting.setCompassEnabled(false);
-                gmsSetting.setRotateGesturesEnabled(false);
-                gmsSetting.setMapToolbarEnabled(false);
-                mapModel = new GMapModel(googleMap);
-                onMapReadyCallBack.onMapReady();
-            }
+        mapView.getMapAsync(googleMap -> {
+            gMap = googleMap;
+            gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            UiSettings gmsSetting = gMap.getUiSettings();
+            gmsSetting.setZoomControlsEnabled(false);
+            gmsSetting.setCompassEnabled(false);
+            gmsSetting.setRotateGesturesEnabled(false);
+            gmsSetting.setMapToolbarEnabled(false);
+            mapModel = new GMapModel(googleMap);
+            onMapReadyCallBack.onMapReady();
         });
     }
 

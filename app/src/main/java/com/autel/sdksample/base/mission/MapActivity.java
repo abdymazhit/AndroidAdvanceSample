@@ -114,47 +114,33 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
         });
         flyModeInfo = (TextView) findViewById(R.id.flyModeInfo);
         logInfo = (TextView) findViewById(R.id.logInfo);
-        logInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long current = System.currentTimeMillis();
-                if (current - clickStamp < 1500) {
-                    logInfo.setVisibility(View.GONE);
-                }
-                clickStamp = current;
+        logInfo.setOnClickListener(v -> {
+            long current = System.currentTimeMillis();
+            if (current - clickStamp < 1500) {
+                logInfo.setVisibility(View.GONE);
             }
+            clickStamp = current;
         });
         missionModeInfo = (TextView) findViewById(R.id.missionInfo);
         flyControllerInfo = (TextView) findViewById(R.id.flyControllerInfo);
-        ((Switch) findViewById(R.id.flyInfoSwitch)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                flyInfoShow = isChecked;
-                flyControllerInfo.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            }
+        ((Switch) findViewById(R.id.flyInfoSwitch)).setOnCheckedChangeListener((buttonView, isChecked) -> {
+            flyInfoShow = isChecked;
+            flyControllerInfo.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         });
         getSupportFragmentManager().beginTransaction().replace(R.id.mission_operator, new MissionOperatorFragment()).commit();
     }
 
     public void updateLogInfo(final String log) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (null != logInfo) {
-                    logInfo.setVisibility(View.VISIBLE);
-                    logInfo.setText(log);
-                }
+        runOnUiThread(() -> {
+            if (null != logInfo) {
+                logInfo.setVisibility(View.VISIBLE);
+                logInfo.setText(log);
             }
         });
     }
 
     public void updateMissionInfo(final String info) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                missionModeInfo.setText(info);
-            }
-        });
+        runOnUiThread(() -> missionModeInfo.setText(info));
     }
 
 

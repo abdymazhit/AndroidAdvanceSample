@@ -63,25 +63,19 @@ public class OrbitPositionSetView extends FrameLayout {
         clearView();
         View startTitle = inflater.inflate(R.layout.common_mission_title_with_close, null);
         ((TextView) startTitle.findViewById(R.id.mission_title)).setText(R.string.mission_orbit);
-        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (orbitPositionSetViewListener != null) {
-                    orbitPositionSetViewListener.exitClick();
-                }
+        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if (orbitPositionSetViewListener != null) {
+                orbitPositionSetViewListener.exitClick();
             }
         });
         View contentView = inflater.inflate(R.layout.orbit_position_set_content, null);
         missionDropSelectView = (MissionDropSelectView) contentView.findViewById(R.id.mission_drop_select_view);
         orbitSetPositionTip = (TextView) contentView.findViewById(R.id.orbit_set_position_tip);
-        missionDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (orbitPositionSetViewListener != null) {
-                    orbitPositionSetViewListener.positionSetWayItemClick(position);
-                }
-                showObitSetTip(position);
+        missionDropSelectView.setOnItemClickListener(position -> {
+            if (orbitPositionSetViewListener != null) {
+                orbitPositionSetViewListener.positionSetWayItemClick(position);
             }
+            showObitSetTip(position);
         });
         List<String> datas = new ArrayList<>();
         datas.add(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_create_from_drone_location));
@@ -91,12 +85,9 @@ public class OrbitPositionSetView extends FrameLayout {
         missionDropSelectView.notifyDataChange(AdvancedItemEnum.WAYPOINT_MISSION);
         View bottomView = inflater.inflate(R.layout.common_mission_bottom, null);
         ((TextView) bottomView.findViewById(R.id.bottom_title)).setText(R.string.mission_set);
-        bottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (orbitPositionSetViewListener != null) {
-                    orbitPositionSetViewListener.positionSetConfirmClick();
-                }
+        bottomView.setOnClickListener(v -> {
+            if (orbitPositionSetViewListener != null) {
+                orbitPositionSetViewListener.positionSetConfirmClick();
             }
         });
         titleContainer.addView(startTitle);

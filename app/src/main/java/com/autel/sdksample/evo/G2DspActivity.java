@@ -73,15 +73,12 @@ public class G2DspActivity extends DspActivity {
 
             }
         });
-        findViewById(R.id.setBandwidthInfo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mXStarEvoDsp.setBandwidthInfo(selectedBandMode, selectedBandwidth);
+        findViewById(R.id.setBandwidthInfo).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
             }
+            mXStarEvoDsp.setBandwidthInfo(selectedBandMode, selectedBandwidth);
         });
 
         ((Spinner) findViewById(R.id.transferModeList)).setAdapter(new TransferModeAdapter(this));
@@ -96,96 +93,81 @@ public class G2DspActivity extends DspActivity {
 
             }
         });
-        findViewById(R.id.setTransferMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mXStarEvoDsp.setTransferMode(selectedTransferMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setTransferMode onSuccess");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setTransferMode onFailure " + error.getDescription());
-                    }
-                });
+        findViewById(R.id.setTransferMode).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
             }
+            mXStarEvoDsp.setTransferMode(selectedTransferMode, new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+                    logOut("setTransferMode onSuccess");
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setTransferMode onFailure " + error.getDescription());
+                }
+            });
         });
-        findViewById(R.id.getTransferMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mXStarEvoDsp.getTransferMode(new CallbackWithOneParam<TransferMode>() {
-                    @Override
-                    public void onSuccess(TransferMode data) {
-                        logOut("getTransferMode onSuccess " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getTransferMode onFailure " + error.getDescription());
-                    }
-                });
+        findViewById(R.id.getTransferMode).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
             }
+            mXStarEvoDsp.getTransferMode(new CallbackWithOneParam<TransferMode>() {
+                @Override
+                public void onSuccess(TransferMode data) {
+                    logOut("getTransferMode onSuccess " + data);
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getTransferMode onFailure " + error.getDescription());
+                }
+            });
         });
 
-        findViewById(R.id.setDspInfoListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
+        findViewById(R.id.setDspInfoListener).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mXStarEvoDsp.setDspInfoListener(new CallbackWithOneParam<EvoDspInfo>() {
+                @Override
+                public void onSuccess(EvoDspInfo g2DspInfo) {
+                    logOut("setDspInfoListener onSuccess " + g2DspInfo);
                 }
-                mXStarEvoDsp.setDspInfoListener(new CallbackWithOneParam<EvoDspInfo>() {
-                    @Override
-                    public void onSuccess(EvoDspInfo g2DspInfo) {
-                        logOut("setDspInfoListener onSuccess " + g2DspInfo);
-                    }
 
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setDspInfoListener onFailure " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-        findViewById(R.id.resetDspInfoListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("setDspInfoListener onFailure " + autelError.getDescription());
                 }
-                mXStarEvoDsp.setDspInfoListener(null);
-            }
+            });
         });
-        findViewById(R.id.getDeviceVersionInfo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoDsp == null) {
-                    Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
-                    return;
+        findViewById(R.id.resetDspInfoListener).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mXStarEvoDsp.setDspInfoListener(null);
+        });
+        findViewById(R.id.getDeviceVersionInfo).setOnClickListener(v -> {
+            if (mXStarEvoDsp == null) {
+                Toast.makeText(getApplicationContext(), "请先对频", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mXStarEvoDsp.getDeviceVersionInfo(new CallbackWithOneParam<List<DeviceVersionInfo>>() {
+                @Override
+                public void onSuccess(List<DeviceVersionInfo> data) {
+                    logOut("getDeviceVersionInfo onSuccess " + data.size());
                 }
-                mXStarEvoDsp.getDeviceVersionInfo(new CallbackWithOneParam<List<DeviceVersionInfo>>() {
-                    @Override
-                    public void onSuccess(List<DeviceVersionInfo> data) {
-                        logOut("getDeviceVersionInfo onSuccess " + data.size());
-                    }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getDeviceVersionInfo onFailure " + error.getDescription());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getDeviceVersionInfo onFailure " + error.getDescription());
+                }
+            });
         });
     }
 }

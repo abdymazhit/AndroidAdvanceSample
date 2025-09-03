@@ -62,12 +62,7 @@ public class CameraActivity extends AppCompatActivity {
 //        initListener();
         codecView = (AutelCodecView) findViewById(R.id.codecView);
 
-        findViewById(R.id.camera_type).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeSize();
-            }
-        });
+        findViewById(R.id.camera_type).setOnClickListener(v -> changeSize());
 
     }
 

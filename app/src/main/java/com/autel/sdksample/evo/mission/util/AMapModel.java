@@ -189,22 +189,17 @@ public class AMapModel implements MapModelImpl {
             final LatLngInterpolator latLngInterpolator = new LatLngInterpolator.LinearFixed();
             ValueAnimator valueAnimator = new ValueAnimator();
             final LatLng startPosition = marker.getPosition();
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-            {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation)
-                {
-                    try {
-                        if (marker == null) // oops... destroying map during animation...
-                        {
-                            return;
-                        }
-                        float v = animation.getAnimatedFraction();
-                        LatLng newPosition = latLngInterpolator.interpolate(v, startPosition,nextPosition);
-                        marker.setPosition(newPosition);
-                    } catch (Exception ex) {
-                        // I don't care atm..
+            valueAnimator.addUpdateListener(animation -> {
+                try {
+                    if (marker == null) // oops... destroying map during animation...
+                    {
+                        return;
                     }
+                    float v = animation.getAnimatedFraction();
+                    LatLng newPosition = latLngInterpolator.interpolate(v, startPosition,nextPosition);
+                    marker.setPosition(newPosition);
+                } catch (Exception ex) {
+                    // I don't care atm..
                 }
             });
             valueAnimator.setFloatValues(0, 1);
@@ -358,21 +353,18 @@ public class AMapModel implements MapModelImpl {
     @Override
     public void setOnMapClickListener(final int mapClickWay) {
         if(aMap != null){
-            aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
-                @Override
-                public void onMapClick(LatLng latLng) {
-                    switch (mapClickWay){
-                        case MapConstant.MAP_CLICK_MODE_ORBIT:
-                            addOrbitFromMap(latLng);
-                            break;
-                        case MapConstant.MAP_CLICK_MODE_WAYPOINT:
-                            if(isOnPolyLine(latLng)){
-                                insertWaypoints(latLng);
-                            }else{
-                                addWaypointFromMap(latLng,false);
-                            }
-                            break;
-                    }
+            aMap.setOnMapClickListener(latLng -> {
+                switch (mapClickWay){
+                    case MapConstant.MAP_CLICK_MODE_ORBIT:
+                        addOrbitFromMap(latLng);
+                        break;
+                    case MapConstant.MAP_CLICK_MODE_WAYPOINT:
+                        if(isOnPolyLine(latLng)){
+                            insertWaypoints(latLng);
+                        }else{
+                            addWaypointFromMap(latLng,false);
+                        }
+                        break;
                 }
             });
         }
@@ -554,7 +546,7 @@ public class AMapModel implements MapModelImpl {
 
         if(path != null){
             Projection pj = aMap.getProjection();
-            ArrayList<LatLng> tempWaypoints = new ArrayList<LatLng>();
+            ArrayList<LatLng> tempWaypoints = new ArrayList<>();
 
             int maxsize = 99;
 

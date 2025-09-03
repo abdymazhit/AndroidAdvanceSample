@@ -169,42 +169,33 @@ public class DynamicTrackActivity extends BaseActivity<AutelCameraManager> {
             }
         });
 
-        trackingModeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null == evoTrackingMission) return;
-                evoTrackingMission.switchFollowMode(DynamicTrackMode.findMode(flightMode), new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        Toast.makeText(DynamicTrackActivity.this, "setTrackingModeEnable onFailure ", Toast.LENGTH_LONG).show();
+        trackingModeBtn.setOnClickListener(v -> {
+            if (null == evoTrackingMission) return;
+            evoTrackingMission.switchFollowMode(DynamicTrackMode.findMode(flightMode), new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    Toast.makeText(DynamicTrackActivity.this, "setTrackingModeEnable onFailure ", Toast.LENGTH_LONG).show();
 
-                    }
+                }
 
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(DynamicTrackActivity.this, "setTrackingModeEnable onSuccess ", Toast.LENGTH_LONG).show();
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(DynamicTrackActivity.this, "setTrackingModeEnable onSuccess ", Toast.LENGTH_LONG).show();
 
-                    }
-                });
-            }
+                }
+            });
         });
-        tvStop.setOnClickListener(new View.OnClickListener() {
+        tvStop.setOnClickListener(v -> missionManager.cancelMission(new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                missionManager.cancelMission(new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        dynamicTrackView.clearForStop();
-                    }
+            public void onSuccess() {
+                dynamicTrackView.clearForStop();
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-
-                    }
-                });
+            @Override
+            public void onFailure(AutelError error) {
 
             }
-        });
+        }));
 
         dynamicTrackView.setTrackCallback(new DynamicTrackView.TrackCallback() {
             @Override

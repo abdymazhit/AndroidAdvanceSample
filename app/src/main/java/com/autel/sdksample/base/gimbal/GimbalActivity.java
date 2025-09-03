@@ -57,66 +57,57 @@ public abstract class GimbalActivity extends BaseActivity<AutelGimbal> {
     }
 
     private void initClick() {
-        findViewById(R.id.setGimbalWorkMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setGimbalWorkMode(gimbalWorkMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setGimbalWorkMode error " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setGimbalWorkMode result   onSuccess");
-                    }
-                });
+        findViewById(R.id.setGimbalWorkMode).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.setGimbalWorkMode(gimbalWorkMode, new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setGimbalWorkMode error " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setGimbalWorkMode result   onSuccess");
+                }
+            });
         });
-        findViewById(R.id.getGimbalWorkMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getGimbalWorkMode(new CallbackWithOneParam<GimbalWorkMode>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getGimbalWorkMode error " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(GimbalWorkMode data) {
-                        logOut("getGimbalWorkMode data " + data);
-                    }
-                });
+        findViewById(R.id.getGimbalWorkMode).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getGimbalWorkMode(new CallbackWithOneParam<GimbalWorkMode>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getGimbalWorkMode error " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(GimbalWorkMode data) {
+                    logOut("getGimbalWorkMode data " + data);
+                }
+            });
         });
 
-        findViewById(R.id.getVersionInfo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getVersionInfo(new CallbackWithOneParam<GimbalVersionInfo>() {
-                    @Override
-                    public void onSuccess(GimbalVersionInfo gimbalVersionInfo) {
-                        logOut("getVersionInfo onSuccess {" + gimbalVersionInfo + "}");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getVersionInfo onFailure " + autelError.getDescription());
-                    }
-                });
+        findViewById(R.id.getVersionInfo).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getVersionInfo(new CallbackWithOneParam<GimbalVersionInfo>() {
+                @Override
+                public void onSuccess(GimbalVersionInfo gimbalVersionInfo) {
+                    logOut("getVersionInfo onSuccess {" + gimbalVersionInfo + "}");
+                }
+
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("getVersionInfo onFailure " + autelError.getDescription());
+                }
+            });
         });
     }
 }

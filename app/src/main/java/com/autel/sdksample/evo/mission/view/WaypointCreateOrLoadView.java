@@ -54,31 +54,22 @@ public class WaypointCreateOrLoadView extends FrameLayout {
         clearView();
         View titleView = inflater.inflate(R.layout.common_mission_title_with_close,null);
         ((TextView)titleView.findViewById(R.id.mission_title)).setText(R.string.waypoint);
-        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointCreateOrLoadListener != null){
-                    waypointCreateOrLoadListener.exitClick();
-                }
+        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if(waypointCreateOrLoadListener != null){
+                waypointCreateOrLoadListener.exitClick();
             }
         });
         View contentView = inflater.inflate(R.layout.waypoint_create_view_content,null);
-        contentView.findViewById(R.id.load_waypoint_btn).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointCreateOrLoadListener != null){
-                    waypointCreateOrLoadListener.loadClick();
-                }
+        contentView.findViewById(R.id.load_waypoint_btn).setOnClickListener(v -> {
+            if(waypointCreateOrLoadListener != null){
+                waypointCreateOrLoadListener.loadClick();
             }
         });
-        contentView.findViewById(R.id.create_waypoint_btn).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointCreateOrLoadListener != null){
-                    waypointCreateOrLoadListener.createClick();
-                }
-
+        contentView.findViewById(R.id.create_waypoint_btn).setOnClickListener(v -> {
+            if(waypointCreateOrLoadListener != null){
+                waypointCreateOrLoadListener.createClick();
             }
+
         });
         titleContainer.addView(titleView);
         contentContainer.addView(contentView);

@@ -92,12 +92,9 @@ public class OrbitExecuteView extends FrameLayout {
         commonTitle.setText(R.string.mission_orbit);
         TextView commonHide = (TextView)titleView.findViewById(R.id.common_hide);
         commonHide.setText(R.string.mission_hide);
-        commonHide.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(orbitExecuteViewListener != null){
-                    orbitExecuteViewListener.hideClick();
-                }
+        commonHide.setOnClickListener(v -> {
+            if(orbitExecuteViewListener != null){
+                orbitExecuteViewListener.hideClick();
             }
         });
         View contentView = inflater.inflate(R.layout.oribit_execute_content,null);
@@ -109,33 +106,24 @@ public class OrbitExecuteView extends FrameLayout {
         right_img = contentView.findViewById(R.id.right_img);
 
         orbit_rb = (AutelSegmentedGroup)contentView.findViewById(R.id.orbit_rb);
-        orbit_rb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.rb_left_btn){
-                    showLeftStick(OrbitExecuteView.this.remoteControllerCommandStickMode);
-                }else if(checkedId == R.id.rb_right_btn){
-                    showRightStick(OrbitExecuteView.this.remoteControllerCommandStickMode);
-                }
+        orbit_rb.setOnCheckedChangeListener((group, checkedId) -> {
+            if(checkedId == R.id.rb_left_btn){
+                showLeftStick(OrbitExecuteView.this.remoteControllerCommandStickMode);
+            }else if(checkedId == R.id.rb_right_btn){
+                showRightStick(OrbitExecuteView.this.remoteControllerCommandStickMode);
             }
         });
         orbit_rb.check(R.id.rb_left_btn);
         View pauseBtn = contentView.findViewById(R.id.pause_btn);
-        pauseBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(orbitExecuteViewListener != null){
-                    orbitExecuteViewListener.pauseClick();
-                }
+        pauseBtn.setOnClickListener(v -> {
+            if(orbitExecuteViewListener != null){
+                orbitExecuteViewListener.pauseClick();
             }
         });
         View bottomView = inflater.inflate(R.layout.common_mission_bottom,null);
-        bottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(orbitExecuteViewListener != null){
-                    orbitExecuteViewListener.exitClick();
-                }
+        bottomView.setOnClickListener(v -> {
+            if(orbitExecuteViewListener != null){
+                orbitExecuteViewListener.exitClick();
             }
         });
         TextView bottomTitle = (TextView) bottomView.findViewById(R.id.bottom_title);

@@ -208,26 +208,23 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
 
-        findViewById(R.id.setGimbalDialAdjustSpeed).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = dialAdjustSpeed.getText().toString();
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setGimbalDialAdjustSpeed(isEmpty(value) ? 10 : Integer.valueOf(value), new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError rcError) {
-                        logOut("setGimbalAngleWithSpeed error " + rcError.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setGimbalAngleWithSpeed onSuccess ");
-                    }
-                });
+        findViewById(R.id.setGimbalDialAdjustSpeed).setOnClickListener(v -> {
+            String value = dialAdjustSpeed.getText().toString();
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first",Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.setGimbalDialAdjustSpeed(isEmpty(value) ? 10 : Integer.valueOf(value), new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError rcError) {
+                    logOut("setGimbalAngleWithSpeed error " + rcError.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setGimbalAngleWithSpeed onSuccess ");
+                }
+            });
         });
     }
 

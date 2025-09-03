@@ -72,25 +72,19 @@ public class WaypointAllSelectView extends FrameLayout {
         TextView btnLeft = (TextView) bottomView.findViewById(R.id.btn_left);
         btnRight = (TextView)bottomView.findViewById(R.id.btn_right);
         btnLeft.setText("Ok");
-        btnLeft.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointAllSelectViewListener != null){
-                    WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
-                    waypointAdvanceDataBean.setAltitude(curAltitude);
-                    waypointAdvanceDataBean.setSpeed(curSpeed);
-                    waypointAllSelectViewListener.waypointProjectMarkerDataChange(waypointAdvanceDataBean);
-                    waypointAllSelectViewListener.leftClick();
-                }
+        btnLeft.setOnClickListener(v -> {
+            if(waypointAllSelectViewListener != null){
+                WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
+                waypointAdvanceDataBean.setAltitude(curAltitude);
+                waypointAdvanceDataBean.setSpeed(curSpeed);
+                waypointAllSelectViewListener.waypointProjectMarkerDataChange(waypointAdvanceDataBean);
+                waypointAllSelectViewListener.leftClick();
             }
         });
         btnRight.setText("Delete");
-        btnRight.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointAllSelectViewListener != null){
-                    waypointAllSelectViewListener.rightClick();
-                }
+        btnRight.setOnClickListener(v -> {
+            if(waypointAllSelectViewListener != null){
+                waypointAllSelectViewListener.rightClick();
             }
         });
         titleContainer.addView(titleView);

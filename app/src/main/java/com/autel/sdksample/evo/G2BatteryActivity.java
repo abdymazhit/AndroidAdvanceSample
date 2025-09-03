@@ -36,38 +36,29 @@ public class G2BatteryActivity extends BatteryActivity {
     @Override
     protected void initUi() {
         super.initUi();
-        findViewById(R.id.getHistoryState).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
+        findViewById(R.id.getHistoryState).setOnClickListener(v -> {
         });
-        findViewById(R.id.resetBatteryRealTimeDataListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.resetBatteryRealTimeDataListener).setOnClickListener(v -> {
 //                test3();
-                if (mXStarEvoBattery instanceof EvoBattery)
-                    ((EvoBattery) mXStarEvoBattery).setBatteryStateListener(null);
+            if (mXStarEvoBattery instanceof EvoBattery)
+                ((EvoBattery) mXStarEvoBattery).setBatteryStateListener(null);
 
 
-            }
         });
 
-        findViewById(R.id.setBatteryRealTimeDataListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mXStarEvoBattery instanceof EvoBattery)
-                    ((EvoBattery)mXStarEvoBattery).setBatteryStateListener(new CallbackWithOneParam<EvoBatteryInfo>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setBatteryStateListener  error :  " + error.getDescription());
-                    }
+        findViewById(R.id.setBatteryRealTimeDataListener).setOnClickListener(v -> {
+            if (mXStarEvoBattery instanceof EvoBattery)
+                ((EvoBattery)mXStarEvoBattery).setBatteryStateListener(new CallbackWithOneParam<EvoBatteryInfo>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setBatteryStateListener  error :  " + error.getDescription());
+                }
 
-                    @Override
-                    public void onSuccess(EvoBatteryInfo data) {
-                        logOut("setBatteryStateListener  data current battery :  " + data.toString());
-                    }
-                });
-            }
+                @Override
+                public void onSuccess(EvoBatteryInfo data) {
+                    logOut("setBatteryStateListener  data current battery :  " + data.toString());
+                }
+            });
         });
 
     }

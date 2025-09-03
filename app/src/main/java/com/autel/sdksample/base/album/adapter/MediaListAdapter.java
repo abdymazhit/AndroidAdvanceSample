@@ -101,20 +101,14 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
             textView.setText(originUrl);
         }
         convertView.findViewById(R.id.downloadStart).setTag(position);
-        convertView.findViewById(R.id.downloadStart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String url = elementList.get((int) v.getTag()).getOriginalMedia();
-                getHttpDownloadManager(mContext).start(new DownloadTask(url, getSavePath(mContext, url)));
-            }
+        convertView.findViewById(R.id.downloadStart).setOnClickListener(v -> {
+            final String url = elementList.get((int) v.getTag()).getOriginalMedia();
+            getHttpDownloadManager(mContext).start(new DownloadTask(url, getSavePath(mContext, url)));
         });
         convertView.findViewById(R.id.downloadCancel).setTag(position);
-        convertView.findViewById(R.id.downloadCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String url = elementList.get((int) v.getTag()).getOriginalMedia();
-                getHttpDownloadManager(mContext).cancel(DownloadUtils.getTaskId(url, getSavePath(mContext, url)));
-            }
+        convertView.findViewById(R.id.downloadCancel).setOnClickListener(v -> {
+            final String url = elementList.get((int) v.getTag()).getOriginalMedia();
+            getHttpDownloadManager(mContext).cancel(DownloadUtils.getTaskId(url, getSavePath(mContext, url)));
         });
 
         DownloadTask task = getHttpDownloadManager(mContext)
@@ -157,32 +151,17 @@ public class MediaListAdapter extends SelectorAdapter<MediaInfo> implements Http
 
     @Override
     public void started(int task_id) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                notifyDataSetChanged();
-            }
-        });
+        handler.post(() -> notifyDataSetChanged());
     }
 
     @Override
     public void progress(int task_id, long receive_length, long total_length) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                notifyDataSetChanged();
-            }
-        });
+        handler.post(() -> notifyDataSetChanged());
     }
 
     @Override
     public void completed(int task_id, String path) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                notifyDataSetChanged();
-            }
-        });
+        handler.post(() -> notifyDataSetChanged());
     }
 
     @Override

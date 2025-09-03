@@ -63,82 +63,61 @@ public class G2GimbalActivity extends GimbalActivity {
         gimbalAnglePitchSpeed = (EditText) findViewById(R.id.gimbalAnglePitchSpeed);
         gimbalAngleRollSpeed = (EditText) findViewById(R.id.gimbalAngleRollSpeed);
         gimbalAngleYawSpeed = (EditText) findViewById(R.id.gimbalAngleYawSpeed);
-        findViewById(R.id.setGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setGimbalAngleListener).setOnClickListener(v -> mXStarEvoGimbal.setAngleListener(new CallbackWithOneParam<EvoAngleInfo>() {
+
             @Override
-            public void onClick(View v) {
-                mXStarEvoGimbal.setAngleListener(new CallbackWithOneParam<EvoAngleInfo>() {
-
-                    @Override
-                    public void onSuccess(EvoAngleInfo data) {
-                        logOut("setAngleListener onSuccess " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAngleListener error " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess(EvoAngleInfo data) {
+                logOut("setAngleListener onSuccess " + data);
             }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAngleListener error " + autelError.getDescription());
+            }
+        }));
+        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(v -> mXStarEvoGimbal.setAngleListener(null));
+        findViewById(R.id.getAngleRange).setOnClickListener(v -> mXStarEvoGimbal.getParameterRangeManager().getAngleRange(new CallbackWithOneParam<GimbalAngleRange>() {
+            @Override
+            public void onSuccess(GimbalAngleRange data) {
+                logOut("getAngleRange onSuccess " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("getAngleRange onSuccess " + autelError.getDescription());
+            }
+        }));
+        findViewById(R.id.setGimbalAngle).setOnClickListener(v -> {
+            String pitchValue = gimbalAnglePitch.getText().toString();
+            int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
+
+            String rollValue = gimbalAngleRoll.getText().toString();
+            int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
+
+            String yawValue = gimbalAngleYaw.getText().toString();
+            int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
+
+            GimbalAngleData angleData = new GimbalAngleData();
+            angleData.setPitch(pitch);
+            angleData.setRoll(roll);
+            angleData.setYaw(yaw);
+            mXStarEvoGimbal.setGimbalAngle(pitch, roll, yaw);
         });
-        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mXStarEvoGimbal.setAngleListener(null);
-            }
-        });
-        findViewById(R.id.getAngleRange).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mXStarEvoGimbal.getParameterRangeManager().getAngleRange(new CallbackWithOneParam<GimbalAngleRange>() {
-                    @Override
-                    public void onSuccess(GimbalAngleRange data) {
-                        logOut("getAngleRange onSuccess " + data);
-                    }
+        findViewById(R.id.setGimbalAngleSpeed).setOnClickListener(v -> {
+            String pitchValue = gimbalAnglePitchSpeed.getText().toString();
+            int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
 
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getAngleRange onSuccess " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-        findViewById(R.id.setGimbalAngle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String pitchValue = gimbalAnglePitch.getText().toString();
-                int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
+            String rollValue = gimbalAngleRollSpeed.getText().toString();
+            int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
 
-                String rollValue = gimbalAngleRoll.getText().toString();
-                int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
+            String yawValue = gimbalAngleYawSpeed.getText().toString();
+            int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
 
-                String yawValue = gimbalAngleYaw.getText().toString();
-                int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
-
-                GimbalAngleData angleData = new GimbalAngleData();
-                angleData.setPitch(pitch);
-                angleData.setRoll(roll);
-                angleData.setYaw(yaw);
-                mXStarEvoGimbal.setGimbalAngle(pitch, roll, yaw);
-            }
-        });
-        findViewById(R.id.setGimbalAngleSpeed).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String pitchValue = gimbalAnglePitchSpeed.getText().toString();
-                int pitch = isEmpty(pitchValue) ? 0 : Integer.valueOf(pitchValue);
-
-                String rollValue = gimbalAngleRollSpeed.getText().toString();
-                int roll = isEmpty(rollValue) ? 0 : Integer.valueOf(rollValue);
-
-                String yawValue = gimbalAngleYawSpeed.getText().toString();
-                int yaw = isEmpty(yawValue) ? 0 : Integer.valueOf(yawValue);
-
-                GimbalAngleSpeed angleSpeed = new GimbalAngleSpeed();
-                angleSpeed.setPitchSpeed(pitch);
-                angleSpeed.setRollSpeed(roll);
-                angleSpeed.setYawSpeed(yaw);
-                mXStarEvoGimbal.setGimbalAngleWithSpeed(pitch);
-            }
+            GimbalAngleSpeed angleSpeed = new GimbalAngleSpeed();
+            angleSpeed.setPitchSpeed(pitch);
+            angleSpeed.setRollSpeed(roll);
+            angleSpeed.setYawSpeed(yaw);
+            mXStarEvoGimbal.setGimbalAngleWithSpeed(pitch);
         });
         gimbalAxisTypeList = (Spinner) findViewById(R.id.gimbalAxisTypeList);
         gimbalAxisTypeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -154,60 +133,47 @@ public class G2GimbalActivity extends GimbalActivity {
         });
         GimbalAxisAdapter axisAdapter = new GimbalAxisAdapter(this);
         gimbalAxisTypeList.setAdapter(axisAdapter);
-        findViewById(R.id.resetGimbalAngle).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.resetGimbalAngle).setOnClickListener(v -> mXStarEvoGimbal.resetGimbalAngle(mGimbalAxis, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                mXStarEvoGimbal.resetGimbalAngle(mGimbalAxis, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("resetGimbalAngle onSuccess ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("resetGimbalAngle onFailure " + error.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("resetGimbalAngle onSuccess ");
             }
-        });
 
-        findViewById(R.id.setRollAdjustData).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String value = ((EditText) findViewById(R.id.rollAdjustDataValue)).getText().toString();
-                if ("".equals(value)) {
-                    return;
+            public void onFailure(AutelError error) {
+                logOut("resetGimbalAngle onFailure " + error.getDescription());
+            }
+        }));
+
+        findViewById(R.id.setRollAdjustData).setOnClickListener(v -> {
+            String value = ((EditText) findViewById(R.id.rollAdjustDataValue)).getText().toString();
+            if ("".equals(value)) {
+                return;
+            }
+
+            mXStarEvoGimbal.setRollAdjustData(Float.valueOf(value), new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+                    logOut("setRollAdjustData onSuccess ");
                 }
 
-                mXStarEvoGimbal.setRollAdjustData(Float.valueOf(value), new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setRollAdjustData onSuccess ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setRollAdjustData onFailure " + error.getDescription());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setRollAdjustData onFailure " + error.getDescription());
+                }
+            });
         });
 
-        findViewById(R.id.getRollAdjustData).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.getRollAdjustData).setOnClickListener(v -> mXStarEvoGimbal.getRollAdjustData(new CallbackWithOneParam<Double>() {
             @Override
-            public void onClick(View v) {
-                mXStarEvoGimbal.getRollAdjustData(new CallbackWithOneParam<Double>() {
-                    @Override
-                    public void onSuccess(Double data) {
-                        logOut("getRollAdjustData onSuccess "+data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getRollAdjustData onFailure " + error.getDescription());
-                    }
-                });
+            public void onSuccess(Double data) {
+                logOut("getRollAdjustData onSuccess "+data);
             }
-        });
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getRollAdjustData onFailure " + error.getDescription());
+            }
+        }));
     }
 }

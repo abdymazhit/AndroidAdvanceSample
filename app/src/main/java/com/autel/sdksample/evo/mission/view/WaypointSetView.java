@@ -88,69 +88,51 @@ public class WaypointSetView extends FrameLayout {
     private void showWaypointSetView() {
         clearView();
         View titleView = inflater.inflate(R.layout.common_mission_title_close_with_text, null);
-        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.exitClick();
-                }
+        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.exitClick();
             }
         });
         ((TextView) titleView.findViewById(R.id.mission_title)).setText(R.string.waypoint);
         TextView saveBtn = (TextView) titleView.findViewById(R.id.common_save);
         saveBtn.setText("save");
-        saveBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.saveClick();
-                }
+        saveBtn.setOnClickListener(v -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.saveClick();
             }
         });
         final View contentView = inflater.inflate(R.layout.waypoint_set_content, null);
         waypointSetContainer = (FrameLayout) contentView.findViewById(R.id.waypoint_set_content_container);
         AutelSegmentedGroup waypointRb = (AutelSegmentedGroup) contentView.findViewById(R.id.waypoint_rb);
-        waypointRb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (checkedId == R.id.rb_left_btn) {
-                    showSetBasicView(contentView);
-                    if (waypointSetViewListener != null) {
-                        waypointSetViewListener.basicClick();
-                    }
-                } else if (checkedId == R.id.rb_right_btn) {
-                    showSetAdvancedView(contentView);
-                    if (waypointSetViewListener != null) {
-                        waypointSetViewListener.advanceClick();
-                    }
+        waypointRb.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rb_left_btn) {
+                showSetBasicView(contentView);
+                if (waypointSetViewListener != null) {
+                    waypointSetViewListener.basicClick();
+                }
+            } else if (checkedId == R.id.rb_right_btn) {
+                showSetAdvancedView(contentView);
+                if (waypointSetViewListener != null) {
+                    waypointSetViewListener.advanceClick();
                 }
             }
         });
         waypointRb.check(R.id.rb_left_btn);
 
         View bottomView = inflater.inflate(R.layout.waypoint_set_bottom, null);
-        bottomView.findViewById(R.id.btn_add).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.waypointAddConfirm();
-                }
+        bottomView.findViewById(R.id.btn_add).setOnClickListener(v -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.waypointAddConfirm();
             }
         });
-        bottomView.findViewById(R.id.btn_delete).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.waypointDeleteConfirm();
-                }
+        bottomView.findViewById(R.id.btn_delete).setOnClickListener(v -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.waypointDeleteConfirm();
             }
         });
-        bottomView.findViewById(R.id.btn_start).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.waypointMissionStart();
-                }
+        bottomView.findViewById(R.id.btn_start).setOnClickListener(v -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.waypointMissionStart();
             }
         });
 
@@ -168,48 +150,36 @@ public class WaypointSetView extends FrameLayout {
     private void showSetAdvancedView(View contentView) {
         View advanceView = inflater.inflate(R.layout.waypoint_set_view_advance_content, null);
         curNumTv = (TextView)advanceView.findViewById(R.id.cur_waypoint_num_tv);
-        advanceView.findViewById(R.id.img_prev).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointSetViewListener != null){
-                    waypointSetViewListener.showPrevWaypointData();
-                }
+        advanceView.findViewById(R.id.img_prev).setOnClickListener(v -> {
+            if(waypointSetViewListener != null){
+                waypointSetViewListener.showPrevWaypointData();
+            }
 
+        });
+        advanceView.findViewById(R.id.img_prev).setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                v.setAlpha(0.5f);
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                v.setAlpha(1.0f);
+            }else if(event.getAction() == MotionEvent.ACTION_CANCEL){
+                v.setAlpha(1.0f);
+            }
+            return false;
+        });
+        advanceView.findViewById(R.id.img_last).setOnClickListener(v -> {
+            if(waypointSetViewListener != null){
+                waypointSetViewListener.showLastWaypointData();
             }
         });
-        advanceView.findViewById(R.id.img_prev).setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    v.setAlpha(0.5f);
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    v.setAlpha(1.0f);
-                }else if(event.getAction() == MotionEvent.ACTION_CANCEL){
-                    v.setAlpha(1.0f);
-                }
-                return false;
+        advanceView.findViewById(R.id.img_last).setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                v.setAlpha(0.5f);
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                v.setAlpha(1.0f);
+            }else if(event.getAction() == MotionEvent.ACTION_CANCEL){
+                v.setAlpha(1.0f);
             }
-        });
-        advanceView.findViewById(R.id.img_last).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointSetViewListener != null){
-                    waypointSetViewListener.showLastWaypointData();
-                }
-            }
-        });
-        advanceView.findViewById(R.id.img_last).setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    v.setAlpha(0.5f);
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    v.setAlpha(1.0f);
-                }else if(event.getAction() == MotionEvent.ACTION_CANCEL){
-                    v.setAlpha(1.0f);
-                }
-                return false;
-            }
+            return false;
         });
         initAltitudeAdvance(advanceView);
         initSpeedAdvance(advanceView);
@@ -337,23 +307,20 @@ public class WaypointSetView extends FrameLayout {
 
     private void initHeadingDropView(View basicView) {
         headingDropView = (MissionDropSelectView) basicView.findViewById(R.id.waypoint_heading_drop_tv);
-        headingDropView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                switch (position) {
-                    case 0:
-                        curHeading = 1;
-                        break;
-                    case 1:
-                        curHeading = 2;
-                        break;
-                    case 2:
-                        curHeading = 3;
-                        break;
-                }
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.waypointCurDataChange(getAdvacneData(), 4);
-                }
+        headingDropView.setOnItemClickListener(position -> {
+            switch (position) {
+                case 0:
+                    curHeading = 1;
+                    break;
+                case 1:
+                    curHeading = 2;
+                    break;
+                case 2:
+                    curHeading = 3;
+                    break;
+            }
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.waypointCurDataChange(getAdvacneData(), 4);
             }
         });
         List<String> datas = new ArrayList<>();
@@ -366,32 +333,29 @@ public class WaypointSetView extends FrameLayout {
 
     private void initFinishActionView(View basicView) {
         finishActionDropView = (MissionDropSelectView) basicView.findViewById(R.id.waypoint_finish_action_drop_tv);
-        finishActionDropView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (waypointSetViewListener != null) {
-                    WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
-                    switch (position) {
-                        case 0:
-                            waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_STOP_ON_LAST_POINT);
-                            break;
-                        case 1:
-                            waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_RETURN_HOME);
-                            break;
-                        case 2:
-                            waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_LAND_ON_LAST_POINT);
-                            break;
-                        case 3:
-                            waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_RETURN_TO_FIRST_POINT);
-                            break;
-                        case 4:
-                            waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_KEEP_ON_LAST_POINT);
-                            break;
-                    }
-                    waypointSetViewListener.waypointCurDataChange(waypointAdvanceDataBean, WaypointAdvanceDataBean.TYPE_FINISH_ACTION);
+        finishActionDropView.setOnItemClickListener(position -> {
+            if (waypointSetViewListener != null) {
+                WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
+                switch (position) {
+                    case 0:
+                        waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_STOP_ON_LAST_POINT);
+                        break;
+                    case 1:
+                        waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_RETURN_HOME);
+                        break;
+                    case 2:
+                        waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_LAND_ON_LAST_POINT);
+                        break;
+                    case 3:
+                        waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_RETURN_TO_FIRST_POINT);
+                        break;
+                    case 4:
+                        waypointAdvanceDataBean.setFinishType(WaypointAdvanceDataBean.FINISH_ACTION_KEEP_ON_LAST_POINT);
+                        break;
                 }
-
+                waypointSetViewListener.waypointCurDataChange(waypointAdvanceDataBean, WaypointAdvanceDataBean.TYPE_FINISH_ACTION);
             }
+
         });
         List<String> datas = new ArrayList<>();
         datas.add(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.waypoint_finish_action_hover));
@@ -405,24 +369,21 @@ public class WaypointSetView extends FrameLayout {
 
     private void initAvoidDropView(View basicView) {
         avoidDropView = (MissionDropSelectView) basicView.findViewById(R.id.waypoint_avoid_drop_tv);
-        avoidDropView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(waypointSetViewListener != null){
-                    WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_INVALID);
-                            break;
-                        case 1:
-                            waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_CLIMB_FIRST);
-                            break;
-                        case 2:
-                            waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_HORIZOTAL);
-                            break;
-                    }
-                    waypointSetViewListener.waypointCurDataChange(waypointAdvanceDataBean,WaypointAdvanceDataBean.TYPE_AVOIDANCE);
+        avoidDropView.setOnItemClickListener(position -> {
+            if(waypointSetViewListener != null){
+                WaypointAdvanceDataBean waypointAdvanceDataBean = new WaypointAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_INVALID);
+                        break;
+                    case 1:
+                        waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_CLIMB_FIRST);
+                        break;
+                    case 2:
+                        waypointAdvanceDataBean.setAvoidance(WaypointAdvanceDataBean.OBSTACLE_AVOIDANCE_MODE_HORIZOTAL);
+                        break;
                 }
+                waypointSetViewListener.waypointCurDataChange(waypointAdvanceDataBean,WaypointAdvanceDataBean.TYPE_AVOIDANCE);
             }
         });
         List<String> datas = new ArrayList<>();
@@ -435,12 +396,9 @@ public class WaypointSetView extends FrameLayout {
 
     private void initCreatChoiceDropView(View basicView) {
         creatChoiceDropView = (MissionDropSelectView) basicView.findViewById(R.id.waypoint_choice_drop_tv);
-        creatChoiceDropView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (waypointSetViewListener != null) {
-                    waypointSetViewListener.waypointCreateWayConfirm(position);
-                }
+        creatChoiceDropView.setOnItemClickListener(position -> {
+            if (waypointSetViewListener != null) {
+                waypointSetViewListener.waypointCreateWayConfirm(position);
             }
         });
         List<String> datas = new ArrayList<>();

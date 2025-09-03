@@ -113,559 +113,412 @@ public class CameraXb008Fragment extends CameraBaseFragment {
 
 
     private void initR12Click(View view) {
-        view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String NoX = spotMeteringAreaX.getText().toString();
-                String NoY = spotMeteringAreaY.getText().toString();
-                xb008.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+        view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(v -> {
+            String NoX = spotMeteringAreaX.getText().toString();
+            String NoY = spotMeteringAreaY.getText().toString();
+            xb008.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+                    logOut("setSpotMeteringArea  onSuccess  ");
+                }
+
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("setSpotMeteringArea  description  " + autelError.getDescription());
+                }
+            });
+        });
+        view.findViewById(R.id.getSpotMeteringArea).
+                setOnClickListener(v -> xb008.getSpotMeteringArea(new CallbackWithOneParam<SpotMeteringArea>() {
+                    @Override
+                    public void onFailure(AutelError error) {
+                        logOut("getSpotMeteringArea  description  " + error.getDescription());
+                    }
+
+                    @Override
+                    public void onSuccess(SpotMeteringArea data) {
+                        logOut("getSpotMeteringArea X " + data.X + "  Y " + data.Y);
+                    }
+                }));
+
+        view.findViewById(R.id.setExposure).
+                setOnClickListener(v -> xb008.setExposure(cameraExposureCompensation, new CallbackWithNoParam() {
                     @Override
                     public void onSuccess() {
-                        logOut("setSpotMeteringArea  onSuccess  ");
+                        logOut("setExposure  onSuccess  ");
                     }
 
                     @Override
                     public void onFailure(AutelError autelError) {
-                        logOut("setSpotMeteringArea  description  " + autelError.getDescription());
+                        logOut("setExposure  description  " + autelError.getDescription());
                     }
-                });
-            }
-        });
-        view.findViewById(R.id.getSpotMeteringArea).
-                setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        xb008.getSpotMeteringArea(new CallbackWithOneParam<SpotMeteringArea>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getSpotMeteringArea  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(SpotMeteringArea data) {
-                                logOut("getSpotMeteringArea X " + data.X + "  Y " + data.Y);
-                            }
-                        });
-                    }
-                });
-
-        view.findViewById(R.id.setExposure).
-                setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        xb008.setExposure(cameraExposureCompensation, new CallbackWithNoParam() {
-                            @Override
-                            public void onSuccess() {
-                                logOut("setExposure  onSuccess  ");
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("setExposure  description  " + autelError.getDescription());
-                            }
-                        });
-                    }
-                });
+                }));
 
 
         view.findViewById(R.id.getExposure).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xb008.getExposure(new CallbackWithOneParam<ExposureCompensation>() {
                     @Override
-                    public void onClick(View v) {
-                        xb008.getExposure(new CallbackWithOneParam<ExposureCompensation>() {
-                            @Override
-                            public void onSuccess(ExposureCompensation cameraExposureCompensation) {
-                                logOut("getExposure  onSuccess  " + cameraExposureCompensation);
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("getExposure  description  " + autelError.getDescription());
-                            }
-                        });
+                    public void onSuccess(ExposureCompensation cameraExposureCompensation) {
+                        logOut("getExposure  onSuccess  " + cameraExposureCompensation);
                     }
-                });
+
+                    @Override
+                    public void onFailure(AutelError autelError) {
+                        logOut("getExposure  description  " + autelError.getDescription());
+                    }
+                }));
 
 
         view.findViewById(R.id.setISO).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xb008.setISO(cameraISO, new CallbackWithNoParam() {
                     @Override
-                    public void onClick(View v) {
-                        xb008.setISO(cameraISO, new CallbackWithNoParam() {
-                            @Override
-                            public void onSuccess() {
-                                logOut("setISO  onSuccess  ");
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("setISO  description  " + autelError.getDescription());
-                            }
-                        });
+                    public void onSuccess() {
+                        logOut("setISO  onSuccess  ");
                     }
-                });
+
+                    @Override
+                    public void onFailure(AutelError autelError) {
+                        logOut("setISO  description  " + autelError.getDescription());
+                    }
+                }));
 
         view.findViewById(R.id.getISO).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xb008.getISO(new CallbackWithOneParam<CameraISO>() {
                     @Override
-                    public void onClick(View v) {
-                        xb008.getISO(new CallbackWithOneParam<CameraISO>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getISO  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(CameraISO data) {
-                                logOut("getISO " + data);
-                            }
-                        });
+                    public void onFailure(AutelError error) {
+                        logOut("getISO  description  " + error.getDescription());
                     }
-                });
+
+                    @Override
+                    public void onSuccess(CameraISO data) {
+                        logOut("getISO " + data);
+                    }
+                }));
 
 
         view.findViewById(R.id.setShutter).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xb008.setShutter(cameraShutterSpeed, new CallbackWithNoParam() {
                     @Override
-                    public void onClick(View v) {
-                        xb008.setShutter(cameraShutterSpeed, new CallbackWithNoParam() {
+                    public void onFailure(AutelError error) {
+                        logOut("setShutter  description  " + error.getDescription());
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        logOut("setShutter state onSuccess");
+                    }
+                }));
+
+        view.findViewById(R.id.getShutter).
+                setOnClickListener(v -> xb008.getShutter(new CallbackWithOneParam<ShutterSpeed>() {
+                    @Override
+                    public void onFailure(AutelError error) {
+                        logOut("getShutter  description  " + error.getDescription());
+                    }
+
+                    @Override
+                    public void onSuccess(ShutterSpeed data) {
+                        logOut("getShutter " + data);
+                    }
+                }));
+
+        view.findViewById(R.id.setColorStyle).setOnClickListener(v -> xb008.setColorStyle(cameraColorStyle, new CallbackWithNoParam() {
+            @Override
+            public void onSuccess() {
+                logOut("setColorStyle  onSuccess  ");
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAutoExposureLockState  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getColorStyle).setOnClickListener(v -> xb008.getColorStyle(new CallbackWithOneParam<ColorStyle>() {
+            @Override
+            public void onSuccess(ColorStyle cameraColorStyle) {
+                logOut("getColorStyle  onSuccess  " + cameraColorStyle);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("getColorStyle  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setWhiteBalance).setOnClickListener(v -> {
+            WhiteBalance cameraWhiteBalance = new WhiteBalance();
+            cameraWhiteBalance.type = cameraWhiteBalanceType;
+
+            xb008.setWhiteBalance(cameraWhiteBalance, new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setWhiteBalance  description  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setWhiteBalance state onSuccess");
+                }
+            });
+        });
+
+        view.findViewById(R.id.getWhiteBalance).setOnClickListener(v -> xb008.getWhiteBalance(new CallbackWithOneParam<WhiteBalance>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getWhiteBalance  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(WhiteBalance data) {
+                logOut("getWhiteBalance " + data.type + "  colorTemperature  " + data.colorTemperature);
+            }
+        }));
+
+        ((Switch) view.findViewById(R.id.set3DNoiseReductionEnable)).setOnCheckedChangeListener((buttonView, isChecked) -> xb008.set3DNoiseReductionEnable(isChecked, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("set3DNoiseReductionEnable  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("set3DNoiseReductionEnable state onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.is3DNoiseReductionEnable).setOnClickListener(v -> {
+        });
+
+
+        view.findViewById(R.id.setAntiFlicker).setOnClickListener(v -> xb008.setAntiFlicker(cameraAntiFlicker, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setAntiFlicker  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setAntiFlicker state onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.getAntiFlicker).setOnClickListener(v -> xb008.getAntiFlicker(new CallbackWithOneParam<AntiFlicker>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getAntiFlicker  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(AntiFlicker data) {
+                logOut("getAntiFlicker " + data);
+            }
+        }));
+
+        view.findViewById(R.id.setAutoExposureLockState).setOnClickListener(v -> xb008.setAutoExposureLockState(cameraAutoExposureLockState, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setAutoExposureLockState  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setAutoExposureLockState  onSuccess  ");
+            }
+        }));
+
+        view.findViewById(R.id.getAutoExposureLockState).setOnClickListener(v -> xb008.getAutoExposureLockState(new CallbackWithOneParam<AutoExposureLockState>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getAutoExposureLockState  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(AutoExposureLockState data) {
+                logOut("getAutoExposureLockState  " + data);
+            }
+        }));
+
+        view.findViewById(R.id.isHistogramStatusEnable).setOnClickListener(v -> xb008.isHistogramStatusEnable(new CallbackWithOneParam<Boolean>() {
+            @Override
+            public void onSuccess(Boolean data) {
+                logOut("isHistogramEnable " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("isHistogramEnable " + error.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setExposureMode).setOnClickListener(v -> xb008.setExposureMode(cameraExposureMode, new CallbackWithNoParam() {
+            @Override
+            public void onSuccess() {
+                logOut("setExposureMode  onSuccess  ");
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAutoExposureLockState  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getExposureMode).setOnClickListener(v -> xb008.getExposureMode(new CallbackWithOneParam<ExposureMode>() {
+            @Override
+            public void onSuccess(ExposureMode cameraExposureMode) {
+                logOut("getExposureMode  onSuccess  " + cameraExposureMode);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("getExposureMode  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setPhotoStyle).setOnClickListener(v -> {
+            if (photoStyleType == PhotoStyleType.Custom) {
+                photoCustomStyleContrast.setVisibility(View.VISIBLE);
+                photoCustomStyleSaturation.setVisibility(View.VISIBLE);
+                photoCustomStyleSharpness.setVisibility(View.VISIBLE);
+                String contrastValue = photoCustomStyleContrast.getText().toString();
+                String saturationValue = photoCustomStyleSaturation.getText().toString();
+                String sharpnessValue = photoCustomStyleSharpness.getText().toString();
+
+                xb008.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
+                        isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
+                        isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
                             @Override
                             public void onFailure(AutelError error) {
-                                logOut("setShutter  description  " + error.getDescription());
+                                logOut("setPhotoStyle  description  " + error.getDescription());
                             }
 
                             @Override
                             public void onSuccess() {
-                                logOut("setShutter state onSuccess");
+                                logOut("setPhotoStyle state onSuccess");
                             }
                         });
-                    }
-                });
-
-        view.findViewById(R.id.getShutter).
-                setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        xb008.getShutter(new CallbackWithOneParam<ShutterSpeed>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getShutter  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(ShutterSpeed data) {
-                                logOut("getShutter " + data);
-                            }
-                        });
-                    }
-                });
-
-        view.findViewById(R.id.setColorStyle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xb008.setColorStyle(cameraColorStyle, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setColorStyle  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAutoExposureLockState  description  " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getColorStyle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xb008.getColorStyle(new CallbackWithOneParam<ColorStyle>() {
-                    @Override
-                    public void onSuccess(ColorStyle cameraColorStyle) {
-                        logOut("getColorStyle  onSuccess  " + cameraColorStyle);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getColorStyle  description  " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.setWhiteBalance).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WhiteBalance cameraWhiteBalance = new WhiteBalance();
-                cameraWhiteBalance.type = cameraWhiteBalanceType;
-
-                xb008.setWhiteBalance(cameraWhiteBalance, new CallbackWithNoParam() {
+            } else {
+                xb008.setPhotoStyle(photoStyleType, new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
-                        logOut("setWhiteBalance  description  " + error.getDescription());
+                        logOut("setPhotoStyle  description  " + error.getDescription());
                     }
 
                     @Override
                     public void onSuccess() {
-                        logOut("setWhiteBalance state onSuccess");
+                        logOut("setPhotoStyle state onSuccess");
                     }
                 });
             }
         });
 
-        view.findViewById(R.id.getWhiteBalance).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoStyle).setOnClickListener(v -> xb008.getPhotoStyle(new CallbackWithOneParam<PhotoStyle>() {
             @Override
-            public void onClick(View v) {
-                xb008.getWhiteBalance(new CallbackWithOneParam<WhiteBalance>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getWhiteBalance  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(WhiteBalance data) {
-                        logOut("getWhiteBalance " + data.type + "  colorTemperature  " + data.colorTemperature);
-                    }
-                });
+            public void onSuccess(PhotoStyle data) {
+                logOut("getPhotoStyle " + data);
             }
-        });
 
-        ((Switch) view.findViewById(R.id.set3DNoiseReductionEnable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                xb008.set3DNoiseReductionEnable(isChecked, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("set3DNoiseReductionEnable  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("set3DNoiseReductionEnable state onSuccess");
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoStyle " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.is3DNoiseReductionEnable).setOnClickListener(new View.OnClickListener() {
+        ((Switch) view.findViewById(R.id.setVideoSubtitleEnable)).setOnCheckedChangeListener((buttonView, isChecked) -> xb008.setVideoSubtitleEnable(isChecked, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
+            public void onFailure(AutelError error) {
+                logOut("setVideoSubtitleEnable  description  " + error.getDescription());
             }
-        });
 
-
-        view.findViewById(R.id.setAntiFlicker).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.setAntiFlicker(cameraAntiFlicker, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAntiFlicker  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAntiFlicker state onSuccess");
-                    }
-                });
+            public void onSuccess() {
+                logOut("setVideoSubtitleEnable onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.getAntiFlicker).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.isSubtitleEnable).setOnClickListener(v -> xb008.isSubtitleEnable(new CallbackWithOneParam<Boolean>() {
             @Override
-            public void onClick(View v) {
-                xb008.getAntiFlicker(new CallbackWithOneParam<AntiFlicker>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getAntiFlicker  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(AntiFlicker data) {
-                        logOut("getAntiFlicker " + data);
-                    }
-                });
+            public void onSuccess(Boolean data) {
+                logOut("isSubtitleEnable " + data);
             }
-        });
 
-        view.findViewById(R.id.setAutoExposureLockState).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.setAutoExposureLockState(cameraAutoExposureLockState, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAutoExposureLockState  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAutoExposureLockState  onSuccess  ");
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("isSubtitleEnable " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.getAutoExposureLockState).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setPhotoBurstCount).setOnClickListener(v -> xb008.setPhotoBurstCount(photoBurstCount, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xb008.getAutoExposureLockState(new CallbackWithOneParam<AutoExposureLockState>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getAutoExposureLockState  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(AutoExposureLockState data) {
-                        logOut("getAutoExposureLockState  " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setPhotoBurstCount  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.isHistogramStatusEnable).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.isHistogramStatusEnable(new CallbackWithOneParam<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean data) {
-                        logOut("isHistogramEnable " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("isHistogramEnable " + error.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("setPhotoBurstCount state onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.setExposureMode).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoBurstCount).setOnClickListener(v -> xb008.getPhotoBurstCount(new CallbackWithOneParam<PhotoBurstCount>() {
             @Override
-            public void onClick(View v) {
-                xb008.setExposureMode(cameraExposureMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setExposureMode  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAutoExposureLockState  description  " + autelError.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoBurstCount  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getExposureMode).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.getExposureMode(new CallbackWithOneParam<ExposureMode>() {
-                    @Override
-                    public void onSuccess(ExposureMode cameraExposureMode) {
-                        logOut("getExposureMode  onSuccess  " + cameraExposureMode);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getExposureMode  description  " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess(PhotoBurstCount data) {
+                logOut("getPhotoBurstCount " + data);
             }
-        });
+        }));
 
-        view.findViewById(R.id.setPhotoStyle).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setPhotoTimelapseInterval).setOnClickListener(v -> xb008.setPhotoTimelapseInterval(photoTimelapseInterval, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                if (photoStyleType == PhotoStyleType.Custom) {
-                    photoCustomStyleContrast.setVisibility(View.VISIBLE);
-                    photoCustomStyleSaturation.setVisibility(View.VISIBLE);
-                    photoCustomStyleSharpness.setVisibility(View.VISIBLE);
-                    String contrastValue = photoCustomStyleContrast.getText().toString();
-                    String saturationValue = photoCustomStyleSaturation.getText().toString();
-                    String sharpnessValue = photoCustomStyleSharpness.getText().toString();
-
-                    xb008.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
-                            isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
-                            isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
-                                @Override
-                                public void onFailure(AutelError error) {
-                                    logOut("setPhotoStyle  description  " + error.getDescription());
-                                }
-
-                                @Override
-                                public void onSuccess() {
-                                    logOut("setPhotoStyle state onSuccess");
-                                }
-                            });
-                } else {
-                    xb008.setPhotoStyle(photoStyleType, new CallbackWithNoParam() {
-                        @Override
-                        public void onFailure(AutelError error) {
-                            logOut("setPhotoStyle  description  " + error.getDescription());
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            logOut("setPhotoStyle state onSuccess");
-                        }
-                    });
-                }
+            public void onFailure(AutelError error) {
+                logOut("setPhotoTimelapseInterval  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getPhotoStyle).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.getPhotoStyle(new CallbackWithOneParam<PhotoStyle>() {
-                    @Override
-                    public void onSuccess(PhotoStyle data) {
-                        logOut("getPhotoStyle " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoStyle " + error.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("setPhotoTimelapseInterval state onSuccess");
             }
-        });
+        }));
 
-        ((Switch) view.findViewById(R.id.setVideoSubtitleEnable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        view.findViewById(R.id.getPhotoTimelapseInterval).setOnClickListener(v -> xb008.getPhotoTimelapseInterval(new CallbackWithOneParam<PhotoTimelapseInterval>() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                xb008.setVideoSubtitleEnable(isChecked, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setVideoSubtitleEnable  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoSubtitleEnable onSuccess");
-                    }
-                });
+            public void onSuccess(PhotoTimelapseInterval data) {
+                logOut("getPhotoTimelapseInterval " + data);
             }
-        });
 
-        view.findViewById(R.id.isSubtitleEnable).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.isSubtitleEnable(new CallbackWithOneParam<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean data) {
-                        logOut("isSubtitleEnable " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("isSubtitleEnable " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoTimelapseInterval " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.setPhotoBurstCount).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setPhotoAEBCount).setOnClickListener(v -> xb008.setPhotoAEBCount(photoAEBCount, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xb008.setPhotoBurstCount(photoBurstCount, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoBurstCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoBurstCount state onSuccess");
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setPhotoAEBCount  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getPhotoBurstCount).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.getPhotoBurstCount(new CallbackWithOneParam<PhotoBurstCount>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoBurstCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoBurstCount data) {
-                        logOut("getPhotoBurstCount " + data);
-                    }
-                });
+            public void onSuccess() {
+                logOut("setPhotoAEBCount state onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.setPhotoTimelapseInterval).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoAEBCount).setOnClickListener(v -> xb008.getPhotoAEBCount(new CallbackWithOneParam<PhotoAEBCount>() {
             @Override
-            public void onClick(View v) {
-                xb008.setPhotoTimelapseInterval(photoTimelapseInterval, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoTimelapseInterval  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoTimelapseInterval state onSuccess");
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoAEBCount  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getPhotoTimelapseInterval).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xb008.getPhotoTimelapseInterval(new CallbackWithOneParam<PhotoTimelapseInterval>() {
-                    @Override
-                    public void onSuccess(PhotoTimelapseInterval data) {
-                        logOut("getPhotoTimelapseInterval " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoTimelapseInterval " + error.getDescription());
-                    }
-                });
+            public void onSuccess(PhotoAEBCount data) {
+                logOut("getPhotoAEBCount " + data);
             }
-        });
-
-        view.findViewById(R.id.setPhotoAEBCount).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xb008.setPhotoAEBCount(photoAEBCount, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoAEBCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoAEBCount state onSuccess");
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getPhotoAEBCount).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xb008.getPhotoAEBCount(new CallbackWithOneParam<PhotoAEBCount>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoAEBCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoAEBCount data) {
-                        logOut("getPhotoAEBCount " + data);
-                    }
-                });
-            }
-        });
+        }));
 
 //        view.findViewById(R.id.getVideoSum).setOnClickListener(new View.OnClickListener() {
 //            @Override

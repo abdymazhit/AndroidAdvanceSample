@@ -17,6 +17,7 @@
 package com.autel.sdksample.evo.mission.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.asin;
@@ -124,7 +125,7 @@ class MathUtil {
 
     public static double getUpValue(double d){
          BigDecimal b = new BigDecimal(d);
-         d = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+         d = b.setScale(1, RoundingMode.HALF_UP).doubleValue();
         return d;
     }
 }

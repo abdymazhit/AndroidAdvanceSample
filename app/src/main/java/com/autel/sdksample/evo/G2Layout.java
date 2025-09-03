@@ -33,9 +33,7 @@ public class G2Layout {
     }
 
     private void initUI() {
-        mLayout.findViewById(R.id.rcTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mLayout.findViewById(R.id.rcTest).setOnClickListener(v -> {
 //                new RxLock<String>(30_000){
 //
 //                    @Override
@@ -68,68 +66,17 @@ public class G2Layout {
 //
 //                    }
 //                });
-                mContext.startActivity(new Intent(mContext, G2RemoteControllerActivity.class));
-            }
+            mContext.startActivity(new Intent(mContext, G2RemoteControllerActivity.class));
         });
-        mLayout.findViewById(R.id.fcTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, G2FlyControllerActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.cameraTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, CameraActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.codecTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, CodecActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.DSPTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, G2DspActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.missionTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, AMapMissionActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.BatteryTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, G2BatteryActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.GimbalTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, G2GimbalActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.AlbumTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, AlbumActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.avoidTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,TestActivity.class));
-            }
-        });
-        mLayout.findViewById(R.id.upgradeTest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext,XStarPremiumUpgradeActivity.class));
-            }
-        });
+        mLayout.findViewById(R.id.fcTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, G2FlyControllerActivity.class)));
+        mLayout.findViewById(R.id.cameraTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, CameraActivity.class)));
+        mLayout.findViewById(R.id.codecTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, CodecActivity.class)));
+        mLayout.findViewById(R.id.DSPTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, G2DspActivity.class)));
+        mLayout.findViewById(R.id.missionTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AMapMissionActivity.class)));
+        mLayout.findViewById(R.id.BatteryTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, G2BatteryActivity.class)));
+        mLayout.findViewById(R.id.GimbalTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, G2GimbalActivity.class)));
+        mLayout.findViewById(R.id.AlbumTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext, AlbumActivity.class)));
+        mLayout.findViewById(R.id.avoidTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext,TestActivity.class)));
+        mLayout.findViewById(R.id.upgradeTest).setOnClickListener(v -> mContext.startActivity(new Intent(mContext,XStarPremiumUpgradeActivity.class)));
     }
 }

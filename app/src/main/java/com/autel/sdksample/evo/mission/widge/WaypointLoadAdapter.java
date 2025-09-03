@@ -37,56 +37,44 @@ public class WaypointLoadAdapter extends RecyclerView.Adapter<WaypointLoadAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         ((TextView)holder.view.findViewById(R.id.item_name_tv)).setText(names.get(position).getName());
         final SwipeMenuLayout swipeMenuLayout = (SwipeMenuLayout) holder.view.findViewById(R.id.swipe_layout);
-        holder.view.findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemClickListener != null){
-                    itemClickListener.onItemClick(names.get(holder.getAdapterPosition()).getName());
-                }
+        holder.view.findViewById(R.id.content).setOnClickListener(v -> {
+            if(itemClickListener != null){
+                itemClickListener.onItemClick(names.get(holder.getAdapterPosition()).getName());
+            }
 
+        });
+        holder.view.findViewById(R.id.btnUnRead).setOnClickListener(v -> {
+            swipeMenuLayout.smoothClose();
+            if(itemClickListener != null){
+                itemClickListener.onItemEditClick(names.get(holder.getAdapterPosition()).getName());
             }
         });
-        holder.view.findViewById(R.id.btnUnRead).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                swipeMenuLayout.smoothClose();
-                if(itemClickListener != null){
-                    itemClickListener.onItemEditClick(names.get(holder.getAdapterPosition()).getName());
-                }
-            }
-        });
-        holder.view.findViewById(R.id.btnDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                swipeMenuLayout.smoothClose();
-                if(itemClickListener != null){
-                    itemClickListener.onItemDeleteClick(names.get(holder.getAdapterPosition()).getName());
-                }
+        holder.view.findViewById(R.id.btnDelete).setOnClickListener(v -> {
+            swipeMenuLayout.smoothClose();
+            if(itemClickListener != null){
+                itemClickListener.onItemDeleteClick(names.get(holder.getAdapterPosition()).getName());
             }
         });
         CheckBox checkBox = (CheckBox) holder.view.findViewById(R.id.item_check_box);
         if(checkState){
             checkBox.setVisibility(View.VISIBLE);
             checkBox.setChecked(names.get(position).isCheckState());
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked != names.get(holder.getAdapterPosition()).isCheckState()){
-                        names.get(holder.getAdapterPosition()).setCheckState(isChecked);
-                        if(checkChangeListener != null){
-                            int count = 0;
-                            for (MissionFileBean bean : names) {
-                                if(bean.isCheckState()){
-                                    count++;
-                                }
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if(isChecked != names.get(holder.getAdapterPosition()).isCheckState()){
+                    names.get(holder.getAdapterPosition()).setCheckState(isChecked);
+                    if(checkChangeListener != null){
+                        int count = 0;
+                        for (MissionFileBean bean : names) {
+                            if(bean.isCheckState()){
+                                count++;
                             }
-                            if(isChecked){
-                                selectNames.add(names.get(holder.getAdapterPosition()).getName());
-                            }else{
-                                selectNames.remove(names.get(holder.getAdapterPosition()).getName());
-                            }
-                            checkChangeListener.onCheckChange(count);
                         }
+                        if(isChecked){
+                            selectNames.add(names.get(holder.getAdapterPosition()).getName());
+                        }else{
+                            selectNames.remove(names.get(holder.getAdapterPosition()).getName());
+                        }
+                        checkChangeListener.onCheckChange(count);
                     }
                 }
             });

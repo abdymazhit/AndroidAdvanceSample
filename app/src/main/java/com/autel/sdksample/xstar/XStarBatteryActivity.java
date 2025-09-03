@@ -37,150 +37,105 @@ public class XStarBatteryActivity extends BatteryActivity {
     @Override
     protected void initUi() {
         super.initUi();
-        findViewById(R.id.resetBatteryRealTimeDataListener).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.resetBatteryRealTimeDataListener).setOnClickListener(v -> mXStarBattery.setBatteryStateListener(null));
+        findViewById(R.id.setBatteryRealTimeDataListener).setOnClickListener(v -> mXStarBattery.setBatteryStateListener(new CallbackWithOneParam<BatteryState>() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.setBatteryStateListener(null);
+            public void onFailure(AutelError error) {
+                logOut("setBatteryStateListener  error :  " + error.getDescription());
             }
-        });
-        findViewById(R.id.setBatteryRealTimeDataListener).setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                mXStarBattery.setBatteryStateListener(new CallbackWithOneParam<BatteryState>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setBatteryStateListener  error :  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(BatteryState data) {
-                        logOut("setBatteryStateListener  data current battery :  " + data.toString());
-                    }
-                });
+            public void onSuccess(BatteryState data) {
+                logOut("setBatteryStateListener  data current battery :  " + data.toString());
             }
-        });
-        findViewById(R.id.getCells).setOnClickListener(new View.OnClickListener() {
+        }));
+        findViewById(R.id.getCells).setOnClickListener(v -> mXStarBattery.getVoltageCells(new CallbackWithOneParam<int[]>() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getVoltageCells(new CallbackWithOneParam<int[]>() {
-                    @Override
-                    public void onSuccess(int[] data) {
-                        StringBuffer sb = new StringBuffer();
-                        for (int i = 0; i < data.length; i++) {
-                            sb.append("index ");
-                            sb.append(i);
-                            sb.append(" = ");
-                            sb.append(data[i]);
-                            sb.append("   ");
-                        }
-                        logOut("getVoltageCells  " + sb);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVoltageCells  error : " + error.getDescription());
-                    }
-                });
+            public void onSuccess(int[] data) {
+                StringBuffer sb = new StringBuffer();
+                for (int i = 0; i < data.length; i++) {
+                    sb.append("index ");
+                    sb.append(i);
+                    sb.append(" = ");
+                    sb.append(data[i]);
+                    sb.append("   ");
+                }
+                logOut("getVoltageCells  " + sb);
             }
-        });
-        findViewById(R.id.getVoltage).setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getVoltage(new CallbackWithOneParam<Float>() {
-                    @Override
-                    public void onSuccess(Float data) {
-                        logOut("getVoltage  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVoltage  error : " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getVoltageCells  error : " + error.getDescription());
             }
-        });
-        findViewById(R.id.getCapacity).setOnClickListener(new View.OnClickListener() {
+        }));
+        findViewById(R.id.getVoltage).setOnClickListener(v -> mXStarBattery.getVoltage(new CallbackWithOneParam<Float>() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getCapacity(new CallbackWithOneParam<Float>() {
-                    @Override
-                    public void onSuccess(Float data) {
-                        logOut("getCapacity  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getCapacity  error : " + error.getDescription());
-                    }
-                });
+            public void onSuccess(Float data) {
+                logOut("getVoltage  " + data);
             }
-        });
-        findViewById(R.id.getDesignCapacity).setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getDesignCapacity(new CallbackWithOneParam<Float>() {
-                    @Override
-                    public void onSuccess(Float data) {
-                        logOut("getDesignCapacity  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getDesignCapacity  error : " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getVoltage  error : " + error.getDescription());
             }
-        });
-
-        findViewById(R.id.getRemainingPercent).setOnClickListener(new View.OnClickListener() {
+        }));
+        findViewById(R.id.getCapacity).setOnClickListener(v -> mXStarBattery.getCapacity(new CallbackWithOneParam<Float>() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getRemainingPercent(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
-                        logOut("getRemainingPercent  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getRemainingPercent  error : " + error.getDescription());
-                    }
-                });
+            public void onSuccess(Float data) {
+                logOut("getCapacity  " + data);
             }
-        });
 
-        findViewById(R.id.getTemperature).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getTemperature(new CallbackWithOneParam<Float>() {
-                    @Override
-                    public void onSuccess(Float data) {
-                        logOut("getTemperature  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getTemperature error : " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getCapacity  error : " + error.getDescription());
             }
-        });
-        findViewById(R.id.getCurrent).setOnClickListener(new View.OnClickListener() {
+        }));
+        findViewById(R.id.getDesignCapacity).setOnClickListener(v -> mXStarBattery.getDesignCapacity(new CallbackWithOneParam<Float>() {
             @Override
-            public void onClick(View v) {
-                mXStarBattery.getCurrent(new CallbackWithOneParam<Float>() {
-                    @Override
-                    public void onSuccess(Float data) {
-                        logOut("getCurrent  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getCurrent error : " + error.getDescription());
-                    }
-                });
+            public void onSuccess(Float data) {
+                logOut("getDesignCapacity  " + data);
             }
-        });
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getDesignCapacity  error : " + error.getDescription());
+            }
+        }));
+
+        findViewById(R.id.getRemainingPercent).setOnClickListener(v -> mXStarBattery.getRemainingPercent(new CallbackWithOneParam<Integer>() {
+            @Override
+            public void onSuccess(Integer data) {
+                logOut("getRemainingPercent  " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getRemainingPercent  error : " + error.getDescription());
+            }
+        }));
+
+        findViewById(R.id.getTemperature).setOnClickListener(v -> mXStarBattery.getTemperature(new CallbackWithOneParam<Float>() {
+            @Override
+            public void onSuccess(Float data) {
+                logOut("getTemperature  " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getTemperature error : " + error.getDescription());
+            }
+        }));
+        findViewById(R.id.getCurrent).setOnClickListener(v -> mXStarBattery.getCurrent(new CallbackWithOneParam<Float>() {
+            @Override
+            public void onSuccess(Float data) {
+                logOut("getCurrent  " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getCurrent error : " + error.getDescription());
+            }
+        }));
     }
 
 }

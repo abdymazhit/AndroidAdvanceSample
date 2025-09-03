@@ -68,12 +68,7 @@ public class WaypointLoadView extends FrameLayout {
 
     private void fetchFileData() {
         waypointLoadAdapter = new WaypointLoadAdapter();
-        waypointLoadAdapter.setCheckChangeListener(new WaypointLoadAdapter.CheckChangeListener() {
-            @Override
-            public void onCheckChange(int num) {
-                bottomTv.setText("Delete" + "(" + num + ")");
-            }
-        });
+        waypointLoadAdapter.setCheckChangeListener(num -> bottomTv.setText("Delete" + "(" + num + ")"));
         waypointLoadAdapter.setOnItemClickListener(new WaypointLoadAdapter.ItemClickListener() {
             @Override
             public void onItemClick(String name) {
@@ -103,30 +98,24 @@ public class WaypointLoadView extends FrameLayout {
         View titleView = inflater.inflate(R.layout.common_mission_title_close_with_text,null);
         View contentView = inflater.inflate(R.layout.waypoint_load_view,null);
 
-        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointLoadViewListener != null){
-                    waypointLoadViewListener.exitClick();
-                }
+        titleView.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if(waypointLoadViewListener != null){
+                waypointLoadViewListener.exitClick();
             }
         });
         TextView titleTv = (TextView) titleView.findViewById(R.id.mission_title);
         titleTv.setText(R.string.waypoint_load);
         TextView editTv = (TextView) titleView.findViewById(R.id.common_save);
         editTv.setText("edit");
-        editTv.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointLoadViewListener != null){
-                    waypointLoadViewListener.editClick();
-                }
-                waypointLoadAdapter.setCheckState(true);
-                waypointLoadAdapter.notifyDataSetChanged();
-                showMutiChoiceView();
-                if(waypointLoadAdapter.getItemCount() == 0){
-                    showHaveNoDataView();
-                }
+        editTv.setOnClickListener(v -> {
+            if(waypointLoadViewListener != null){
+                waypointLoadViewListener.editClick();
+            }
+            waypointLoadAdapter.setCheckState(true);
+            waypointLoadAdapter.notifyDataSetChanged();
+            showMutiChoiceView();
+            if(waypointLoadAdapter.getItemCount() == 0){
+                showHaveNoDataView();
             }
         });
 
@@ -152,41 +141,32 @@ public class WaypointLoadView extends FrameLayout {
     private void showMutiChoiceView() {
         View mutiTitleView = inflater.inflate(R.layout.waypoint_checkbox_title,null);
         final CheckBox mutiCheckBox = (CheckBox) mutiTitleView.findViewById(R.id.all_check);
-        mutiCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                waypointLoadAdapter.checkAll(isChecked);
-                if(isChecked){
-                    bottomTv.setText("Delete" + "(" + waypointLoadAdapter.getItemCount() + ")");
-                }else{
-                    bottomTv.setText("Delete");
-                }
+        mutiCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            waypointLoadAdapter.checkAll(isChecked);
+            if(isChecked){
+                bottomTv.setText("Delete" + "(" + waypointLoadAdapter.getItemCount() + ")");
+            }else{
+                bottomTv.setText("Delete");
             }
         });
         View okBtn = mutiTitleView.findViewById(R.id.ok_btn);
-        okBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                waypointLoadAdapter.checkAll(false);
-                showWaypointFileSystemView();
-                if(waypointLoadAdapter.getItemCount() == 0){
-                    showHaveNoDataView();
-                }
+        okBtn.setOnClickListener(v -> {
+            waypointLoadAdapter.checkAll(false);
+            showWaypointFileSystemView();
+            if(waypointLoadAdapter.getItemCount() == 0){
+                showHaveNoDataView();
             }
         });
 
         View mutiBottomView = inflater.inflate(R.layout.common_mission_bottom,null);
         bottomTv = (TextView) mutiBottomView.findViewById(R.id.bottom_title);
         bottomTv.setText("Delete");
-        mutiBottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(waypointLoadViewListener != null){
-                    waypointLoadViewListener.deleteSelectFile(waypointLoadAdapter.getSelectFiles());
-                }
-                bottomTv.setText("Delete");
-                mutiCheckBox.setChecked(false);
+        mutiBottomView.setOnClickListener(v -> {
+            if(waypointLoadViewListener != null){
+                waypointLoadViewListener.deleteSelectFile(waypointLoadAdapter.getSelectFiles());
             }
+            bottomTv.setText("Delete");
+            mutiCheckBox.setChecked(false);
         });
 
         titleContainer.removeAllViews();

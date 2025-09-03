@@ -29,65 +29,42 @@ public class ZteLogActivity extends AppCompatActivity implements Handler.Callbac
         mHandler = new Handler(this);
         aSwitch = (Switch) findViewById(R.id.switch1);
         ZteLogUtils.deleteBeforeFile();
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    DspRFManager2.getInstance().openZteNormalLog(new CallbackWithOneParam<Boolean>() {
-                        @Override
-                        public void onSuccess(final Boolean data) {
-                            ZteLogUtils.mkdirNormalPath();
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ZteLogActivity.this, "openZteNormalLog onSuccess " + data, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+        aSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                DspRFManager2.getInstance().openZteNormalLog(new CallbackWithOneParam<Boolean>() {
+                    @Override
+                    public void onSuccess(final Boolean data) {
+                        ZteLogUtils.mkdirNormalPath();
+                        mHandler.post(() -> Toast.makeText(ZteLogActivity.this, "openZteNormalLog onSuccess " + data, Toast.LENGTH_SHORT).show());
+                    }
 
-                        @Override
-                        public void onFailure(AutelError error) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ZteLogActivity.this, "openZteNormalLog onFailure ", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }, new CallbackWithOneParam<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] data) {
-                            ZteLogUtils.saveLocalLog(data);
-                        }
+                    @Override
+                    public void onFailure(AutelError error) {
+                        mHandler.post(() -> Toast.makeText(ZteLogActivity.this, "openZteNormalLog onFailure ", Toast.LENGTH_SHORT).show());
+                    }
+                }, new CallbackWithOneParam<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] data) {
+                        ZteLogUtils.saveLocalLog(data);
+                    }
 
-                        @Override
-                        public void onFailure(AutelError error) {
+                    @Override
+                    public void onFailure(AutelError error) {
 
-                        }
-                    });
-                } else {
-                    DspRFManager2.getInstance().stopZteNormalLog(new CallbackWithOneParam<Boolean>() {
-                        @Override
-                        public void onSuccess(final Boolean data) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ZteLogActivity.this, "openZteNormalLog onSuccess " + data, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+                    }
+                });
+            } else {
+                DspRFManager2.getInstance().stopZteNormalLog(new CallbackWithOneParam<Boolean>() {
+                    @Override
+                    public void onSuccess(final Boolean data) {
+                        mHandler.post(() -> Toast.makeText(ZteLogActivity.this, "openZteNormalLog onSuccess " + data, Toast.LENGTH_SHORT).show());
+                    }
 
-                        @Override
-                        public void onFailure(AutelError error) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ZteLogActivity.this, "onFailure onSuccess ", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-                }
+                    @Override
+                    public void onFailure(AutelError error) {
+                        mHandler.post(() -> Toast.makeText(ZteLogActivity.this, "onFailure onSuccess ", Toast.LENGTH_SHORT).show());
+                    }
+                });
             }
         });
     }

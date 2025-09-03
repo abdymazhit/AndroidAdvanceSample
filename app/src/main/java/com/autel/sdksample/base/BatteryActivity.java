@@ -127,232 +127,199 @@ public class BatteryActivity extends BaseActivity<AutelBattery> {
 
 
     private void initClick() {
-        findViewById(R.id.getLowBatteryNotifyThreshold).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.getLowBatteryNotifyThreshold).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mController.getLowBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getLowBatteryNotifyThreshold  error :  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(Float data) {
+                    logOut("getLowBatteryNotifyThreshold  data :  " + data);
+                }
+            });
+        });
+        findViewById(R.id.setLowBatteryNotifyThreshold).setOnClickListener(v -> {
+            String value = lowBatteryNotifyThreshold.getText().toString();
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            mController.setLowBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setLowBatteryNotifyThreshold  error :  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setLowBatteryNotifyThreshold   onSuccess ");
+                }
+            });
+        });
+
+        findViewById(R.id.getCriticalBatteryNotifyThreshold).setOnClickListener(v -> {
+            for(int index = 0; index <3;index++){
                 if (mController == null) {
                     Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
                     return;
                 }
-                mController.getLowBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
+                mController.getCriticalBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
                     @Override
                     public void onFailure(AutelError error) {
-                        logOut("getLowBatteryNotifyThreshold  error :  " + error.getDescription());
+                        logOut("getCriticalBatteryNotifyThreshold  error :  " + error.getDescription()+"  time "+System.currentTimeMillis());
                     }
 
                     @Override
                     public void onSuccess(Float data) {
-                        logOut("getLowBatteryNotifyThreshold  data :  " + data);
+                        logOut("getCriticalBatteryNotifyThreshold  data :  " + data+"  time "+System.currentTimeMillis());
                     }
                 });
             }
         });
-        findViewById(R.id.setLowBatteryNotifyThreshold).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = lowBatteryNotifyThreshold.getText().toString();
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setLowBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setLowBatteryNotifyThreshold  error :  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setLowBatteryNotifyThreshold   onSuccess ");
-                    }
-                });
+        findViewById(R.id.setCriticalBatteryNotifyThreshold).setOnClickListener(v -> {
+            String value = criticalBatteryNotifyThreshold.getText().toString();
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.setCriticalBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setCriticalBatteryNotifyThreshold  error :  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setCriticalBatteryNotifyThreshold  onSuccess  ");
+                }
+            });
         });
-
-        findViewById(R.id.getCriticalBatteryNotifyThreshold).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int index = 0; index <3;index++){
-                    if (mController == null) {
-                        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    mController.getCriticalBatteryNotifyThreshold(new CallbackWithOneParam<Float>() {
-                        @Override
-                        public void onFailure(AutelError error) {
-                            logOut("getCriticalBatteryNotifyThreshold  error :  " + error.getDescription()+"  time "+System.currentTimeMillis());
-                        }
-
-                        @Override
-                        public void onSuccess(Float data) {
-                            logOut("getCriticalBatteryNotifyThreshold  data :  " + data+"  time "+System.currentTimeMillis());
-                        }
-                    });
-                }
+        findViewById(R.id.getDischargeDay).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getDischargeDay(new CallbackWithOneParam<Integer>() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getDischargeDay  error :  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess(Integer data) {
+                    logOut("getDischargeDay  data :  " + data);
+                }
+            });
         });
-        findViewById(R.id.setCriticalBatteryNotifyThreshold).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = criticalBatteryNotifyThreshold.getText().toString();
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setCriticalBatteryNotifyThreshold(isEmpty(value) ? 0.25f : Float.valueOf(value), new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setCriticalBatteryNotifyThreshold  error :  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setCriticalBatteryNotifyThreshold  onSuccess  ");
-                    }
-                });
+        findViewById(R.id.setDischargeDay).setOnClickListener(v -> {
+            String value = dischargeDay.getText().toString();
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.setDischargeDay(isEmpty(value) ? 2 : Integer.valueOf(value), new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+
+                    logOut("setDischargeDay  onSuccess  ");
+                }
+
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("setDischargeDay  error :  " + autelError.getDescription());
+                }
+            });
         });
-        findViewById(R.id.getDischargeDay).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getDischargeDay(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getDischargeDay  error :  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(Integer data) {
-                        logOut("getDischargeDay  data :  " + data);
-                    }
-                });
+        findViewById(R.id.getDischargeCount).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getDischargeCount(new CallbackWithOneParam<Integer>() {
+                @Override
+                public void onSuccess(Integer data) {
+                    logOut("getDischargeCount  " + data);
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getDischargeCount error : " + error.getDescription());
+                }
+            });
         });
-        findViewById(R.id.setDischargeDay).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = dischargeDay.getText().toString();
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.setDischargeDay(isEmpty(value) ? 2 : Integer.valueOf(value), new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-
-                        logOut("setDischargeDay  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setDischargeDay  error :  " + autelError.getDescription());
-                    }
-                });
+        findViewById(R.id.getVersion).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getVersion(new CallbackWithOneParam<String>() {
+                @Override
+                public void onSuccess(String data) {
+                    logOut("getVersion  " + data);
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getVersion  error : " + error.getDescription());
+                }
+            });
         });
-        findViewById(R.id.getDischargeCount).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getDischargeCount(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
-                        logOut("getDischargeCount  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getDischargeCount error : " + error.getDescription());
-                    }
-                });
+        findViewById(R.id.getSerialNumber).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getSerialNumber(new CallbackWithOneParam<String>() {
+                @Override
+                public void onSuccess(String data) {
+                    logOut("getSerialNumber  " + data);
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getSerialNumber  error : " + error.getDescription());
+                }
+            });
         });
-        findViewById(R.id.getVersion).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getVersion(new CallbackWithOneParam<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        logOut("getVersion  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVersion  error : " + error.getDescription());
-                    }
-                });
+        findViewById(R.id.getFullChargeCapacity).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
+            mController.getFullChargeCapacity(new CallbackWithOneParam<Integer>() {
+                @Override
+                public void onSuccess(Integer data) {
+                    logOut("getFullChargeCapacity  " + data);
+                }
+
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getFullChargeCapacity error : " + error.getDescription());
+                }
+            });
         });
-        findViewById(R.id.getSerialNumber).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                mController.getSerialNumber(new CallbackWithOneParam<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        logOut("getSerialNumber  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getSerialNumber  error : " + error.getDescription());
-                    }
-                });
+        findViewById(R.id.getCellVoltageRange).setOnClickListener(v -> {
+            if (mController == null) {
+                Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
+                return;
             }
-        });
-        findViewById(R.id.getFullChargeCapacity).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
+            mController.getParameterSupportManager().getBatteryCellVoltageRange(new CallbackWithOneParam<RangePair<Integer>>() {
+                @Override
+                public void onSuccess(RangePair<Integer> data) {
+                    logOut("getBatteryCellVoltageRange  from " + data.getValueFrom() + " to " + data.getValueTo());
                 }
-                mController.getFullChargeCapacity(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
-                        logOut("getFullChargeCapacity  " + data);
-                    }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getFullChargeCapacity error : " + error.getDescription());
-                    }
-                });
-            }
-        });
-        findViewById(R.id.getCellVoltageRange).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mController == null) {
-                    Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-                    return;
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("getBatteryCellVoltageRange error : " + error.getDescription());
                 }
-                mController.getParameterSupportManager().getBatteryCellVoltageRange(new CallbackWithOneParam<RangePair<Integer>>() {
-                    @Override
-                    public void onSuccess(RangePair<Integer> data) {
-                        logOut("getBatteryCellVoltageRange  from " + data.getValueFrom() + " to " + data.getValueTo());
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getBatteryCellVoltageRange error : " + error.getDescription());
-                    }
-                });
-            }
+            });
         });
     }
 }

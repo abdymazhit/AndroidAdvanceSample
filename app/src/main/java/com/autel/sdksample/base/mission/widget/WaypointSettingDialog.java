@@ -24,12 +24,7 @@ public class WaypointSettingDialog {
         this.position = position;
         waypointSettingDialog = new Dialog(context,android.R.style.Theme_Translucent);
         waypointSettingDialog.setContentView(R.layout.dialog_waypoint_setting);
-        waypointSettingDialog.findViewById(R.id.dialog_waypoint_setting_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                waypointSettingDialog.dismiss();
-            }
-        });
+        waypointSettingDialog.findViewById(R.id.dialog_waypoint_setting_cancel).setOnClickListener(v -> waypointSettingDialog.dismiss());
         ((EditText)waypointSettingDialog.findViewById(R.id.edit_waypoint_height)).setText(""+(int)waypoint.getAutelCoordinate3D().getAltitude());
         ((SeekBar)waypointSettingDialog.findViewById(R.id.seekbar_waypoint_delay_time)).setProgress((int)waypoint.getDelay());
         ((TextView)waypointSettingDialog.findViewById(R.id.text_waypoint_delay_time)).setText((int)waypoint.getDelay() + " s");
@@ -51,15 +46,12 @@ public class WaypointSettingDialog {
             }
         });
         mWaypoint = waypoint;
-        waypointSettingDialog.findViewById(R.id.text_waypoint_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                double height = Double.parseDouble(((EditText)waypointSettingDialog.findViewById(R.id.edit_waypoint_height)).getText().toString());
-                int delay = ((SeekBar)waypointSettingDialog.findViewById(R.id.seekbar_waypoint_delay_time)).getProgress();
-                mWaypoint.getAutelCoordinate3D().setAltitude(height);
-                mWaypoint.setDelay(delay);
-                waypointSettingDialog.dismiss();
-            }
+        waypointSettingDialog.findViewById(R.id.text_waypoint_ok).setOnClickListener(v -> {
+            double height = Double.parseDouble(((EditText)waypointSettingDialog.findViewById(R.id.edit_waypoint_height)).getText().toString());
+            int delay = ((SeekBar)waypointSettingDialog.findViewById(R.id.seekbar_waypoint_delay_time)).getProgress();
+            mWaypoint.getAutelCoordinate3D().setAltitude(height);
+            mWaypoint.setDelay(delay);
+            waypointSettingDialog.dismiss();
         });
     }
 

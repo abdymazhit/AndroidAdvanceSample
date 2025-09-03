@@ -89,53 +89,35 @@ public class XStarGimbalActivity extends GimbalActivity {
 
             }
         });
-        findViewById(R.id.setRollAdjustData).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setRollAdjustData).setOnClickListener(v -> mXStarGimbal.setRollAdjustData(gimbalRollAngleAdjust, new CallbackWithOneParam<Double>() {
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setRollAdjustData(gimbalRollAngleAdjust, new CallbackWithOneParam<Double>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setRollAdjustData error " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(Double data) {
-                        logOut("setRollAdjustData data " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setRollAdjustData error " + error.getDescription());
             }
-        });
 
-        findViewById(R.id.setGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setAngleListener(new CallbackWithOneParam<Integer>() {
-
-                    @Override
-                    public void onSuccess(Integer integer) {
-                        logOut("setAngleListener onSuccess " + integer);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAngleListener error " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess(Double data) {
+                logOut("setRollAdjustData data " + data);
             }
-        });
-        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
+        }));
+
+        findViewById(R.id.setGimbalAngleListener).setOnClickListener(v -> mXStarGimbal.setAngleListener(new CallbackWithOneParam<Integer>() {
+
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setAngleListener(null);
+            public void onSuccess(Integer integer) {
+                logOut("setAngleListener onSuccess " + integer);
             }
-        });
 
-        findViewById(R.id.setGimbalAngle).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String value = gimbalAngle.getText().toString();
-                mXStarGimbal.setGimbalAngle(isEmpty(value) ? 10 : Integer.valueOf(value));
+            public void onFailure(AutelError autelError) {
+                logOut("setAngleListener error " + autelError.getDescription());
             }
+        }));
+        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(v -> mXStarGimbal.setAngleListener(null));
+
+        findViewById(R.id.setGimbalAngle).setOnClickListener(v -> {
+            String value = gimbalAngle.getText().toString();
+            mXStarGimbal.setGimbalAngle(isEmpty(value) ? 10 : Integer.valueOf(value));
         });
 
         gimbalAngleWithFineTuning = (EditText) findViewById(R.id.gimbalAngleWithFineTuning);
@@ -165,35 +147,22 @@ public class XStarGimbalActivity extends GimbalActivity {
             }
         });
 
-        findViewById(R.id.setGimbalAngleWithFineTuning).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = gimbalAngleWithFineTuning.getText().toString();
-                mXStarGimbal.setGimbalAngleWithSpeed(isEmpty(value) ? -10 : Integer.valueOf(value));
-            }
+        findViewById(R.id.setGimbalAngleWithFineTuning).setOnClickListener(v -> {
+            String value = gimbalAngleWithFineTuning.getText().toString();
+            mXStarGimbal.setGimbalAngleWithSpeed(isEmpty(value) ? -10 : Integer.valueOf(value));
         });
 
-        findViewById(R.id.setGimbalStateListener).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setGimbalStateListener).setOnClickListener(v -> mXStarGimbal.setGimbalStateListener(new CallbackWithOneParam<GimbalState>() {
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setGimbalStateListener(new CallbackWithOneParam<GimbalState>() {
-                    @Override
-                    public void onSuccess(GimbalState gimbalState) {
-                        logOut("setGimbalStateListener onSuccess " + gimbalState);
-                    }
+            public void onSuccess(GimbalState gimbalState) {
+                logOut("setGimbalStateListener onSuccess " + gimbalState);
+            }
 
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setGimbalStateListener error " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-        findViewById(R.id.resetGimbalStateListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setGimbalStateListener(null);
+            public void onFailure(AutelError autelError) {
+                logOut("setGimbalStateListener error " + autelError.getDescription());
             }
-        });
+        }));
+        findViewById(R.id.resetGimbalStateListener).setOnClickListener(v -> mXStarGimbal.setGimbalStateListener(null));
     }
 }

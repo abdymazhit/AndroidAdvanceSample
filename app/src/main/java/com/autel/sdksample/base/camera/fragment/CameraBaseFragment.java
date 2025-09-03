@@ -64,254 +64,166 @@ public class CameraBaseFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.setMediaMode).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setMediaMode).setOnClickListener(v -> baseCamera.setMediaMode(mediaMode, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                baseCamera.setMediaMode(mediaMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setMediaMode  description  " + error.getDescription());
-                    }
+            public void onFailure(AutelError error) {
+                logOut("setMediaMode  description  " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("setMediaMode state onSuccess");
-                    }
-                });
+            @Override
+            public void onSuccess() {
+                logOut("setMediaMode state onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.setCameraSDCardStateListener).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setCameraSDCardStateListener).setOnClickListener(v -> baseCamera.setSDCardStateListener(new CallbackWithOneParam<SDCardState>() {
             @Override
-            public void onClick(View v) {
-                baseCamera.setSDCardStateListener(new CallbackWithOneParam<SDCardState>() {
-                    @Override
-                    public void onSuccess(SDCardState state) {
-                        logOut("setSDCardStateListener  state  " + state);
-                    }
+            public void onSuccess(SDCardState state) {
+                logOut("setSDCardStateListener  state  " + state);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setSDCardStateListener  description  " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.resetCameraSDCardStateListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.setSDCardStateListener(null);
+            public void onFailure(AutelError error) {
+                logOut("setSDCardStateListener  description  " + error.getDescription());
             }
-        });
-        view.findViewById(R.id.getMediaMode).setOnClickListener(new View.OnClickListener() {
+        }));
+        view.findViewById(R.id.resetCameraSDCardStateListener).setOnClickListener(v -> baseCamera.setSDCardStateListener(null));
+        view.findViewById(R.id.getMediaMode).setOnClickListener(v -> baseCamera.getMediaMode(new CallbackWithOneParam<MediaMode>() {
             @Override
-            public void onClick(View v) {
-                baseCamera.getMediaMode(new CallbackWithOneParam<MediaMode>() {
-                    @Override
-                    public void onSuccess(MediaMode data) {
-                        logOut("getMediaMode " + data);
-                    }
+            public void onSuccess(MediaMode data) {
+                logOut("getMediaMode " + data);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMediaMode " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.getVersion).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.getVersion(new CallbackWithOneParam<String>() {
-                    @Override
-                    public void onSuccess(String data) {
-                        logOut("getVersion " + data);
-                    }
+            public void onFailure(AutelError error) {
+                logOut("getMediaMode " + error.getDescription());
+            }
+        }));
+        view.findViewById(R.id.getVersion).setOnClickListener(v -> baseCamera.getVersion(new CallbackWithOneParam<String>() {
+            @Override
+            public void onSuccess(String data) {
+                logOut("getVersion " + data);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVersion " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.getTimeStamp).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onFailure(AutelError error) {
+                logOut("getVersion " + error.getDescription());
             }
+        }));
+        view.findViewById(R.id.getTimeStamp).setOnClickListener(v -> {
         });
-        view.findViewById(R.id.getProduct).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getProduct).setOnClickListener(v -> logOut("getProduct " + baseCamera.getProduct()));
+        view.findViewById(R.id.getSdFreeSpace).setOnClickListener(v -> baseCamera.getSDCardFreeSpace(new CallbackWithOneParam<Long>() {
             @Override
-            public void onClick(View v) {
-                logOut("getProduct " + baseCamera.getProduct());
+            public void onSuccess(Long data) {
+                logOut("getSDCardFreeSpace " + data);
             }
-        });
-        view.findViewById(R.id.getSdFreeSpace).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                baseCamera.getSDCardFreeSpace(new CallbackWithOneParam<Long>() {
-                    @Override
-                    public void onSuccess(Long data) {
-                        logOut("getSDCardFreeSpace " + data);
-                    }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getSDCardFreeSpace " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.getSDCardStatus).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.getSDCardState(new CallbackWithOneParam<SDCardState>() {
-                    @Override
-                    public void onSuccess(SDCardState data) {
-                        logOut("getSDCardState " + data);
-                    }
+            public void onFailure(AutelError error) {
+                logOut("getSDCardFreeSpace " + error.getDescription());
+            }
+        }));
+        view.findViewById(R.id.getSDCardStatus).setOnClickListener(v -> baseCamera.getSDCardState(new CallbackWithOneParam<SDCardState>() {
+            @Override
+            public void onSuccess(SDCardState data) {
+                logOut("getSDCardState " + data);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getSDCardState " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.getWorkStatus).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.getWorkState(new CallbackWithOneParam<WorkState>() {
-                    @Override
-                    public void onSuccess(WorkState data) {
-                        logOut("getWorkState " + data);
-                    }
+            public void onFailure(AutelError error) {
+                logOut("getSDCardState " + error.getDescription());
+            }
+        }));
+        view.findViewById(R.id.getWorkStatus).setOnClickListener(v -> baseCamera.getWorkState(new CallbackWithOneParam<WorkState>() {
+            @Override
+            public void onSuccess(WorkState data) {
+                logOut("getWorkState " + data);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getWorkState " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.resetCamera).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.resetDefaults(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("resetDefaults " + error.getDescription());
-                    }
+            public void onFailure(AutelError error) {
+                logOut("getWorkState " + error.getDescription());
+            }
+        }));
+        view.findViewById(R.id.resetCamera).setOnClickListener(v -> baseCamera.resetDefaults(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("resetDefaults " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("resetDefaults onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.formatSDCard).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.formatSDCard(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("formatSDCard " + error.getDescription());
-                    }
+            public void onSuccess() {
+                logOut("resetDefaults onSuccess");
+            }
+        }));
+        view.findViewById(R.id.formatSDCard).setOnClickListener(v -> baseCamera.formatSDCard(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("formatSDCard " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("formatSDCard onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.stopTimelapse).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.stopTakePhoto(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("stopTakePhoto " + error.getDescription());
-                    }
+            public void onSuccess() {
+                logOut("formatSDCard onSuccess");
+            }
+        }));
+        view.findViewById(R.id.stopTimelapse).setOnClickListener(v -> baseCamera.stopTakePhoto(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("stopTakePhoto " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("stopTakePhoto onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.takePhoto).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.startTakePhoto(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("startTakePhoto " + error.getDescription());
-                    }
+            public void onSuccess() {
+                logOut("stopTakePhoto onSuccess");
+            }
+        }));
+        view.findViewById(R.id.takePhoto).setOnClickListener(v -> baseCamera.startTakePhoto(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("startTakePhoto " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("startTakePhoto onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.stopRecordVideo).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.stopRecordVideo(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("stopRecordVideo " + error.getDescription());
-                    }
+            public void onSuccess() {
+                logOut("startTakePhoto onSuccess");
+            }
+        }));
+        view.findViewById(R.id.stopRecordVideo).setOnClickListener(v -> baseCamera.stopRecordVideo(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("stopRecordVideo " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("stopRecordVideo onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.startRecordVideo).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.startRecordVideo(new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("startRecordVideo " + error.getDescription());
-                    }
+            public void onSuccess() {
+                logOut("stopRecordVideo onSuccess");
+            }
+        }));
+        view.findViewById(R.id.startRecordVideo).setOnClickListener(v -> baseCamera.startRecordVideo(new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("startRecordVideo " + error.getDescription());
+            }
 
-                    @Override
-                    public void onSuccess() {
-                        logOut("startRecordVideo onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.resetCameraMediaStateListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                baseCamera.setMediaStateListener(null);
+            public void onSuccess() {
+                logOut("startRecordVideo onSuccess");
             }
-        });
-        view.findViewById(R.id.setCameraMediaStateListener).setOnClickListener(new View.OnClickListener() {
+        }));
+        view.findViewById(R.id.resetCameraMediaStateListener).setOnClickListener(v -> baseCamera.setMediaStateListener(null));
+        view.findViewById(R.id.setCameraMediaStateListener).setOnClickListener(v -> baseCamera.setMediaStateListener(new CallbackWithTwoParams<MediaStatus, String>() {
             @Override
-            public void onClick(View v) {
-                baseCamera.setMediaStateListener(new CallbackWithTwoParams<MediaStatus, String>() {
-                    @Override
-                    public void onSuccess(MediaStatus state, String data) {
-                        logOut("setMediaStateListener state " + state+" data "+data);
-                    }
+            public void onSuccess(MediaStatus state, String data) {
+                logOut("setMediaStateListener state " + state+" data "+data);
+            }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setMediaStateListener error " + error.getDescription());
-                    }
-                });
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setMediaStateListener error " + error.getDescription());
             }
-        });
+        }));
     }
 
     protected void logOut(String log) {

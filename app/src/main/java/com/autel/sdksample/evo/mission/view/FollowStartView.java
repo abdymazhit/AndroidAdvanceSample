@@ -58,22 +58,16 @@ public class FollowStartView extends FrameLayout{
     private void showFollowStartView(){
         View startTitle = inflater.inflate(R.layout.common_mission_title_with_close,null);
         ((TextView)startTitle.findViewById(R.id.mission_title)).setText(R.string.mission_follow);
-        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followStartViewListener != null){
-                    followStartViewListener.onCloseClick();
-                }
+        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if(followStartViewListener != null){
+                followStartViewListener.onCloseClick();
             }
         });
         View bottomView = inflater.inflate(R.layout.common_mission_bottom,null);
         ((TextView)bottomView.findViewById(R.id.bottom_title)).setText(R.string.mission_start);
-        bottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followStartViewListener != null){
-                    followStartViewListener.onStartClick();
-                }
+        bottomView.setOnClickListener(v -> {
+            if(followStartViewListener != null){
+                followStartViewListener.onStartClick();
             }
         });
         View contentView = inflater.inflate(R.layout.follow_start_view,null);

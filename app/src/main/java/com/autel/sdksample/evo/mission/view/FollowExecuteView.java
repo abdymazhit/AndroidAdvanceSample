@@ -87,44 +87,32 @@ public class FollowExecuteView extends FrameLayout {
         ((TextView)executeTitle.findViewById(R.id.common_title)).setText(R.string.mission_follow);
         TextView hideBtn = (TextView) executeTitle.findViewById(R.id.common_hide);
         hideBtn.setText(R.string.mission_hide);
-        hideBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followExecuteListener != null){
-                    followExecuteListener.onHideClick();
-                }
+        hideBtn.setOnClickListener(v -> {
+            if(followExecuteListener != null){
+                followExecuteListener.onHideClick();
             }
         });
         View bottomView = inflater.inflate(R.layout.common_mission_bottom,null);
         TextView bottomTitle = (TextView) bottomView.findViewById(R.id.bottom_title);
         bottomTitle.setText(R.string.mission_exit);
-        bottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followExecuteListener != null){
-                    followExecuteListener.onExitClick();
-                }
+        bottomView.setOnClickListener(v -> {
+            if(followExecuteListener != null){
+                followExecuteListener.onExitClick();
             }
         });
         View contentView = inflater.inflate(R.layout.follow_execute_view,null);
         distanceTv2 = (TextView) contentView.findViewById(R.id.distance_tv);
-        contentView.findViewById(R.id.face_me_btn).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followExecuteListener != null){
-                    followExecuteListener.onFaceMeClick();
-                }
+        contentView.findViewById(R.id.face_me_btn).setOnClickListener(v -> {
+            if(followExecuteListener != null){
+                followExecuteListener.onFaceMeClick();
             }
         });
         View pauseBtn = contentView.findViewById(R.id.pause_btn);
-        pauseBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(followExecuteListener != null){
-                    followExecuteListener.onPauseClick();
-                }
-                
+        pauseBtn.setOnClickListener(v -> {
+            if(followExecuteListener != null){
+                followExecuteListener.onPauseClick();
             }
+
         });
         titleContainer.addView(executeTitle);
         contentContainer.addView(contentView);

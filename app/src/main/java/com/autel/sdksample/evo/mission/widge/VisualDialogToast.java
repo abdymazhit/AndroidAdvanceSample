@@ -36,33 +36,24 @@ public class VisualDialogToast {
         mTextview1 = (TextView) mView.findViewById(R.id.tv_cancel);
         mTextview2 = (TextView) mView.findViewById(R.id.tv_select_new_target);
         mTextview3 = (TextView) mView.findViewById(R.id.tv_exit_flight_mode);
-        mTextview1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != listener) {
-                    listener.onClickView1();
-                }
-                dialog.dismiss();
+        mTextview1.setOnClickListener(v -> {
+            if (null != listener) {
+                listener.onClickView1();
             }
+            dialog.dismiss();
         });
-        mTextview2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != listener) {
-                    listener.onClickView2();
-                }
-                dialog.dismiss();
+        mTextview2.setOnClickListener(v -> {
+            if (null != listener) {
+                listener.onClickView2();
             }
+            dialog.dismiss();
         });
 
-        mTextview3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != listener) {
-                    listener.onClickView3();
-                }
-                dialog.dismiss();
+        mTextview3.setOnClickListener(v -> {
+            if (null != listener) {
+                listener.onClickView3();
             }
+            dialog.dismiss();
         });
     }
 

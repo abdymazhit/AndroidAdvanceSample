@@ -169,14 +169,11 @@ public class MapFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mapViewUtil = MapViewUtilFactory.instanceMapViewUtil(AutelConfigManager.instance().getAppContext());
-        mapViewUtil.initMap(new OnMapReadyCallBack() {
-            @Override
-            public void onMapReady() {
-                isMapReadyState = true;
-                if(isWaitForMapReadyState){
-                }
-                registerNetLocationGps();
+        mapViewUtil.initMap(() -> {
+            isMapReadyState = true;
+            if(isWaitForMapReadyState){
             }
+            registerNetLocationGps();
         });
         mapViewUtil.onCreate(savedInstanceState);
         initPhoneGPS();
@@ -534,16 +531,13 @@ public class MapFragment extends Fragment {
 
         getActivity().getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED), false, contentObserver);
 
-        mGPSListener = new GpsStatus.Listener() {
-            @Override
-            public void onGpsStatusChanged(int event) {
-                switch (event) {
-                    case GpsStatus.GPS_EVENT_STARTED:
-                        break;
+        mGPSListener = event -> {
+            switch (event) {
+                case GpsStatus.GPS_EVENT_STARTED:
+                    break;
 
-                    case GpsStatus.GPS_EVENT_FIRST_FIX:
-                        break;
-                }
+                case GpsStatus.GPS_EVENT_FIRST_FIX:
+                    break;
             }
         };
 

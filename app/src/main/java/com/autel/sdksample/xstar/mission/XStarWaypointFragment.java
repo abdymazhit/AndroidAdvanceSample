@@ -60,12 +60,9 @@ public class XStarWaypointFragment extends WaypointMissionFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_mission_menu_waypoint);
 
-        ((MapActivity) getActivity()).setWaypointHeightListener(new MapActivity.WaypointHeightListener() {
-            @Override
-            public int fetchHeight() {
-                String valueHeight = waypointHeight.getText().toString();
-                return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
-            }
+        ((MapActivity) getActivity()).setWaypointHeightListener(() -> {
+            String valueHeight = waypointHeight.getText().toString();
+            return isEmpty(valueHeight) ? 50 : Integer.valueOf(valueHeight);
         });
         finishActionSpinner = (Spinner) view.findViewById(R.id.finishAction);
         finishActionAdapter = new WaypointFinishActionAdapter(getContext());

@@ -49,78 +49,55 @@ public class CodecActivity extends BaseActivity<AutelCodec> {
      * Use AutelCodecView to display the video stream from camera simply.
      */
     private void initClick() {
-        findViewById(R.id.testAutelCodecView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCodecing = true;
+        findViewById(R.id.testAutelCodecView).setOnClickListener(v -> {
+            isCodecing = true;
 
-                final AutelCodecView autelCodecView = new AutelCodecView(CodecActivity.this);
-                content_layout.setOnClickListener(null);
-                content_layout.setVisibility(View.VISIBLE);
-                content_layout.addView(autelCodecView);
+            final AutelCodecView autelCodecView = new AutelCodecView(CodecActivity.this);
+            content_layout.setOnClickListener(null);
+            content_layout.setVisibility(View.VISIBLE);
+            content_layout.addView(autelCodecView);
 
-                LinearLayout btn_layout = new LinearLayout(CodecActivity.this);
-                btn_layout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout btn_layout = new LinearLayout(CodecActivity.this);
+            btn_layout.setOrientation(LinearLayout.VERTICAL);
 
-                Button btn_exp = new Button(CodecActivity.this);
-                btn_exp.setText("Exposure");
-                btn_exp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AutelCodecView.setOverExposure(!AutelCodecView.isOverExposureEnabled(), R.mipmap.expo2560);
+            Button btn_exp = new Button(CodecActivity.this);
+            btn_exp.setText("Exposure");
+            btn_exp.setOnClickListener(view -> {
+                AutelCodecView.setOverExposure(!AutelCodecView.isOverExposureEnabled(), R.mipmap.expo2560);
 //                        startActivity(new Intent(CodecActivity.this, XStarRemoteControllerActivity.class));
-                    }
-                });
+            });
 
-                Button btn_pause = new Button(CodecActivity.this);
-                btn_pause.setText("Pause");
-                btn_pause.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AutelCodecView.pause();
-                    }
-                });
+            Button btn_pause = new Button(CodecActivity.this);
+            btn_pause.setText("Pause");
+            btn_pause.setOnClickListener(view -> AutelCodecView.pause());
 
-                Button btn_resume = new Button(CodecActivity.this);
-                btn_resume.setText("Resume");
-                btn_resume.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AutelCodecView.resume();
-                    }
-                });
+            Button btn_resume = new Button(CodecActivity.this);
+            btn_resume.setText("Resume");
+            btn_resume.setOnClickListener(view -> AutelCodecView.resume());
 
-                Button btn_checkOverExposureEnabled = new Button(CodecActivity.this);
-                btn_checkOverExposureEnabled.setText("isOverExposureEnabled");
-                btn_checkOverExposureEnabled.setAllCaps(false);
-                btn_checkOverExposureEnabled.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(CodecActivity.this, "isOverExposureEnabled == " + AutelCodecView.isOverExposureEnabled(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            Button btn_checkOverExposureEnabled = new Button(CodecActivity.this);
+            btn_checkOverExposureEnabled.setText("isOverExposureEnabled");
+            btn_checkOverExposureEnabled.setAllCaps(false);
+            btn_checkOverExposureEnabled.setOnClickListener(view -> Toast.makeText(CodecActivity.this, "isOverExposureEnabled == " + AutelCodecView.isOverExposureEnabled(), Toast.LENGTH_SHORT).show());
 
-                btn_layout.addView(btn_exp);
-                btn_layout.addView(btn_pause);
-                btn_layout.addView(btn_resume);
-                btn_layout.addView(btn_checkOverExposureEnabled);
+            btn_layout.addView(btn_exp);
+            btn_layout.addView(btn_pause);
+            btn_layout.addView(btn_resume);
+            btn_layout.addView(btn_checkOverExposureEnabled);
 
-                content_layout.addView(btn_layout);
-            }
+            content_layout.addView(btn_layout);
         });
 
         /**
          * The H264 video stream data for developer to deal with
          */
-        findViewById(R.id.testAutelCodec).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCodecing = true;
+        findViewById(R.id.testAutelCodec).setOnClickListener(v -> {
+            isCodecing = true;
 
-                final AutelCodecView logTV = new AutelCodecView(CodecActivity.this);
-                content_layout.setOnClickListener(null);
-                content_layout.setVisibility(View.VISIBLE);
-                content_layout.addView(logTV);
+            final AutelCodecView logTV = new AutelCodecView(CodecActivity.this);
+            content_layout.setOnClickListener(null);
+            content_layout.setVisibility(View.VISIBLE);
+            content_layout.addView(logTV);
 //                if (null != mController) {
 //                    mController.setCodecListener(new AutelCodecListener() {
 //                        @Override
@@ -154,7 +131,6 @@ public class CodecActivity extends BaseActivity<AutelCodec> {
 //                        }
 //                    }, null);
 //                }
-            }
         });
     }
 

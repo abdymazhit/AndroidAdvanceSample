@@ -31,28 +31,18 @@ public class XStarPremiumGimbalActivity extends GimbalActivity {
     @Override
     protected void initUi() {
         super.initUi();
-        findViewById(R.id.setGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mXStarGimbal.setAngleListener(new CallbackWithOneParam<Integer>() {
+        findViewById(R.id.setGimbalAngleListener).setOnClickListener(v -> mXStarGimbal.setAngleListener(new CallbackWithOneParam<Integer>() {
 
-                    @Override
-                    public void onSuccess(Integer integer) {
-                        logOut("setAngleListener onSuccess " + integer);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAngleListener error " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mXStarGimbal.setAngleListener(null);
+            public void onSuccess(Integer integer) {
+                logOut("setAngleListener onSuccess " + integer);
             }
-        });
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAngleListener error " + autelError.getDescription());
+            }
+        }));
+        findViewById(R.id.resetGimbalAngleListener).setOnClickListener(v -> mXStarGimbal.setAngleListener(null));
     }
 }

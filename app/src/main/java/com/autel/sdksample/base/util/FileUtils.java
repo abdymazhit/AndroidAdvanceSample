@@ -30,35 +30,15 @@ public class FileUtils {
 
         byte[] buffer = new byte[2048];
         AssetManager assets = context.getAssets();
-        InputStream modelStream = null;
-        BufferedOutputStream outputStream = null;
 
-        try {
-            modelStream = assets.open(fileName);
-            outputStream = new BufferedOutputStream(new FileOutputStream(modelFile));
+        try (InputStream modelStream = assets.open(fileName); BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(modelFile))) {
 
             int count;
-            while((count = modelStream.read(buffer)) != -1){
+            while ((count = modelStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, count);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(modelStream != null){
-                try {
-                    modelStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if(outputStream != null){
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
     }

@@ -62,12 +62,7 @@ public class MissionDropSelectView extends FrameLayout {
         selectTv = (TextView) unpressView.findViewById(R.id.orbit_position_select_one_tv);
         selectTv.setText(datas.get(position));
         curSelet = position;
-        unpressView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPressView(itemEnum);
-            }
-        });
+        unpressView.setOnClickListener(v -> showPressView(itemEnum));
     }
 
     private void showPressView(final AdvancedItemEnum itemEnum) {
@@ -83,14 +78,11 @@ public class MissionDropSelectView extends FrameLayout {
         missionDropRv.addItemDecoration(new ListItemDecoration(mContext, LinearLayoutManager.VERTICAL));
         missionDropRv.setLayoutManager(new LinearLayoutManager(mContext));
         MissionDropViewAdapter adapter = new MissionDropViewAdapter(datas);
-        adapter.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                showUnPressView(mContext, position, itemEnum);
-                pressView.setBackgroundResource(0);
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
-                }
+        adapter.setOnItemClickListener(position -> {
+            showUnPressView(mContext, position, itemEnum);
+            pressView.setBackgroundResource(0);
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(position);
             }
         });
         adapter.setCurSelect(curSelet);

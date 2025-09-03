@@ -2,6 +2,7 @@ package com.autel.sdksample.evo.mission.util;
 
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -35,14 +36,14 @@ public class TransformUtils {
 	 */
 	public static double centigrade2Fahrenheit(double centigrade) {
 		BigDecimal bg = new BigDecimal(32 + centigrade * 1.8);
-		BigDecimal result = bg.setScale(1, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 	}
 
 
 	public static double fahrenheit2Centigrade(double fahrenheit){
 		BigDecimal bg = new BigDecimal((fahrenheit - 32) / 1.8);
-		BigDecimal result = bg.setScale(1, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 
 	}
@@ -62,13 +63,13 @@ public class TransformUtils {
 
 	public static double doubleFormat(double mps) {
 		BigDecimal bg = new BigDecimal(mps);
-		BigDecimal result = bg.setScale(1, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 	}
 
 	public static double doubleFormat(double mps , int value){
 		BigDecimal bg = new BigDecimal(mps);
-		BigDecimal result = bg.setScale(value, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(value, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 	}
 
@@ -117,14 +118,14 @@ public class TransformUtils {
 			}
 			BigDecimal bigDecimal = new BigDecimal(dis);
 
-			return bigDecimal.setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue();
+			return bigDecimal.setScale(1, RoundingMode.HALF_UP).doubleValue();
 		} else {// 1000M以下
 			float dis = (float) lenMeter;
 			if (unitFlag) {
 				dis = (float) meter2feet(dis,1);
 			}
 			BigDecimal bigDecimal = new BigDecimal(dis);
-			return bigDecimal.setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue();
+			return bigDecimal.setScale(1, RoundingMode.HALF_UP).doubleValue();
 		}
 	}
 
@@ -165,27 +166,27 @@ public class TransformUtils {
 
 	public static double mps2mph(double meter) {
 		BigDecimal bg = new BigDecimal(meter * 2.2369);
-		BigDecimal result = bg.setScale(1, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 
 		return result.doubleValue();
 	}
 
 	public static double mps2kmph(double meter){
         BigDecimal bg = new BigDecimal(meter * 3.6);
-        BigDecimal result = bg.setScale(1,BigDecimal.ROUND_HALF_DOWN);
+        BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
         return result.doubleValue();
     }
 
 
 	public static double mph2mps(double mph){
 		BigDecimal bg = new BigDecimal(mph / 2.2369);
-		BigDecimal result = bg.setScale(1, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return bg.doubleValue();
 	}
 
 	public static double kmph2mps(double kmph){
 		BigDecimal bg = new BigDecimal(kmph / 3.6);
-		BigDecimal result = bg.setScale(1,BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal result = bg.setScale(1, RoundingMode.HALF_DOWN);
 		return result.doubleValue();
 	}
 
@@ -219,14 +220,14 @@ public class TransformUtils {
 	 */
 	public static double meter2feet(double meter,int decimalNum) {
 		BigDecimal bg = new BigDecimal(meter / FEET2METERUNIT);
-		BigDecimal result = bg.setScale(decimalNum, BigDecimal.ROUND_HALF_UP);
+		BigDecimal result = bg.setScale(decimalNum, RoundingMode.HALF_UP);
 		return decimalNum == 0 ? result.intValue() : result.doubleValue();
 	}
 
 
 	public static double feet2meter(double feet, int decimalNum){
 		BigDecimal bg = new BigDecimal(feet * FEET2METERUNIT);
-		BigDecimal result = bg.setScale(decimalNum, BigDecimal.ROUND_HALF_UP);
+		BigDecimal result = bg.setScale(decimalNum, RoundingMode.HALF_UP);
 		return decimalNum == 0 ? result.intValue() : result.doubleValue();
 	}
 
@@ -313,7 +314,7 @@ public class TransformUtils {
 	 */
 	public static float getFloatValue(double value, int count){
 		BigDecimal format  = new BigDecimal(value);
-		return format.setScale(count,BigDecimal.ROUND_HALF_UP).floatValue();
+		return format.setScale(count, RoundingMode.HALF_UP).floatValue();
 	}
 
     /**

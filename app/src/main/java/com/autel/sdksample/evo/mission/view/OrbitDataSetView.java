@@ -95,12 +95,9 @@ public class OrbitDataSetView extends FrameLayout {
         clearView();
         View startTitle = inflater.inflate(R.layout.common_mission_title_with_close, null);
         ((TextView) startTitle.findViewById(R.id.mission_title)).setText(R.string.mission_orbit);
-        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (orbitSetViewListener != null) {
-                    orbitSetViewListener.exitClick();
-                }
+        startTitle.findViewById(R.id.mission_btn_close).setOnClickListener(v -> {
+            if (orbitSetViewListener != null) {
+                orbitSetViewListener.exitClick();
             }
         });
         View contentView = inflater.inflate(R.layout.orbit_data_set_content, null);
@@ -123,12 +120,7 @@ public class OrbitDataSetView extends FrameLayout {
         }
         AutelSegmentedGroup orbitRb = (AutelSegmentedGroup) contentView.findViewById(R.id.orbit_rb);
         final ViewGroup orbitDataSetContainer = (ViewGroup) contentView.findViewById(R.id.orbit_execute_remote_container);
-        orbitRb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                onBasicAdvancedChanged(checkedId, orbitDataSetContainer, baseView, advanceView);
-            }
-        });
+        orbitRb.setOnCheckedChangeListener((group, checkedId) -> onBasicAdvancedChanged(checkedId, orbitDataSetContainer, baseView, advanceView));
         orbitRb.check(R.id.rb_left_btn);
         orbitDataSetContainer.removeAllViews();
         orbitDataSetContainer.addView(baseView);
@@ -138,12 +130,9 @@ public class OrbitDataSetView extends FrameLayout {
         View bottomView = inflater.inflate(R.layout.common_mission_bottom, null);
         TextView bottomText = (TextView) bottomView.findViewById(R.id.bottom_title);
         bottomText.setText(R.string.mission_start);
-        bottomView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (orbitSetViewListener != null) {
-                    orbitSetViewListener.executeClick(completionDropSelectView.getCurSelet());
-                }
+        bottomView.setOnClickListener(v -> {
+            if (orbitSetViewListener != null) {
+                orbitSetViewListener.executeClick(completionDropSelectView.getCurSelet());
             }
         });
         titleContainer.addView(startTitle);
@@ -233,21 +222,18 @@ public class OrbitDataSetView extends FrameLayout {
         });
 
         baseFlightDirectionDropSelectView = (MissionDropSelectView) basicView.findViewById(R.id.base_flight_direction_drop_select_view);
-        baseFlightDirectionDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(orbitSetViewListener != null){
-                    OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CW);
-                            break;
-                        case 1:
-                            orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CCW);
-                            break;
-                    }
-                    orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_BASIC_FLIGHT_DIRECTION);
+        baseFlightDirectionDropSelectView.setOnItemClickListener(position -> {
+            if(orbitSetViewListener != null){
+                OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CW);
+                        break;
+                    case 1:
+                        orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CCW);
+                        break;
                 }
+                orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_BASIC_FLIGHT_DIRECTION);
             }
         });
         List<String> datas = new ArrayList<>();
@@ -366,21 +352,18 @@ public class OrbitDataSetView extends FrameLayout {
         TextView directionTitle = (TextView) advanceView.findViewById(R.id.flight_direction_title);
         directionTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.flight_direction));
         flightDirectionDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.flight_direction_drop_select_view);
-        flightDirectionDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(orbitSetViewListener != null){
-                    OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CW);
-                            break;
-                        case 1:
-                            orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CCW);
-                            break;
-                    }
-                    orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_FLIGHT_DIRECTION);
+        flightDirectionDropSelectView.setOnItemClickListener(position -> {
+            if(orbitSetViewListener != null){
+                OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CW);
+                        break;
+                    case 1:
+                        orbitAdvanceDataBean.setFlightDirection(OrbitAdvanceDataBean.FLIGHT_DIRECTION_CCW);
+                        break;
                 }
+                orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_FLIGHT_DIRECTION);
             }
         });
         List<String> datas = new ArrayList<>();
@@ -392,30 +375,27 @@ public class OrbitDataSetView extends FrameLayout {
         TextView headingTv = (TextView) advanceView.findViewById(R.id.heading_title);
         headingTv.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_heading));
         headingDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.heading_drop_select_view);
-        headingDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(orbitSetViewListener != null){
-                    OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_FORWARD);
-                            break;
-                        case 1:
-                            orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_TOWARDS_CENTER);
-                            break;
-                        case 2:
-                            orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_AWAYS_FROM_CENTER);
-                            break;
-                        case 3:
-                            orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_BACKWARD);
-                            break;
-                        case 4:
-                            orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_USER_CONTROLLED);
-                            break;
-                    }
-                    orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_HEADING);
+        headingDropSelectView.setOnItemClickListener(position -> {
+            if(orbitSetViewListener != null){
+                OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_FORWARD);
+                        break;
+                    case 1:
+                        orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_TOWARDS_CENTER);
+                        break;
+                    case 2:
+                        orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_AWAYS_FROM_CENTER);
+                        break;
+                    case 3:
+                        orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_FACE_BACKWARD);
+                        break;
+                    case 4:
+                        orbitAdvanceDataBean.setHeading(OrbitAdvanceDataBean.HEADING_USER_CONTROLLED);
+                        break;
                 }
+                orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_HEADING);
             }
         });
         List<String> datas1 = new ArrayList<>();
@@ -431,30 +411,27 @@ public class OrbitDataSetView extends FrameLayout {
         TextView entryPointTitle = (TextView) advanceView.findViewById(R.id.entry_point_title);
         entryPointTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_entry_point));
         entryPointDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.entry_point_drop_select_view);
-        entryPointDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(orbitSetViewListener != null){
-                    OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_NEAREST);
-                            break;
-                        case 1:
-                            orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_NORTH);
-                            break;
-                        case 2:
-                            orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_SOUTH);
-                            break;
-                        case 3:
-                            orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_EAST);
-                            break;
-                        case 4:
-                            orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_WEST);
-                            break;
-                    }
-                    orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_ENTRY_POINT);
+        entryPointDropSelectView.setOnItemClickListener(position -> {
+            if(orbitSetViewListener != null){
+                OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_NEAREST);
+                        break;
+                    case 1:
+                        orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_NORTH);
+                        break;
+                    case 2:
+                        orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_SOUTH);
+                        break;
+                    case 3:
+                        orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_EAST);
+                        break;
+                    case 4:
+                        orbitAdvanceDataBean.setEntryPoint(OrbitAdvanceDataBean.ENTRY_POINT_WEST);
+                        break;
                 }
+                orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_ENTRY_POINT);
             }
         });
         List<String> datas2 = new ArrayList<>();
@@ -469,21 +446,18 @@ public class OrbitDataSetView extends FrameLayout {
         TextView completionTitle = (TextView) advanceView.findViewById(R.id.completion_title);
         completionTitle.setText(AutelConfigManager.instance().getAppContext().getResources().getString(R.string.orbit_advanced_completion));
         completionDropSelectView = (MissionDropSelectView) advanceView.findViewById(R.id.completion_drop_select_view);
-        completionDropSelectView.setOnItemClickListener(new MissionDropViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(orbitSetViewListener != null){
-                    OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
-                    switch (position){
-                        case 0:
-                            orbitAdvanceDataBean.setCompletion(OrbitAdvanceDataBean.COMPLETION_HOVER);
-                            break;
-                        case 1:
-                            orbitAdvanceDataBean.setCompletion(OrbitAdvanceDataBean.COMPLETION_RTH);
-                            break;
-                    }
-                    orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_COMPLETION);
+        completionDropSelectView.setOnItemClickListener(position -> {
+            if(orbitSetViewListener != null){
+                OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+                switch (position){
+                    case 0:
+                        orbitAdvanceDataBean.setCompletion(OrbitAdvanceDataBean.COMPLETION_HOVER);
+                        break;
+                    case 1:
+                        orbitAdvanceDataBean.setCompletion(OrbitAdvanceDataBean.COMPLETION_RTH);
+                        break;
                 }
+                orbitSetViewListener.basicDataChange(orbitAdvanceDataBean,OrbitAdvanceDataBean.TYPE_ADVANCE_COMPLETION);
             }
         });
         List<String> datas3 = new ArrayList<>();

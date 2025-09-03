@@ -127,108 +127,99 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
         AutelLog.e("CYK:init:", "FILE_LENGTH:" + upgradeFile.length());
 
         Button buttonGetVersion = (Button) findViewById(R.id.getFirmwareVersion);
-        buttonGetVersion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String language = getResources().getConfiguration().locale.getLanguage();
+        buttonGetVersion.setOnClickListener(v -> {
+            String language = getResources().getConfiguration().locale.getLanguage();
 
-                UpgradeManager.getInstance().requestServer(language, Utils.getVersionName(XStarPremiumUpgradeActivity.this), new CallbackWithOneParam<HardwareUpgradeResultBean>() {
-                    @Override
-                    public void onSuccess(HardwareUpgradeResultBean resultBean) {
-                        List<DownloadBeanInfo> data = resultBean.getDownloadList();
-                        downloadBeanInfos.clear();
-                        downloadTaskList.clear();
+            UpgradeManager.getInstance().requestServer(language, Utils.getVersionName(XStarPremiumUpgradeActivity.this), new CallbackWithOneParam<HardwareUpgradeResultBean>() {
+                @Override
+                public void onSuccess(HardwareUpgradeResultBean resultBean) {
+                    List<DownloadBeanInfo> data = resultBean.getDownloadList();
+                    downloadBeanInfos.clear();
+                    downloadTaskList.clear();
 //                        progressMap.clear();
-                        downLoadMap.clear();
-                        AutelLog.e("CYK", "getUpgradeInfo:version:" + data.get(0).getPackage_version());
-                        downloadBeanInfos.addAll(data);
-                        StringBuilder urlStr = new StringBuilder();
-                        if (!data.isEmpty()) {
-                            for (DownloadBeanInfo d : data) {
-                                String url = d.getItemurl();
+                    downLoadMap.clear();
+                    AutelLog.e("CYK", "getUpgradeInfo:version:" + data.get(0).getPackage_version());
+                    downloadBeanInfos.addAll(data);
+                    StringBuilder urlStr = new StringBuilder();
+                    if (!data.isEmpty()) {
+                        for (DownloadBeanInfo d : data) {
+                            String url = d.getItemurl();
 //                                urlStr.append(d.getItemurl() + "\n");
-                                urlStr.append(d.getHeader_info());
-                                DownloadTask downloadTask = new DownloadTask(url, getSavePath(url));
-                                downloadTaskList.add(downloadTask);
+                            urlStr.append(d.getHeader_info());
+                            DownloadTask downloadTask = new DownloadTask(url, getSavePath(url));
+                            downloadTaskList.add(downloadTask);
 //                                progressMap.put(downloadTask.getId(), url);
-                                downLoadMap.put(downloadTask.getId(), d);
-                                AutelLog.e("CYK", "getUpgradeInfo:version:" + d.getPackage_version());
-                            }
+                            downLoadMap.put(downloadTask.getId(), d);
+                            AutelLog.e("CYK", "getUpgradeInfo:version:" + d.getPackage_version());
                         }
-                        AutelLog.e("CYK:XStarPremiumUpgradeActivity.requestServer:", urlStr.toString());
-                        Message msg = new Message();
-                        msg.what = H_T_URL;
-                        msg.obj = urlStr.toString();
-                        timeHandler.sendMessage(msg);
                     }
+                    AutelLog.e("CYK:XStarPremiumUpgradeActivity.requestServer:", urlStr.toString());
+                    Message msg = new Message();
+                    msg.what = H_T_URL;
+                    msg.obj = urlStr.toString();
+                    timeHandler.sendMessage(msg);
+                }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        Message msg = new Message();
-                        msg.what = H_T_ERROR_TOAST;
-                        msg.obj = error.getDescription();
-                        timeHandler.sendMessage(msg);
-                    }
-                });
-            }
+                @Override
+                public void onFailure(AutelError error) {
+                    Message msg = new Message();
+                    msg.what = H_T_ERROR_TOAST;
+                    msg.obj = error.getDescription();
+                    timeHandler.sendMessage(msg);
+                }
+            });
         });
 
         btn = (Button) findViewById(R.id.downloadFile);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getHttpDownloadManager(context).addDownloadCallback(XStarPremiumUpgradeActivity.this);
-                downloadLayout.removeAllViews();
-                textViewMap.clear();
-                if (!downloadBeanInfos.isEmpty()) {
-                    for (DownloadBeanInfo d : downloadBeanInfos) {
-                        TextView t = new TextView(context);
-                        t.setTag(d.getItemurl());
-                        t.setText(getName(d.getItemurl()) + ": 0%");
-                        textViewMap.put(d.getItemurl(), t);
-                        downloadLayout.addView(t);
-                    }
+        btn.setOnClickListener(v -> {
+            getHttpDownloadManager(context).addDownloadCallback(XStarPremiumUpgradeActivity.this);
+            downloadLayout.removeAllViews();
+            textViewMap.clear();
+            if (!downloadBeanInfos.isEmpty()) {
+                for (DownloadBeanInfo d : downloadBeanInfos) {
+                    TextView t = new TextView(context);
+                    t.setTag(d.getItemurl());
+                    t.setText(getName(d.getItemurl()) + ": 0%");
+                    textViewMap.put(d.getItemurl(), t);
+                    downloadLayout.addView(t);
                 }
+            }
 
-                if (!downloadTaskList.isEmpty()) {
-                    for (DownloadTask d : downloadTaskList) {
-                        AutelLog.e("CYK:DownloadTask:" + d.toContentValues().toString());
-                        getHttpDownloadManager(context).start(d);
-                    }
+            if (!downloadTaskList.isEmpty()) {
+                for (DownloadTask d : downloadTaskList) {
+                    AutelLog.e("CYK:DownloadTask:" + d.toContentValues().toString());
+                    getHttpDownloadManager(context).start(d);
                 }
             }
         });
 
         Button buttonStart = (Button) findViewById(R.id.startupgrade);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonStart.setOnClickListener(v -> {
 
-                String s = "";
-                try {
-                    s = readTextFromSDcard(new FileInputStream(new File(UPGRADE_FILE_DIR + File.separator + JSON_HEAD)));
-                } catch (Exception e) {
-                    e.printStackTrace();
+            String s = "";
+            try {
+                s = readTextFromSDcard(new FileInputStream(new File(UPGRADE_FILE_DIR + File.separator + JSON_HEAD)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            File file = new File(UPGRADE_FILE_DIR + File.separator + FILE_NAME);
+            UpgradeManager.getInstance().startUpgrade(file, testJsonHeadStr1, new CallBackWithOneParamProgressFirmwareUpgrade<UpgradeStatus>() {
+                @Override
+                public void onProgress(UpgradeStatus var) {
+                    dispatchProgress(var);
                 }
 
-                File file = new File(UPGRADE_FILE_DIR + File.separator + FILE_NAME);
-                UpgradeManager.getInstance().startUpgrade(file, testJsonHeadStr1, new CallBackWithOneParamProgressFirmwareUpgrade<UpgradeStatus>() {
-                    @Override
-                    public void onProgress(UpgradeStatus var) {
-                        dispatchProgress(var);
-                    }
+                @Override
+                public void onSuccess(UpgradeStatus data) {
 
-                    @Override
-                    public void onSuccess(UpgradeStatus data) {
+                }
 
-                    }
+                @Override
+                public void onFailure(AutelError error) {
 
-                    @Override
-                    public void onFailure(AutelError error) {
-
-                    }
-                });
-            }
+                }
+            });
         });
 
         cameraText = (TextView) findViewById(R.id.camera_progress);
@@ -242,7 +233,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
     private String readTextFromSDcard(InputStream is) throws Exception {
         InputStreamReader reader = new InputStreamReader(is);
         BufferedReader bufferedReader = new BufferedReader(reader);
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         String str;
         while ((str = bufferedReader.readLine()) != null) {
             buffer.append(str);

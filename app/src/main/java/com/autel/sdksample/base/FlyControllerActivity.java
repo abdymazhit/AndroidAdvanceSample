@@ -51,12 +51,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
     @Override
     protected void initUi() {
         beginnerSwitch = (Switch) findViewById(R.id.beginnerSwitch);
-        beginnerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setBeginnerModeState(isChecked);
-            }
-        });
+        beginnerSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> setBeginnerModeState(isChecked));
 
         fcMaxHeight = (EditText) findViewById(R.id.fcMaxHeight);
         fcMaxRange = (EditText) findViewById(R.id.fcMaxRange);
@@ -66,12 +61,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
         locationAsHomePoint_lon = (EditText) findViewById(R.id.locationAsHomePoint_lon);
 
         attiModeSwitch = (Switch) findViewById(R.id.attiModeSwitch);
-        attiModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setAttiModeEnable(isChecked);
-            }
-        });
+        attiModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> setAttiModeEnable(isChecked));
         fcLedPilotLamp = (Spinner) findViewById(R.id.fcLedPilotLamp);
         fcLedPilotLamp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

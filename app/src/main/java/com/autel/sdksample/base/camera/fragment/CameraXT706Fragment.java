@@ -187,100 +187,65 @@ public class CameraXT706Fragment extends CameraBaseFragment {
 
 
     private void initXB015Click(final View view) {
-        view.findViewById(R.id.getStateInfo).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getStateInfo).setOnClickListener(v -> xt706.getStateInfo(new CallbackWithOneParam<BaseStateInfo>() {
             @Override
-            public void onClick(View v) {
-                xt706.getStateInfo(new CallbackWithOneParam<BaseStateInfo>() {
-                    @Override
-                    public void onSuccess(BaseStateInfo state) {
-                        XB015StateInfo info = (XB015StateInfo) state;
-                        logOut("getStateInfo  :" + state+" \nresolution-> "+info.getVideoResolutionAndFrameRate().resolution.value()+" fps:"+info.getVideoResolutionAndFrameRate().fps.value());
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getStateInfo  description  " + error.getDescription());
-                    }
-                });
+            public void onSuccess(BaseStateInfo state) {
+                XB015StateInfo info = (XB015StateInfo) state;
+                logOut("getStateInfo  :" + state+" \nresolution-> "+info.getVideoResolutionAndFrameRate().resolution.value()+" fps:"+info.getVideoResolutionAndFrameRate().fps.value());
             }
-        });
 
-        view.findViewById(R.id.setAutelCameraModeListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setMediaModeListener(new CallbackWithOneParam<MediaMode>() {
-                    @Override
-                    public void onSuccess(MediaMode state) {
-                        logOut("setMediaModeListener  :" + state);
-                    }
+            public void onFailure(AutelError error) {
+                logOut("getStateInfo  description  " + error.getDescription());
+            }
+        }));
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setMediaModeListener  description  " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.resetAutelCameraModeListener).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setAutelCameraModeListener).setOnClickListener(v -> xt706.setMediaModeListener(new CallbackWithOneParam<MediaMode>() {
             @Override
-            public void onClick(View v) {
-                xt706.setMediaModeListener(null);
+            public void onSuccess(MediaMode state) {
+                logOut("setMediaModeListener  :" + state);
             }
-        });
-        view.findViewById(R.id.setInfoListener).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setInfoListener(new CallbackWithOneParam<XT706CameraInfo>() {
-                    @Override
-                    public void onSuccess(XT706CameraInfo state) {
-                        logOut("setInfoListener  :" + state);
-                    }
 
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setInfoListener  description  " + error.getDescription());
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.resetInfoListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setInfoListener(null);
+            public void onFailure(AutelError error) {
+                logOut("setMediaModeListener  description  " + error.getDescription());
             }
-        });
-
-        view.findViewById(R.id.resetHistogramListener).setOnClickListener(new View.OnClickListener() {
+        }));
+        view.findViewById(R.id.resetAutelCameraModeListener).setOnClickListener(v -> xt706.setMediaModeListener(null));
+        view.findViewById(R.id.setInfoListener).setOnClickListener(v -> xt706.setInfoListener(new CallbackWithOneParam<XT706CameraInfo>() {
             @Override
-            public void onClick(View v) {
-                xt706.setHistogramListener(null);
+            public void onSuccess(XT706CameraInfo state) {
+                logOut("setInfoListener  :" + state);
             }
-        });
 
-        view.findViewById(R.id.setHistogramListener).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setHistogramListener(new CallbackWithOneParam<int[]>() {
-                    @Override
-                    public void onSuccess(int[] ints) {
-                        StringBuffer stringBuffer = new StringBuffer("{");
-                        for (int item : ints) {
-                            stringBuffer.append(item);
-                            stringBuffer.append(",");
-                        }
-                        if (stringBuffer.length() > 1)
-                            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
-                        stringBuffer.append("}");
-                        logOut("setHistogramListener  onSuccess  " + stringBuffer);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setHistogramListener  description  " + autelError.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setInfoListener  description  " + error.getDescription());
             }
-        });
+        }));
+        view.findViewById(R.id.resetInfoListener).setOnClickListener(v -> xt706.setInfoListener(null));
+
+        view.findViewById(R.id.resetHistogramListener).setOnClickListener(v -> xt706.setHistogramListener(null));
+
+        view.findViewById(R.id.setHistogramListener).setOnClickListener(v -> xt706.setHistogramListener(new CallbackWithOneParam<int[]>() {
+            @Override
+            public void onSuccess(int[] ints) {
+                StringBuffer stringBuffer = new StringBuffer("{");
+                for (int item : ints) {
+                    stringBuffer.append(item);
+                    stringBuffer.append(",");
+                }
+                if (stringBuffer.length() > 1)
+                    stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+                stringBuffer.append("}");
+                logOut("setHistogramListener  onSuccess  " + stringBuffer);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setHistogramListener  description  " + autelError.getDescription());
+            }
+        }));
 
         final EditText digitalZoomScaleValue = (EditText) view.findViewById(R.id.digitalZoomScaleValue);
         final TextView digitalZoomScaleRange = (TextView) view.findViewById(R.id.digitalZoomScaleRange);
@@ -304,961 +269,707 @@ public class CameraXT706Fragment extends CameraBaseFragment {
             }
         });
 
-        view.findViewById(R.id.setDigitalZoomScale).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String value = digitalZoomScaleValue.getText().toString();
-                int parameter = isEmpty(value) ? 100 : Integer.valueOf(value);
-                xt706.setDigitalZoomScale(parameter, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setDigitalZoomScale  onSuccess  ");
-                    }
+        view.findViewById(R.id.setDigitalZoomScale).setOnClickListener(v -> {
+            String value = digitalZoomScaleValue.getText().toString();
+            int parameter = isEmpty(value) ? 100 : Integer.valueOf(value);
+            xt706.setDigitalZoomScale(parameter, new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+                    logOut("setDigitalZoomScale  onSuccess  ");
+                }
 
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setDigitalZoomScale  description  " + autelError.getDescription());
-                    }
-                });
-            }
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("setDigitalZoomScale  description  " + autelError.getDescription());
+                }
+            });
         });
 
-        view.findViewById(R.id.getDigitalZoomScale).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getDigitalZoomScale).setOnClickListener(v -> xt706.getDigitalZoomScale(new CallbackWithOneParam<Integer>() {
             @Override
-            public void onClick(View v) {
-                xt706.getDigitalZoomScale(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onSuccess(Integer value) {
-                        logOut("getDigitalZoomScale  onSuccess  " + value);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getDigitalZoomScale  description  " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess(Integer value) {
+                logOut("getDigitalZoomScale  onSuccess  " + value);
             }
-        });
 
-        view.findViewById(R.id.getMediaMode).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.getMediaMode(new CallbackWithOneParam<MediaMode>() {
-                    @Override
-                    public void onSuccess(final MediaMode data) {
-                        logOut("getMediaMode " + data);
-                        Activity activity = getActivity();
-                        if (null != activity)
-                            if (null != currentVideoResolutionAndFps) {
-                                shutterSpeedAdapter.setData(rangeManager.getCameraShutterSpeed());
-                                shutterList.setAdapter(shutterSpeedAdapter);
-                            }
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getMediaMode " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError autelError) {
+                logOut("getDigitalZoomScale  description  " + autelError.getDescription());
             }
-        });
+        }));
 
-
-        view.findViewById(R.id.setMediaMode).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getMediaMode).setOnClickListener(v -> xt706.getMediaMode(new CallbackWithOneParam<MediaMode>() {
             @Override
-            public void onClick(View v) {
-                xt706.setMediaMode(mediaMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setMediaMode  description  " + error.getDescription());
+            public void onSuccess(final MediaMode data) {
+                logOut("getMediaMode " + data);
+                Activity activity = getActivity();
+                if (null != activity)
+                    if (null != currentVideoResolutionAndFps) {
+                        shutterSpeedAdapter.setData(rangeManager.getCameraShutterSpeed());
+                        shutterList.setAdapter(shutterSpeedAdapter);
                     }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setMediaMode state onSuccess ");
-                        Activity activity = getActivity();
-                        if (null != activity)
-                            if (null != currentVideoResolutionAndFps) {
-                                shutterSpeedAdapter.setData(rangeManager.getCameraShutterSpeed());
-                                shutterList.setAdapter(shutterSpeedAdapter);
-                            }
-                    }
-                });
             }
-        });
 
-
-        view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String NoX = spotMeteringAreaX.getText().toString();
-                String NoY = spotMeteringAreaY.getText().toString();
-                xt706.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setSpotMeteringArea  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setSpotMeteringArea  description  " + autelError.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getMediaMode " + error.getDescription());
             }
+        }));
+
+
+        view.findViewById(R.id.setMediaMode).setOnClickListener(v -> xt706.setMediaMode(mediaMode, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setMediaMode  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setMediaMode state onSuccess ");
+                Activity activity = getActivity();
+                if (null != activity)
+                    if (null != currentVideoResolutionAndFps) {
+                        shutterSpeedAdapter.setData(rangeManager.getCameraShutterSpeed());
+                        shutterList.setAdapter(shutterSpeedAdapter);
+                    }
+            }
+        }));
+
+
+        view.findViewById(R.id.setSpotMeteringArea).setOnClickListener(v -> {
+            String NoX = spotMeteringAreaX.getText().toString();
+            String NoY = spotMeteringAreaY.getText().toString();
+            xt706.setSpotMeteringArea(isEmpty(NoX) ? 1 : Integer.valueOf(NoX), isEmpty(NoY) ? 1 : Integer.valueOf(NoY), new CallbackWithNoParam() {
+                @Override
+                public void onSuccess() {
+                    logOut("setSpotMeteringArea  onSuccess  ");
+                }
+
+                @Override
+                public void onFailure(AutelError autelError) {
+                    logOut("setSpotMeteringArea  description  " + autelError.getDescription());
+                }
+            });
         });
         view.findViewById(R.id.getSpotMeteringArea).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.getSpotMeteringArea(new CallbackWithOneParam<SpotMeteringArea>() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.getSpotMeteringArea(new CallbackWithOneParam<SpotMeteringArea>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getSpotMeteringArea  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(SpotMeteringArea data) {
-                                logOut("getSpotMeteringArea X " + data.X + "  Y " + data.Y);
-                            }
-                        });
+                    public void onFailure(AutelError error) {
+                        logOut("getSpotMeteringArea  description  " + error.getDescription());
                     }
-                });
+
+                    @Override
+                    public void onSuccess(SpotMeteringArea data) {
+                        logOut("getSpotMeteringArea X " + data.X + "  Y " + data.Y);
+                    }
+                }));
 
         view.findViewById(R.id.setExposure).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.setExposure(cameraExposureCompensation, new CallbackWithNoParam() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.setExposure(cameraExposureCompensation, new CallbackWithNoParam() {
-                            @Override
-                            public void onSuccess() {
-                                logOut("setExposure  onSuccess  ");
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("setExposure  description  " + autelError.getDescription());
-                            }
-                        });
+                    public void onSuccess() {
+                        logOut("setExposure  onSuccess  ");
                     }
-                });
+
+                    @Override
+                    public void onFailure(AutelError autelError) {
+                        logOut("setExposure  description  " + autelError.getDescription());
+                    }
+                }));
 
 
         view.findViewById(R.id.getExposure).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.getExposure(new CallbackWithOneParam<ExposureCompensation>() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.getExposure(new CallbackWithOneParam<ExposureCompensation>() {
-                            @Override
-                            public void onSuccess(ExposureCompensation cameraExposureCompensation) {
-                                logOut("getExposure  onSuccess  " + cameraExposureCompensation);
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("getExposure  description  " + autelError.getDescription());
-                            }
-                        });
+                    public void onSuccess(ExposureCompensation cameraExposureCompensation) {
+                        logOut("getExposure  onSuccess  " + cameraExposureCompensation);
                     }
-                });
+
+                    @Override
+                    public void onFailure(AutelError autelError) {
+                        logOut("getExposure  description  " + autelError.getDescription());
+                    }
+                }));
 
 
         view.findViewById(R.id.setISO).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.setISO(cameraISO, new CallbackWithNoParam() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.setISO(cameraISO, new CallbackWithNoParam() {
-                            @Override
-                            public void onSuccess() {
-                                logOut("setISO  onSuccess  ");
-                            }
-
-                            @Override
-                            public void onFailure(AutelError autelError) {
-                                logOut("setISO  description  " + autelError.getDescription());
-                            }
-                        });
+                    public void onSuccess() {
+                        logOut("setISO  onSuccess  ");
                     }
-                });
+
+                    @Override
+                    public void onFailure(AutelError autelError) {
+                        logOut("setISO  description  " + autelError.getDescription());
+                    }
+                }));
 
         view.findViewById(R.id.getISO).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.getISO(new CallbackWithOneParam<CameraISO>() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.getISO(new CallbackWithOneParam<CameraISO>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getISO  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(CameraISO data) {
-                                logOut("getISO " + data);
-                            }
-                        });
+                    public void onFailure(AutelError error) {
+                        logOut("getISO  description  " + error.getDescription());
                     }
-                });
+
+                    @Override
+                    public void onSuccess(CameraISO data) {
+                        logOut("getISO " + data);
+                    }
+                }));
 
 
         view.findViewById(R.id.setShutter).
-                setOnClickListener(new View.OnClickListener() {
+                setOnClickListener(v -> xt706.setShutter(cameraShutterSpeed, new CallbackWithNoParam() {
                     @Override
-                    public void onClick(View v) {
-                        xt706.setShutter(cameraShutterSpeed, new CallbackWithNoParam() {
+                    public void onFailure(AutelError error) {
+                        logOut("setShutter  description  " + error.getDescription());
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        logOut("setShutter state onSuccess");
+                    }
+                }));
+
+        view.findViewById(R.id.getShutter).
+                setOnClickListener(v -> xt706.getShutter(new CallbackWithOneParam<ShutterSpeed>() {
+                    @Override
+                    public void onFailure(AutelError error) {
+                        logOut("getShutter  description  " + error.getDescription());
+                    }
+
+                    @Override
+                    public void onSuccess(ShutterSpeed data) {
+                        logOut("getShutter " + data);
+                    }
+                }));
+
+        view.findViewById(R.id.setColorStyle).setOnClickListener(v -> xt706.setColorStyle(cameraColorStyle, new CallbackWithNoParam() {
+            @Override
+            public void onSuccess() {
+                logOut("setColorStyle  onSuccess  ");
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAutoExposureLockState  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getColorStyle).setOnClickListener(v -> xt706.getColorStyle(new CallbackWithOneParam<ColorStyle>() {
+            @Override
+            public void onSuccess(ColorStyle cameraColorStyle) {
+                logOut("getColorStyle  onSuccess  " + cameraColorStyle);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("getColorStyle  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setWhiteBalance).setOnClickListener(v -> {
+            String colorValueStr = ((EditText) view.findViewById(R.id.colorTemperatureValue)).getText().toString();
+            int colorValue = isEmpty(colorValueStr) ? 2000 : Integer.valueOf(colorValueStr);
+            WhiteBalance cameraWhiteBalance = new WhiteBalance();
+            cameraWhiteBalance.type = cameraWhiteBalanceType;
+            cameraWhiteBalance.colorTemperature = colorValue;
+            xt706.setWhiteBalance(cameraWhiteBalance, new CallbackWithNoParam() {
+                @Override
+                public void onFailure(AutelError error) {
+                    logOut("setWhiteBalance  description  " + error.getDescription());
+                }
+
+                @Override
+                public void onSuccess() {
+                    logOut("setWhiteBalance state onSuccess");
+                }
+            });
+        });
+
+        view.findViewById(R.id.getWhiteBalance).setOnClickListener(v -> xt706.getWhiteBalance(new CallbackWithOneParam<WhiteBalance>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getWhiteBalance  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(WhiteBalance data) {
+                logOut("getWhiteBalance " + data.type + "  colorTemperature  " + data.colorTemperature);
+            }
+        }));
+
+        view.findViewById(R.id.setAntiFlicker).setOnClickListener(v -> xt706.setAntiFlicker(cameraAntiFlicker, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setAntiFlicker  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setAntiFlicker state onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.getAntiFlicker).setOnClickListener(v -> xt706.getAntiFlicker(new CallbackWithOneParam<AntiFlicker>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getAntiFlicker  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(AntiFlicker data) {
+                logOut("getAntiFlicker " + data);
+            }
+        }));
+
+        view.findViewById(R.id.setAutoExposureLockState).setOnClickListener(v -> xt706.setAutoExposureLockState(cameraAutoExposureLockState, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setAutoExposureLockState  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setAutoExposureLockState  onSuccess  ");
+            }
+        }));
+
+        view.findViewById(R.id.getAutoExposureLockState).setOnClickListener(v -> xt706.getAutoExposureLockState(new CallbackWithOneParam<AutoExposureLockState>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getAutoExposureLockState  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(AutoExposureLockState data) {
+                logOut("getAutoExposureLockState  " + data);
+            }
+        }));
+
+        view.findViewById(R.id.isHistogramStatusEnable).setOnClickListener(v -> {
+        });
+
+        view.findViewById(R.id.setExposureMode).setOnClickListener(v -> xt706.setExposureMode(cameraExposureMode, new CallbackWithNoParam() {
+            @Override
+            public void onSuccess() {
+                logOut("setExposureMode  onSuccess  ");
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setAutoExposureLockState  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getExposureMode).setOnClickListener(v -> xt706.getExposureMode(new CallbackWithOneParam<ExposureMode>() {
+            @Override
+            public void onSuccess(ExposureMode cameraExposureMode) {
+                logOut("getExposureMode  onSuccess  " + cameraExposureMode);
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("getExposureMode  description  " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setPhotoStyle).setOnClickListener(v -> {
+            if (photoStyleType == PhotoStyleType.Custom) {
+                photoCustomStyleContrast.setVisibility(View.VISIBLE);
+                photoCustomStyleSaturation.setVisibility(View.VISIBLE);
+                photoCustomStyleSharpness.setVisibility(View.VISIBLE);
+                String contrastValue = photoCustomStyleContrast.getText().toString();
+                String saturationValue = photoCustomStyleSaturation.getText().toString();
+                String sharpnessValue = photoCustomStyleSharpness.getText().toString();
+
+                xt706.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
+                        isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
+                        isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
                             @Override
                             public void onFailure(AutelError error) {
-                                logOut("setShutter  description  " + error.getDescription());
+                                logOut("setPhotoStyle  description  " + error.getDescription());
                             }
 
                             @Override
                             public void onSuccess() {
-                                logOut("setShutter state onSuccess");
+                                logOut("setPhotoStyle state onSuccess");
                             }
                         });
-                    }
-                });
-
-        view.findViewById(R.id.getShutter).
-                setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        xt706.getShutter(new CallbackWithOneParam<ShutterSpeed>() {
-                            @Override
-                            public void onFailure(AutelError error) {
-                                logOut("getShutter  description  " + error.getDescription());
-                            }
-
-                            @Override
-                            public void onSuccess(ShutterSpeed data) {
-                                logOut("getShutter " + data);
-                            }
-                        });
-                    }
-                });
-
-        view.findViewById(R.id.setColorStyle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setColorStyle(cameraColorStyle, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setColorStyle  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAutoExposureLockState  description  " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getColorStyle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getColorStyle(new CallbackWithOneParam<ColorStyle>() {
-                    @Override
-                    public void onSuccess(ColorStyle cameraColorStyle) {
-                        logOut("getColorStyle  onSuccess  " + cameraColorStyle);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getColorStyle  description  " + autelError.getDescription());
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.setWhiteBalance).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String colorValueStr = ((EditText) view.findViewById(R.id.colorTemperatureValue)).getText().toString();
-                int colorValue = isEmpty(colorValueStr) ? 2000 : Integer.valueOf(colorValueStr);
-                WhiteBalance cameraWhiteBalance = new WhiteBalance();
-                cameraWhiteBalance.type = cameraWhiteBalanceType;
-                cameraWhiteBalance.colorTemperature = colorValue;
-                xt706.setWhiteBalance(cameraWhiteBalance, new CallbackWithNoParam() {
+            } else {
+                xt706.setPhotoStyle(photoStyleType, new CallbackWithNoParam() {
                     @Override
                     public void onFailure(AutelError error) {
-                        logOut("setWhiteBalance  description  " + error.getDescription());
+                        logOut("setPhotoStyle  description  " + error.getDescription());
                     }
 
                     @Override
                     public void onSuccess() {
-                        logOut("setWhiteBalance state onSuccess");
+                        logOut("setPhotoStyle state onSuccess");
                     }
                 });
             }
         });
 
-        view.findViewById(R.id.getWhiteBalance).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoStyle).setOnClickListener(v -> xt706.getPhotoStyle(new CallbackWithOneParam<PhotoStyle>() {
             @Override
-            public void onClick(View v) {
-                xt706.getWhiteBalance(new CallbackWithOneParam<WhiteBalance>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getWhiteBalance  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(WhiteBalance data) {
-                        logOut("getWhiteBalance " + data.type + "  colorTemperature  " + data.colorTemperature);
-                    }
-                });
+            public void onSuccess(PhotoStyle data) {
+                logOut("getPhotoStyle " + data);
             }
-        });
 
-        view.findViewById(R.id.setAntiFlicker).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setAntiFlicker(cameraAntiFlicker, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAntiFlicker  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAntiFlicker state onSuccess");
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoStyle " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.getAntiFlicker).setOnClickListener(new View.OnClickListener() {
+        ((Switch) view.findViewById(R.id.setVideoSubtitleEnable)).setOnCheckedChangeListener((buttonView, isChecked) -> xt706.setVideoSubtitleEnable(isChecked, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.getAntiFlicker(new CallbackWithOneParam<AntiFlicker>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getAntiFlicker  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(AntiFlicker data) {
-                        logOut("getAntiFlicker " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setVideoSubtitleEnable  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setAutoExposureLockState).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setAutoExposureLockState(cameraAutoExposureLockState, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAutoExposureLockState  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAutoExposureLockState  onSuccess  ");
-                    }
-                });
+            public void onSuccess() {
+                logOut("setVideoSubtitleEnable onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.getAutoExposureLockState).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.isSubtitleEnable).setOnClickListener(v -> xt706.isSubtitleEnable(new CallbackWithOneParam<Boolean>() {
             @Override
-            public void onClick(View v) {
-                xt706.getAutoExposureLockState(new CallbackWithOneParam<AutoExposureLockState>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getAutoExposureLockState  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(AutoExposureLockState data) {
-                        logOut("getAutoExposureLockState  " + data);
-                    }
-                });
+            public void onSuccess(Boolean data) {
+                logOut("isSubtitleEnable " + data);
             }
-        });
 
-        view.findViewById(R.id.isHistogramStatusEnable).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onFailure(AutelError error) {
+                logOut("isSubtitleEnable " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.setExposureMode).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setPhotoBurstCount).setOnClickListener(v -> xt706.setPhotoBurstCount(photoBurstCount, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.setExposureMode(cameraExposureMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setExposureMode  onSuccess  ");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setAutoExposureLockState  description  " + autelError.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setPhotoBurstCount  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getExposureMode).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.getExposureMode(new CallbackWithOneParam<ExposureMode>() {
-                    @Override
-                    public void onSuccess(ExposureMode cameraExposureMode) {
-                        logOut("getExposureMode  onSuccess  " + cameraExposureMode);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("getExposureMode  description  " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("setPhotoBurstCount state onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.setPhotoStyle).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoBurstCount).setOnClickListener(v -> xt706.getPhotoBurstCount(new CallbackWithOneParam<PhotoBurstCount>() {
             @Override
-            public void onClick(View v) {
-                if (photoStyleType == PhotoStyleType.Custom) {
-                    photoCustomStyleContrast.setVisibility(View.VISIBLE);
-                    photoCustomStyleSaturation.setVisibility(View.VISIBLE);
-                    photoCustomStyleSharpness.setVisibility(View.VISIBLE);
-                    String contrastValue = photoCustomStyleContrast.getText().toString();
-                    String saturationValue = photoCustomStyleSaturation.getText().toString();
-                    String sharpnessValue = photoCustomStyleSharpness.getText().toString();
+            public void onFailure(AutelError error) {
+                logOut("getPhotoBurstCount  description  " + error.getDescription());
+            }
 
-                    xt706.setPhotoStyle(isEmpty(contrastValue) ? 1 : Integer.valueOf(contrastValue),
-                            isEmpty(saturationValue) ? 2 : Integer.valueOf(saturationValue),
-                            isEmpty(sharpnessValue) ? 3 : Integer.valueOf(sharpnessValue), new CallbackWithNoParam() {
-                                @Override
-                                public void onFailure(AutelError error) {
-                                    logOut("setPhotoStyle  description  " + error.getDescription());
-                                }
+            @Override
+            public void onSuccess(PhotoBurstCount data) {
+                logOut("getPhotoBurstCount " + data);
+            }
+        }));
 
-                                @Override
-                                public void onSuccess() {
-                                    logOut("setPhotoStyle state onSuccess");
-                                }
-                            });
-                } else {
-                    xt706.setPhotoStyle(photoStyleType, new CallbackWithNoParam() {
+        view.findViewById(R.id.setPhotoTimelapseInterval).setOnClickListener(v -> xt706.setPhotoTimelapseInterval(photoTimelapseInterval, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setPhotoTimelapseInterval  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setPhotoTimelapseInterval state onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.getPhotoTimelapseInterval).setOnClickListener(v -> xt706.getPhotoTimelapseInterval(new CallbackWithOneParam<PhotoTimelapseInterval>() {
+            @Override
+            public void onSuccess(PhotoTimelapseInterval data) {
+                logOut("getPhotoTimelapseInterval " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getPhotoTimelapseInterval " + error.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setPhotoAEBCount).setOnClickListener(v -> xt706.setPhotoAEBCount(photoAEBCount, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setPhotoAEBCount  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setPhotoAEBCount state onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.getPhotoAEBCount).setOnClickListener(v -> xt706.getPhotoAEBCount(new CallbackWithOneParam<PhotoAEBCount>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getPhotoAEBCount  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(PhotoAEBCount data) {
+                logOut("getPhotoAEBCount " + data);
+            }
+        }));
+
+        view.findViewById(R.id.setVideoEncodeFormat).setOnClickListener(v -> xt706.setVideoEncodeFormat(videoEncoding, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setVideoEncoder  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setVideoEncoder onSuccess");
+            }
+        }));
+
+        view.findViewById(R.id.getVideoEncodeFormat).setOnClickListener(v -> xt706.getVideoEncodeFormat(new CallbackWithOneParam<VideoEncodeFormat>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getVideoEncodeFormat  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(VideoEncodeFormat data) {
+                logOut("getVideoEncodeFormat " + data);
+            }
+        }));
+
+        view.findViewById(R.id.getVideoSum).setOnClickListener(v -> xt706.getVideoSum(new CallbackWithOneParam<VideoSum>() {
+            @Override
+            public void onSuccess(VideoSum data) {
+                logOut("getVideoSum " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getVideoSum " + error.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getLeftPhotoSum).setOnClickListener(v -> xt706.getLeftPhotoSum(new CallbackWithOneParam<Integer>() {
+            @Override
+            public void onSuccess(Integer data) {
+                logOut("getPhotoSum " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getPhotoSum " + error.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setVideoFormat).setOnClickListener(v -> xt706.setVideoFormat(videoFormat, new CallbackWithNoParam() {
+            @Override
+            public void onSuccess() {
+                logOut("setVideoFormat onSuccess");
+            }
+
+            @Override
+            public void onFailure(AutelError autelError) {
+                logOut("setVideoFormat " + autelError.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.getVideoFormat).setOnClickListener(v -> xt706.getVideoFormat(new CallbackWithOneParam<VideoFormat>() {
+            @Override
+            public void onSuccess(VideoFormat data) {
+                logOut("getVideoFormat " + data);
+            }
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getVideoFormat " + error.getDescription());
+            }
+        }));
+
+        view.findViewById(R.id.setVideoStandard).setOnClickListener(v -> xt706.setVideoStandard(selectedVideoStandard, new CallbackWithNoParam() {
+
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setVideoStandard  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setVideoStandard state onSuccess");
+                currentVideoStandard = selectedVideoStandard;
+                initVideoResolutionFpsList();
+            }
+        }));
+
+        view.findViewById(R.id.getVideoStandard).setOnClickListener(v -> xt706.getVideoStandard(new CallbackWithOneParam<VideoStandard>() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("getVideoStandard  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess(VideoStandard data) {
+                logOut("getVideoStandard " + data);
+                currentVideoStandard = data;
+                initVideoResolutionFpsList();
+            }
+        }));
+
+        view.findViewById(R.id.setPhotoFormat).setOnClickListener(v -> xt706.setPhotoFormat(photoFormat, new CallbackWithNoParam() {
+            @Override
+            public void onFailure(AutelError error) {
+                logOut("setPhotoFormat  description  " + error.getDescription());
+            }
+
+            @Override
+            public void onSuccess() {
+                logOut("setPhotoFormat state onSuccess");
+                if (null != xt706) {
+                    xt706.getPhotoFormat(new CallbackWithOneParam<PhotoFormat>() {
                         @Override
                         public void onFailure(AutelError error) {
-                            logOut("setPhotoStyle  description  " + error.getDescription());
                         }
 
                         @Override
-                        public void onSuccess() {
-                            logOut("setPhotoStyle state onSuccess");
+                        public void onSuccess(PhotoFormat data) {
+                            currentPhotoFormat = data;
+                            if (null != xt706) {
+                                photoTimelapseIntervalList.setAdapter(new PhotoTimelapseIntervalAdapter(getContext(),
+                                        xt706.getParameterRangeManager().getPhotoTimelapseInterval()));
+                            }
                         }
                     });
                 }
             }
-        });
+        }));
 
-        view.findViewById(R.id.getPhotoStyle).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getPhotoFormat).setOnClickListener(v -> xt706.getPhotoFormat(new CallbackWithOneParam<PhotoFormat>() {
             @Override
-            public void onClick(View v) {
-                xt706.getPhotoStyle(new CallbackWithOneParam<PhotoStyle>() {
-                    @Override
-                    public void onSuccess(PhotoStyle data) {
-                        logOut("getPhotoStyle " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoStyle " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPhotoFormat  description  " + error.getDescription());
             }
-        });
 
-        ((Switch) view.findViewById(R.id.setVideoSubtitleEnable)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                xt706.setVideoSubtitleEnable(isChecked, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setVideoSubtitleEnable  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoSubtitleEnable onSuccess");
-                    }
-                });
+            public void onSuccess(PhotoFormat data) {
+                logOut("getPhotoFormat " + data);
+                currentPhotoFormat = data;
+                if (null != xt706) {
+                    photoTimelapseIntervalList.setAdapter(new PhotoTimelapseIntervalAdapter(getContext(),
+                            xt706.getParameterRangeManager().getPhotoTimelapseInterval()));
+                }
             }
-        });
+        }));
 
-        view.findViewById(R.id.isSubtitleEnable).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setAspectRatio).setOnClickListener(v -> xt706.setAspectRatio(aspectRatio, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.isSubtitleEnable(new CallbackWithOneParam<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean data) {
-                        logOut("isSubtitleEnable " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("isSubtitleEnable " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setAspectRatio  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setPhotoBurstCount).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setPhotoBurstCount(photoBurstCount, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoBurstCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoBurstCount state onSuccess");
-                    }
-                });
+            public void onSuccess() {
+                logOut("setAspectRatio state onSuccess");
             }
-        });
+        }));
 
-        view.findViewById(R.id.getPhotoBurstCount).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getAspectRatio).setOnClickListener(v -> xt706.getAspectRatio(new CallbackWithOneParam<PhotoAspectRatio>() {
             @Override
-            public void onClick(View v) {
-                xt706.getPhotoBurstCount(new CallbackWithOneParam<PhotoBurstCount>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoBurstCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoBurstCount data) {
-                        logOut("getPhotoBurstCount " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getAspectRatio  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setPhotoTimelapseInterval).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setPhotoTimelapseInterval(photoTimelapseInterval, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoTimelapseInterval  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoTimelapseInterval state onSuccess");
-                    }
-                });
+            public void onSuccess(PhotoAspectRatio data) {
+                logOut("getAspectRatio " + data.toFormat());
             }
-        });
+        }));
 
-        view.findViewById(R.id.getPhotoTimelapseInterval).setOnClickListener(new View.OnClickListener() {
+
+        view.findViewById(R.id.getRealTimeVideoResolution).setOnClickListener(v -> {
+        });
+        view.findViewById(R.id.setRealTimeVideoResolution).setOnClickListener(v -> {
+        });
+        view.findViewById(R.id.getPIVMode).setOnClickListener(v -> xt706.getPIVMode(new CallbackWithOneParam<PIVMode>() {
             @Override
-            public void onClick(View v) {
-                xt706.getPhotoTimelapseInterval(new CallbackWithOneParam<PhotoTimelapseInterval>() {
-                    @Override
-                    public void onSuccess(PhotoTimelapseInterval data) {
-                        logOut("getPhotoTimelapseInterval " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoTimelapseInterval " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getPIVMode  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setPhotoAEBCount).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setPhotoAEBCount(photoAEBCount, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoAEBCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoAEBCount state onSuccess");
-                    }
-                });
+            public void onSuccess(PIVMode mode) {
+                logOut("getPIVMode onSuccess " + mode);
             }
-        });
-
-        view.findViewById(R.id.getPhotoAEBCount).setOnClickListener(new View.OnClickListener() {
+        }));
+        view.findViewById(R.id.setPIVMode).setOnClickListener(v -> xt706.setPIVMode(pivMode, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.getPhotoAEBCount(new CallbackWithOneParam<PhotoAEBCount>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoAEBCount  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoAEBCount data) {
-                        logOut("getPhotoAEBCount " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setPIVMode  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setVideoEncodeFormat).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setVideoEncodeFormat(videoEncoding, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setVideoEncoder  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoEncoder onSuccess");
-                    }
-                });
+            public void onSuccess() {
+                logOut("setPIVMode onSuccess");
             }
-        });
-
-        view.findViewById(R.id.getVideoEncodeFormat).setOnClickListener(new View.OnClickListener() {
+        }));
+        view.findViewById(R.id.setAutoPIVTimelapseInterval).setOnClickListener(v -> xt706.setAutoPIVTimelapseInterval(snapshotTimelapseInterval, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.getVideoEncodeFormat(new CallbackWithOneParam<VideoEncodeFormat>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoEncodeFormat  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(VideoEncodeFormat data) {
-                        logOut("getVideoEncodeFormat " + data);
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setAutoPIVTimelapseInterval  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.getVideoSum).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.getVideoSum(new CallbackWithOneParam<VideoSum>() {
-                    @Override
-                    public void onSuccess(VideoSum data) {
-                        logOut("getVideoSum " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoSum " + error.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("setAutoPIVTimelapseInterval onSuccess");
             }
+        }));
+
+        view.findViewById(R.id.getAutoPIVTimelapseInterval).setOnClickListener(v -> {
         });
 
-        view.findViewById(R.id.getLeftPhotoSum).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.setVideoResolutionAndFrameRate).setOnClickListener(v -> xt706.setVideoResolutionAndFrameRate(videoResolutionAndFps, new CallbackWithNoParam() {
             @Override
-            public void onClick(View v) {
-                xt706.getLeftPhotoSum(new CallbackWithOneParam<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
-                        logOut("getPhotoSum " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoSum " + error.getDescription());
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("setVideoResolutionAndFrameRate  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setVideoFormat).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setVideoFormat(videoFormat, new CallbackWithNoParam() {
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoFormat onSuccess");
-                    }
-
-                    @Override
-                    public void onFailure(AutelError autelError) {
-                        logOut("setVideoFormat " + autelError.getDescription());
-                    }
-                });
+            public void onSuccess() {
+                logOut("setVideoResolutionAndFrameRate onSuccess");
+                currentVideoResolutionAndFps = videoResolutionAndFps;
+                initShuttleSpeedList();
             }
-        });
+        }));
 
-        view.findViewById(R.id.getVideoFormat).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getSkylinePositionData).setOnClickListener(v -> xt706.getSkylinePositionData(100, 100, new CallbackWithOneParam<SkylinePositionData>() {
             @Override
-            public void onClick(View v) {
-                xt706.getVideoFormat(new CallbackWithOneParam<VideoFormat>() {
-                    @Override
-                    public void onSuccess(VideoFormat data) {
-                        logOut("getVideoFormat " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoFormat " + error.getDescription());
-                    }
-                });
+            public void onSuccess(SkylinePositionData data) {
+                logOut("getSkylinePositionData  " + data);
             }
-        });
 
-        view.findViewById(R.id.setVideoStandard).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setVideoStandard(selectedVideoStandard, new CallbackWithNoParam() {
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setVideoStandard  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoStandard state onSuccess");
-                        currentVideoStandard = selectedVideoStandard;
-                        initVideoResolutionFpsList();
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getSkylinePositionData  description  " + error.getDescription());
             }
-        });
+        }));
 
-        view.findViewById(R.id.getVideoStandard).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.getVideoResolutionAndFrameRate).setOnClickListener(v -> xt706.getVideoResolutionAndFrameRate(new CallbackWithOneParam<VideoResolutionAndFps>() {
             @Override
-            public void onClick(View v) {
-                xt706.getVideoStandard(new CallbackWithOneParam<VideoStandard>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoStandard  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(VideoStandard data) {
-                        logOut("getVideoStandard " + data);
-                        currentVideoStandard = data;
-                        initVideoResolutionFpsList();
-                    }
-                });
+            public void onFailure(AutelError error) {
+                logOut("getVideoResolutionAndFrameRate  description  " + error.getDescription());
             }
-        });
 
-        view.findViewById(R.id.setPhotoFormat).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                xt706.setPhotoFormat(photoFormat, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPhotoFormat  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPhotoFormat state onSuccess");
-                        if (null != xt706) {
-                            xt706.getPhotoFormat(new CallbackWithOneParam<PhotoFormat>() {
-                                @Override
-                                public void onFailure(AutelError error) {
-                                }
-
-                                @Override
-                                public void onSuccess(PhotoFormat data) {
-                                    currentPhotoFormat = data;
-                                    if (null != xt706) {
-                                        photoTimelapseIntervalList.setAdapter(new PhotoTimelapseIntervalAdapter(getContext(),
-                                                xt706.getParameterRangeManager().getPhotoTimelapseInterval()));
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
+            public void onSuccess(VideoResolutionAndFps data) {
+                logOut("getVideoResolutionAndFrameRate " + data);
+                currentVideoResolutionAndFps = data;
+                initShuttleSpeedList();
             }
-        });
-
-        view.findViewById(R.id.getPhotoFormat).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getPhotoFormat(new CallbackWithOneParam<PhotoFormat>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPhotoFormat  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoFormat data) {
-                        logOut("getPhotoFormat " + data);
-                        currentPhotoFormat = data;
-                        if (null != xt706) {
-                            photoTimelapseIntervalList.setAdapter(new PhotoTimelapseIntervalAdapter(getContext(),
-                                    xt706.getParameterRangeManager().getPhotoTimelapseInterval()));
-                        }
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.setAspectRatio).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setAspectRatio(aspectRatio, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAspectRatio  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAspectRatio state onSuccess");
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getAspectRatio).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getAspectRatio(new CallbackWithOneParam<PhotoAspectRatio>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getAspectRatio  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PhotoAspectRatio data) {
-                        logOut("getAspectRatio " + data.toFormat());
-                    }
-                });
-            }
-        });
-
-
-        view.findViewById(R.id.getRealTimeVideoResolution).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        view.findViewById(R.id.setRealTimeVideoResolution).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-        view.findViewById(R.id.getPIVMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getPIVMode(new CallbackWithOneParam<PIVMode>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getPIVMode  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(PIVMode mode) {
-                        logOut("getPIVMode onSuccess " + mode);
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.setPIVMode).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setPIVMode(pivMode, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setPIVMode  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setPIVMode onSuccess");
-                    }
-                });
-            }
-        });
-        view.findViewById(R.id.setAutoPIVTimelapseInterval).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setAutoPIVTimelapseInterval(snapshotTimelapseInterval, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setAutoPIVTimelapseInterval  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setAutoPIVTimelapseInterval onSuccess");
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getAutoPIVTimelapseInterval).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-        view.findViewById(R.id.setVideoResolutionAndFrameRate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.setVideoResolutionAndFrameRate(videoResolutionAndFps, new CallbackWithNoParam() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("setVideoResolutionAndFrameRate  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        logOut("setVideoResolutionAndFrameRate onSuccess");
-                        currentVideoResolutionAndFps = videoResolutionAndFps;
-                        initShuttleSpeedList();
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getSkylinePositionData).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getSkylinePositionData(100, 100, new CallbackWithOneParam<SkylinePositionData>() {
-                    @Override
-                    public void onSuccess(SkylinePositionData data) {
-                        logOut("getSkylinePositionData  " + data);
-                    }
-
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getSkylinePositionData  description  " + error.getDescription());
-                    }
-                });
-            }
-        });
-
-        view.findViewById(R.id.getVideoResolutionAndFrameRate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xt706.getVideoResolutionAndFrameRate(new CallbackWithOneParam<VideoResolutionAndFps>() {
-                    @Override
-                    public void onFailure(AutelError error) {
-                        logOut("getVideoResolutionAndFrameRate  description  " + error.getDescription());
-                    }
-
-                    @Override
-                    public void onSuccess(VideoResolutionAndFps data) {
-                        logOut("getVideoResolutionAndFrameRate " + data);
-                        currentVideoResolutionAndFps = data;
-                        initShuttleSpeedList();
-                    }
-                });
-            }
-        });
+        }));
 
         videoResolutionAndFrameRateList = (Spinner) view.findViewById(R.id.videoResolutionAndFrameRateList);
         videoResolutionFpsAdapter = new VideoResolutionFpsAdapter(getContext());

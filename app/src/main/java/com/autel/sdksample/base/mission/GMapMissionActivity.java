@@ -41,13 +41,10 @@ public class GMapMissionActivity extends MapActivity {
             gMapView.onCreate(savedInstanceState);
         } catch (Exception e) {
         }
-        gMapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                mGmap = googleMap;
-                mGmap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                attachTapListener();
-            }
+        gMapView.getMapAsync(googleMap -> {
+            mGmap = googleMap;
+            mGmap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            attachTapListener();
         });
     }
 
@@ -88,21 +85,13 @@ public class GMapMissionActivity extends MapActivity {
 
     private void attachTapListener() {
         if(null != mGmap) {
-            mGmap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                @Override
-                public void onMapClick(LatLng latLng) {
-                    onAbsMapClick(latLng.latitude, latLng.longitude);
+            mGmap.setOnMapClickListener(latLng -> onAbsMapClick(latLng.latitude, latLng.longitude));
+            mGmap.setOnMarkerClickListener(marker -> {
+                int index = mMarkerList.indexOf(marker);
+                if (index >= 0 && index < mMarkerList.size()) {
+                    markerClick(index);
                 }
-            });
-            mGmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    int index = mMarkerList.indexOf(marker);
-                    if (index >= 0 && index < mMarkerList.size()) {
-                        markerClick(index);
-                    }
-                    return true;
-                }
+                return true;
             });
         }
     }
@@ -134,12 +123,7 @@ public class GMapMissionActivity extends MapActivity {
     protected void updateAircraftLocation(double lat, double lot, final AttitudeInfo info) {
         AutelLatLng latLng = MapRectifyUtil.wgs2gcj(new AutelLatLng(lat, lot));
         final LatLng lng = new LatLng(latLng.latitude, latLng.longitude);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                drawDroneMarker(lng, info);
-            }
-        });
+        runOnUiThread(() -> drawDroneMarker(lng, info));
     }
 
 
