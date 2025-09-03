@@ -78,16 +78,10 @@ public class MapFragment extends Fragment {
 
     public void connect(AutelProductType type) {
         if(type != AutelProductType.UNKNOWN){
-            /*if(mRequestManager != null){
-                mRequestManager.enableLongListener(true);
-            }*/
         }
     }
 
     public void disconnect() {
-        /*if(mRequestManager != null){
-            mRequestManager.enableLongListener(false);
-        }*/
     }
 
     public interface OnMapFragmentListener{
@@ -111,11 +105,6 @@ public class MapFragment extends Fragment {
         @Override
         public void onLocationChanged(Location location) {
             PhoneGPS.setPhoneGPS(location);
-           /* if(mapRequest != null){
-                mapRequest.setPhoneLocation(location);
-                mapRequest.initMapToPhoneLocation();
-                mapRequest.updateFollowLocation(location);
-            }*/
         }
 
         @Override
@@ -145,9 +134,6 @@ public class MapFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            /*if(mapRequest != null){
-                mapRequest.initMapToNetLocation(location);
-            }*/
         }
 
         @Override
@@ -188,9 +174,6 @@ public class MapFragment extends Fragment {
             public void onMapReady() {
                 isMapReadyState = true;
                 if(isWaitForMapReadyState){
-                    /*if(mRequestManager != null){
-                        initMapListener();
-                    }*/
                 }
                 registerNetLocationGps();
             }
@@ -242,13 +225,6 @@ public class MapFragment extends Fragment {
         }
 
         mapViewUtil.onResume();
-        /*if(mRequestManager != null){
-            if(isMapReadyState){
-                initMapListener();
-            }else{
-                isWaitForMapReadyState = true;
-            }
-        }*/
         initPhoneGPS();
         Activity activity = getActivity();
         registerHighAccuracyGps();

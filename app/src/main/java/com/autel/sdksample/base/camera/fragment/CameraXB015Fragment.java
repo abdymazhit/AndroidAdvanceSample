@@ -201,17 +201,6 @@ public class CameraXB015Fragment extends CameraBaseFragment {
                         logOut("getStateInfo  description  " + error.getDescription());
                     }
                 });
-//                xb015.setSettingChangedListener(new CallbackWithOneParam<SettingEvent>() {
-//                    @Override
-//                    public void onSuccess( SettingEvent data ) {
-//                        logOut("setSettingChangedListener  :" + data);
-//                    }
-//
-//                    @Override
-//                    public void onFailure( AutelError error ) {
-//                        logOut("setSettingChangedListener  :" + error);
-//                    }
-//                });
             }
         });
 

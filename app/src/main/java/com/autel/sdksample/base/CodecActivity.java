@@ -167,11 +167,6 @@ public class CodecActivity extends BaseActivity<AutelCodec> {
             content_layout.removeAllViews();
             content_layout.setVisibility(View.GONE);
 
-//            if (null != mController) {
-//                mController.cancel();
-//                mController.setCodecListener(null, null);
-//            }
-
             return;
         }
 

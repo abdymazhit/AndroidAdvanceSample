@@ -125,12 +125,6 @@ public class G2Layout {
                 mContext.startActivity(new Intent(mContext,TestActivity.class));
             }
         });
-//        mLayout.findViewById(R.id.visualTest).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mContext.startActivity(new Intent(mContext, DynamicTrackActivity.class));
-//            }
-//        });
         mLayout.findViewById(R.id.upgradeTest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

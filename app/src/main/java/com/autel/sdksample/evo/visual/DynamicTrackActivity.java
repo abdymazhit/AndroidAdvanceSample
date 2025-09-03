@@ -98,29 +98,6 @@ public class DynamicTrackActivity extends BaseActivity<AutelCameraManager> {
 
     @Override
     protected void initUi() {
- /*       cameraType = (TextView) findViewById(R.id.cameraStatus);
-        dynamicTrackView = (DynamicTrackView) findViewById(R.id.intelTrack);
-        mAutelCodecView = (AutelCodecView) findViewById(R.id.codeView);
-        trackingModeBtn = (Button) findViewById(R.id.setTrackingFlightMode);
-        spinner = (Spinner) findViewById(R.id.trackingModeSpinner);
-        tvStop = (TextView) findViewById(R.id.tvStop);
-        dynamicTrackView.setCameraPreview(mAutelCodecView);
-        setListener();
-        AutelCodecView.setOnRenderFrameInfoListener(new OnRenderFrameInfoListener() {
-            @Override
-            public void onRenderFrameTimestamp(long pts) {
-
-            }
-
-            @Override
-            public void onRenderFrameSizeChanged(int width, int height) {
-                realWidth = width;
-                realHeight = height;
-                AutelLog.b().d("width:"+width+"  height:"+height);
-//                updateVideoFrameViewsSize(width,height);
-            }
-
-        });*/
     }
 
     private void updateVideoFrameViewsSize(int width, int height) {
@@ -255,19 +232,6 @@ public class DynamicTrackActivity extends BaseActivity<AutelCameraManager> {
 
 
     private void initListener() {
-//        VisualModelManager.instance().setTrackingMode(TrackMode.ENTER_TRACK, new CallbackWithOneParam<Boolean>() {
-//            @Override
-//            public void onSuccess(Boolean data) {
-//                if (data) {
-//                    Toast.makeText(DynamicTrackActivity.this, "setTrackingMode onSuccess "+data, Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(AutelError error) {
-//
-//            }
-//        });
         if (null == autelCameraManager) {
             return;
         }

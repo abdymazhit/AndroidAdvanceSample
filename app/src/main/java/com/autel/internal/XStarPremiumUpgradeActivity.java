@@ -203,58 +203,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                isEmpty = false;
-//                timeHandler.sendEmptyMessageDelayed(H_T_TIME, 0);
-//                List<File> files = new ArrayList<>();
-//                for (DownloadBeanInfo d : downloadBeanInfos) {
-//                    String url = d.getItemurl();
-//                    File f = new File(UPGRADE_FILE_DIR, getName(url));
-//                    if (f.exists() && f.isFile() && Long.compare(f.length(), d.getItemsize()) == 0) {
-//                        files.add(f);
-//                    }
-//                }
-//
-//                if (files.size() == 0) {
-//                    files.add(upgradeFile);
-//                }
 
-//                if (upgradeFile.exists()) {
-//                    UpgradeManager.getInstance().startUpgrade(files, new CallBackWithOneParamProgressFirmwareUpgrade<UpgradeStatus>() {
-//                        @Override
-//                        public void onProgress(UpgradeStatus upgradeStatus) {
-//                            dispatchProgress(upgradeStatus);
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(UpgradeStatus data) {
-//                            AutelLog.e("CYK", "startUpgrade:onSuccess:" + data.getUcDevUpGradeFlag());
-//                        }
-//
-//                        @Override
-//                        public void onFailure(AutelError error) {
-//                            AutelLog.e("CYK", "startUpgrade:onFailure:" + error.getDescription());
-//                        }
-//                    });
-//                }
-
-//                totalSize = 0;
-//                File f = new File(UPGRADE_FILE_DIR + File.separator + FILE_DIR);
-//                if (f.isDirectory()) {
-//                    dirFiles.clear();
-//                    File[] fileArray = f.listFiles();
-//                    if (fileArray.length > 0) {
-//                        for (File file : fileArray) {
-//                            totalSize += file.length();
-//                            dirFiles.add(file);
-//                        }
-//                    }
-//                    Message msg = new Message();
-//                    msg.what = UPGRADE_START;
-//                    msg.arg1 = 0;
-//                    msg.arg2 = dirFiles.size();
-//                    msg.obj = dirFiles.get(0);
-//                    timeHandler.sendMessage(msg);
-//                }
                 String s = "";
                 try {
                     s = readTextFromSDcard(new FileInputStream(new File(UPGRADE_FILE_DIR + File.separator + JSON_HEAD)));
@@ -686,46 +635,6 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
                     final int startIndex1 = msg.arg1;
                     final int fileSize1 = msg.arg2;
                     File sendFile = dirFiles.get(startIndex1);
-//                    UpgradeManager.getInstance().sendUpgradeFile(sendFile, new CallBackWithOneParamProgressFirmwareUpgrade<UpgradeStatus>() {
-//                        @Override
-//                        public void onProgress(UpgradeStatus var) {
-//                            AutelLog.e("CYK:sendUpgradeFile:" + "UpgradeStatus:" + var.toString());
-//                            dispatchProgress(var);
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(UpgradeStatus data) {
-//                            AutelLog.e("CYK:sendUpgradeFile:" + "onSuccess:index:" + startIndex1 + "  fileSize:" + fileSize1);
-//                            if (startIndex1 + 1 < getMin()) {
-//                                int index = startIndex1;
-//                                index++;
-//                                Message msg = new Message();
-//                                msg.what = UPGRADE_START;
-//                                msg.arg1 = index;
-//                                msg.arg2 = fileSize1;
-//                                timeHandler.sendMessage(msg);
-//                                errorCount = ERROR_COUNT;
-//                            } else if (!isEmpty) {
-//                                Message msg = new Message();
-//                                msg.what = UPGRADE_EMPTY_START;
-//                                msg.arg1 = startIndex1 + 1;
-//                                timeHandler.sendMessage(msg);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(AutelError error) {
-//                            AutelLog.e("CYK:sendUpgradeFile:" + "onFailure:" + error.getDescription());
-//                            if (startIndex1 + 1 < getMin() && errorCount > 0) {
-//                                Message msg = new Message();
-//                                msg.what = UPGRADE_START;
-//                                msg.arg1 = startIndex1;
-//                                msg.arg2 = fileSize1;
-//                                timeHandler.sendMessage(msg);
-//                                errorCount--;
-//                            }
-//                        }
-//                    });
                     break;
                 case UPGRADE_EMPTY_START:
                     isEmpty = true;

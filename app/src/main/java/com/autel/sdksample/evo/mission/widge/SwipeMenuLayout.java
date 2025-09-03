@@ -356,9 +356,6 @@ public class SwipeMenuLayout extends ViewGroup {
                     }
                     //2016 10 22 add , 仿QQ，侧滑菜单展开时，点击内容区域，关闭侧滑菜单。end
                     //如果scroller还没有滑动结束 停止滑动动画
-/*                    if (!mScroller.isFinished()) {
-                        mScroller.abortAnimation();
-                    }*/
                     scrollBy((int) (gap), 0);//滑动使用scrollBy
                     //越界修正
                     if (isLeftSwipe) {//左滑
@@ -501,8 +498,6 @@ public class SwipeMenuLayout extends ViewGroup {
 
     public void smoothExpand() {
         //Log.d(TAG, "smoothExpand() called" + this);
-        /*mScroller.startScroll(getScrollX(), 0, mRightMenuWidths - getScrollX(), 0);
-        invalidate();*/
         //展开就加入ViewCache：
         mViewCache = SwipeMenuLayout.this;
 
@@ -546,8 +541,6 @@ public class SwipeMenuLayout extends ViewGroup {
      */
     public void smoothClose() {
         //Log.d(TAG, "smoothClose() called" + this);
-/*        mScroller.startScroll(getScrollX(), 0, -getScrollX(), 0);
-        invalidate();*/
         mViewCache = null;
 
         //2016 11 13 add 侧滑菜单展开，屏蔽content长按
@@ -624,15 +617,6 @@ public class SwipeMenuLayout extends ViewGroup {
     }
 
     //平滑滚动 弃用 改属性动画实现
-/*    @Override
-    public void computeScroll() {
-        //判断Scroller是否执行完毕：
-        if (mScroller.computeScrollOffset()) {
-            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            //通知View重绘-invalidate()->onDraw()->computeScroll()
-            invalidate();
-        }
-    }*/
 
     /**
      * 快速关闭。

@@ -208,17 +208,6 @@ public class CameraXT701Fragment extends CameraBaseFragment {
                         logOut("getStateInfo  description  " + error.getDescription());
                     }
                 });
-//                xb015.setSettingChangedListener(new CallbackWithOneParam<SettingEvent>() {
-//                    @Override
-//                    public void onSuccess( SettingEvent data ) {
-//                        logOut("setSettingChangedListener  :" + data);
-//                    }
-//
-//                    @Override
-//                    public void onFailure( AutelError error ) {
-//                        logOut("setSettingChangedListener  :" + error);
-//                    }
-//                });
             }
         });
 
@@ -808,17 +797,6 @@ public class CameraXT701Fragment extends CameraBaseFragment {
         view.findViewById(R.id.isHistogramStatusEnable).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                xb015.isHistogramEnable(new CallbackWithOneParam<Boolean>() {
-//                    @Override
-//                    public void onSuccess(Boolean data) {
-//                        logOut("isHistogramEnable " + data);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("isHistogramEnable " + error.getDescription());
-//                    }
-//                });
             }
         });
 
@@ -1283,33 +1261,11 @@ public class CameraXT701Fragment extends CameraBaseFragment {
         view.findViewById(R.id.getRealTimeVideoResolution).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                xb015.getRealTimeVideoResolution(new CallbackWithOneParam<RealTimeVideoResolution>() {
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("getRealTimeVideoResolution  description  " + error.getDescription());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(RealTimeVideoResolution data) {
-//                        logOut("getRealTimeVideoResolution " + data);
-//                    }
-//                });
             }
         });
         view.findViewById(R.id.setRealTimeVideoResolution).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                xb015.setRealTimeVideoResolution(realTimeVideoResolution, new CallbackWithNoParam() {
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("setRealTimeVideoResolution  description  " + error.getDescription());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess() {
-//                        logOut("setRealTimeVideoResolution onSuccess");
-//                    }
-//                });
             }
         });
         view.findViewById(R.id.getPIVMode).setOnClickListener(new View.OnClickListener() {
@@ -1364,17 +1320,6 @@ public class CameraXT701Fragment extends CameraBaseFragment {
         view.findViewById(R.id.getAutoPIVTimelapseInterval).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                xb015.getAutoPIVTimelapseInterval(new CallbackWithOneParam<VideoSnapshotTimelapseInterval>() {
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("getAutoPIVTimelapseInterval  description  " + error.getDescription());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(VideoSnapshotTimelapseInterval mode) {
-//                        logOut("getAutoPIVTimelapseInterval onSuccess " + mode);
-//                    }
-//                });
             }
         });
 

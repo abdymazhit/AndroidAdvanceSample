@@ -681,17 +681,6 @@ public class AMapModel implements MapModelImpl {
 
     private void addOrbitFromMap(LatLng latLng) {
         // need to add multiple language support
-       /* if (homeMarker == null || homeMarker.getPosition() == null) {
-            return ;
-        }
-        if(limitCircle != null){
-            int tmpdistance = DistanceUtils.distanceBetweenPoints(limitCircle.getCenter().latitude, limitCircle.getCenter().longitude,
-                    latLng.latitude, latLng.longitude);
-            if(tmpdistance > limitCircle.getRadius()){
-                showToast(ResourcesUtils.getString(R.string.poi_outside_fly_zone),ToastBeanIcon.ICON_FAIL);
-                return;
-            }
-        }*/
         int tmpdistance = DistanceUtils.distanceBetweenPoints(homeMarker.getPosition().latitude, homeMarker.getPosition().longitude,
                 latLng.latitude, latLng.longitude);
         Bitmap bitmap = BitmapFactory.decodeResource(AutelConfigManager.instance().getAppContext().getResources(),
@@ -893,8 +882,6 @@ public class AMapModel implements MapModelImpl {
                         0);
                 aMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
                 //TODO:一下方法会在小地图的情况下定位不对
-                //mGmap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mPhoneLocation.latitude,mPhoneLocation.longitude)));
-                //mapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(mapInitSize));
                 return true;
             }
             isFirstChangeToNet = false;

@@ -303,8 +303,6 @@ public class GMapModel implements MapModelImpl {
                         0);
                 gMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
                 //TODO:一下方法会在小地图的情况下定位不对
-                //mGmap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mPhoneLocation.latitude,mPhoneLocation.longitude)));
-                //mapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(mapInitSize));
             }
             isFirstChangeToPhone = false;
         }
@@ -682,14 +680,6 @@ public class GMapModel implements MapModelImpl {
 
     private void addOrbitFromMap(LatLng latLng) {
         //TODO:暂时隐藏
-      /*  if(limitCircle != null){
-            int tmpdistance = DistanceUtils.distanceBetweenPoints(limitCircle.getCenter().latitude, limitCircle.getCenter().longitude,
-                    latLng.latitude, latLng.longitude);
-            if(tmpdistance > limitCircle.getRadius()){
-                showToast(ResourcesUtils.getString(R.string.poi_outside_fly_zone),ToastBeanIcon.ICON_FAIL);
-                return;
-            }
-        }*/
 
         Bitmap bitmap = BitmapFactory.decodeResource(AutelConfigManager.instance().getAppContext().getResources(),
                 R.mipmap.favor_marker_point);
@@ -930,8 +920,6 @@ public class GMapModel implements MapModelImpl {
                         0);
                 gMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
                 //TODO:一下方法会在小地图的情况下定位不对
-                //mGmap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mPhoneLocation.latitude,mPhoneLocation.longitude)));
-                //mapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(mapInitSize));
                 return true;
             }
             isFirstChangeToNet = false;

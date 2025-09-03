@@ -351,17 +351,6 @@ public class CameraXb008Fragment extends CameraBaseFragment {
         view.findViewById(R.id.is3DNoiseReductionEnable).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                xb008.is3DNoiseReductionEnable(new CallbackWithOneParam<Boolean>() {
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("is3DNoiseReductionEnable  description  " + error.getDescription());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Boolean data) {
-//                        logOut("is3DNoiseReductionEnable " + data);
-//                    }
-//                });
             }
         });
 
@@ -903,10 +892,6 @@ public class CameraXb008Fragment extends CameraBaseFragment {
 ////                });
 //            }
 //        });
-//
-//        videoResolutionAndFrameRateList = (Spinner) view.findViewById(R.id.videoResolutionAndFrameRateList);
-//        videoResolutionFpsAdapter = new VideoResolutionFpsAdapter(getContext());
-//        view.findViewById(R.id.getVideoStandard).callOnClick();
     }
 
     private void initVideoResolutionFpsList() {

@@ -234,9 +234,6 @@ public class GMapMissionActivity extends MapActivity {
             MarkerOptions markerOption = new MarkerOptions();
             markerOption.position(phonell);
             markerOption.draggable(false);
-//            markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
-//                    R.mipmap.drone_location_icon)));
-//            markerOption.anchor(0.5f, 0.5f);
             mPhoneMarker = mGmap.addMarker(markerOption);
         } else {
             mPhoneMarker.setPosition(phonell);

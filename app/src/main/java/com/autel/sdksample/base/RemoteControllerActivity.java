@@ -229,23 +229,6 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
                 });
             }
         });
-//        findViewById(R.id.getGimbalDialAdjustSpeed).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mController.getGimbalDialAdjustSpeed(new CallbackWithOneParam<Integer>() {
-//
-//                    @Override
-//                    public void onFailure(AutelError rcError) {
-//                        logOut("getGimbalDialAdjustSpeed error " + rcError.getDescription());
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Integer speed) {
-//                        logOut("getGimbalDialAdjustSpeed onSuccess " + speed);
-//                    }
-//                });
-//            }
-//        });
     }
 
 
@@ -419,20 +402,6 @@ public abstract class RemoteControllerActivity extends BaseActivity<AutelRemoteC
             }
         });
     }
-
-//    public void exitCalibration(View view) {
-//        mController.setStickCalibration(RemoteControllerStickCalibration.EXIT, new CallbackWithNoParam() {
-//            @Override
-//            public void onFailure(AutelError rcError) {
-//                logOut("setStickCalibration EXIT RCError " + rcError.getDescription());
-//            }
-//
-//            @Override
-//            public void onSuccess() {
-//                logOut("setStickCalibration EXIT onSuccess  ");
-//            }
-//        });
-//    }
 
     public void getRCLengthUnit(View view) {
         if (mController == null) {

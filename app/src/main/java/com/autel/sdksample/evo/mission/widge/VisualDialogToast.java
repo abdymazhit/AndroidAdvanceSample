@@ -30,9 +30,6 @@ public class VisualDialogToast {
         mView = View.inflate(context, R.layout.visual_view_toast, null);
         dialog.setContentView(mView);
         dialog.setCancelable(false);
-//        if (context instanceof AutelBaseActivity) {
-//            hideNavigationBarWhenDismiss((AutelBaseActivity) context);
-//        }
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
         mTextViewTitle = (TextView) mView.findViewById(R.id.tv_title_content);

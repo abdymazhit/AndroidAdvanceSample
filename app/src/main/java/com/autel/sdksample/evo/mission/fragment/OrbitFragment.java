@@ -107,21 +107,14 @@ public class OrbitFragment extends Fragment {
             @Override
             public void executeClick(int finishType) {
                 showOrbitExecuteView();
-               // mRequestManager.saveOrbitFiles();
-               // mRequestManager.startOrbitMission(finishType);
-                //ToastUtils.showToast("Save Success");
             }
 
             @Override
             public void basicClick() {
-                //mRequestManager.enableRadiusSetFromDrone(true);
-               // mRequestManager.setOrbitBeanData(orbitDataSetView.getBasicData(), OrbitAdvanceDataBean.TYPE_BASIC_MODE);
             }
 
             @Override
             public void advanceClick() {
-                //mRequestManager.enableRadiusSetFromDrone(false);
-                //mRequestManager.setOrbitBeanData(orbitDataSetView.getAdvanceData(),OrbitAdvanceDataBean.TYPE_ADVANCE_MODE);
             }
 
             @Override
@@ -143,21 +136,10 @@ public class OrbitFragment extends Fragment {
 
     private void positionSetConfirm() {
         if(curPointSetWay == POINT_WAY_MAP){
-          /*  if(!mRequestManager.isOrbitAdd()){
-                showToast(ResourcesUtils.getString(R.string.orbit_please_add_a_poi), ToastBeanIcon.ICON_WARN);
-                return;
-            }
-            if(mRequestManager.addOrbitFromMap()){
-                mRequestManager.enableGetPointFromMap(MapConstant.MAP_CLICK_MODE_NULL);
-            }*/
             showOrbitDataSetView();
         }else if(curPointSetWay == POINT_WAY_PHONE){
-           /* if(mRequestManager.addOrbitFromPhone()){
-            }*/
             showOrbitDataSetView();
         }else if(curPointSetWay == POINT_WAY_AIRCRAFT){
-           /* if(mRequestManager.addOrbitFromDrone()){
-            }*/
             showOrbitDataSetView();
         }
     }
@@ -193,8 +175,6 @@ public class OrbitFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //mRequestManager.setMissionLimitCircle();
-        //mRequestManager.fetchRemoteControlMode();
     }
 
 

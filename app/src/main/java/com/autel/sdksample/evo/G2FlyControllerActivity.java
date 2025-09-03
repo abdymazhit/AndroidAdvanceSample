@@ -98,21 +98,6 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
             }
         });
 
-//        if (mEvoFlyController == null) {
-//            Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-        //mEvoFlyController.setVisualViewPointCoordListener(new CallbackWithOneParam<ViewPointTargetArea>() {
-//            @Override
-//            public void onSuccess(ViewPointTargetArea data) {
-//                logOut("setVisualViewPointCoordListener data " + data);
-//            }
-//
-//            @Override
-//            public void onFailure(AutelError error) {
-//                logOut("setVisualViewPointCoordListener onFailure " );
-//            }
-//        });
     }
 
     public void resetFlyControllerListener(View view) {
@@ -124,23 +109,7 @@ public class G2FlyControllerActivity extends FlyControllerActivity {
     }
 
     public void setLandingGearState(View view) {
-//        if (mEvoFlyController == null) {
-//        Toast.makeText(getApplicationContext(), "frequency matching first", Toast.LENGTH_LONG).show();
-//        return;
-//    }
-// mEvoFlyController.setLandingGearState(selectedLandingGearState,new
 
-//    CallbackWithNoParam() {
-//            @Override
-//            public void onSuccess() {
-//                logOut("setLandingGearState onSuccess " + selectedLandingGearState);
-//            }
-//
-//            @Override
-//            public void onFailure(AutelError error) {
-//                logOut("setLandingGearState onFailure " + error.getDescription());
-//            }
-//        });
     }
 
     public void droneArmed(View view) {

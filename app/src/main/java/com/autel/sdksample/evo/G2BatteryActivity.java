@@ -39,17 +39,6 @@ public class G2BatteryActivity extends BatteryActivity {
         findViewById(R.id.getHistoryState).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mXStarEvoBattery.getHistoryState(new CallbackWithOneParam<int[]>() {
-//                    @Override
-//                    public void onSuccess(int[] data) {
-//                        logOut("getHistoryState  onSuccess :  " + data);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("getHistoryState  error :  " + error.getDescription());
-//                    }
-//                });
             }
         });
         findViewById(R.id.resetBatteryRealTimeDataListener).setOnClickListener(new View.OnClickListener() {
@@ -82,95 +71,6 @@ public class G2BatteryActivity extends BatteryActivity {
         });
 
     }
-
-//    private void test() {
-//        RxEvoBattery rxEvoBattery = mXStarEvoBattery.toRx();
-//        rxEvoBattery.getDischargeCount().subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<Integer>() {
-//            @Override
-//            public void onNext(Integer o) {
-//                Toast.makeText(G2BatteryActivity.this, "getDischargeCount success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(G2BatteryActivity.this, "getDischargeCount failed " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//        rxEvoBattery.getDischargeDay().subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<Integer>() {
-//            @Override
-//            public void onNext(Integer o) {
-//                Toast.makeText(G2BatteryActivity.this, "getDischargeDay success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(G2BatteryActivity.this, "getDischargeDay failed " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//        rxEvoBattery.getFullChargeCapacity().subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<Integer>() {
-//            @Override
-//            public void onNext(Integer o) {
-//                Toast.makeText(G2BatteryActivity.this, "getFullChargeCapacity success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(G2BatteryActivity.this, "getFullChargeCapacity failed " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//        rxEvoBattery.getCriticalBatteryNotifyThreshold().subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<Float>() {
-//            @Override
-//            public void onNext(Float o) {
-//                Toast.makeText(G2BatteryActivity.this, "getCriticalBatteryNotifyThreshold success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(G2BatteryActivity.this, "getCriticalBatteryNotifyThreshold failed " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//        rxEvoBattery.getLowBatteryNotifyThreshold().subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<Float>() {
-//            @Override
-//            public void onNext(Float o) {
-//                Toast.makeText(G2BatteryActivity.this, "getLowBatteryNotifyThreshold success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(G2BatteryActivity.this, "getLowBatteryNotifyThreshold failed " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
-//    }
 
 
 }

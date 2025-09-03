@@ -9,8 +9,5 @@ public class LandingGearStateAdapter extends SelectorAdapter<Object> {
 
     public LandingGearStateAdapter(Context context) {
         super(context);
-//        elementList.add(LandingGearState.EXTEND);
-//        elementList.add(LandingGearState.PACK_UP);
-//        elementList.add(LandingGearState.UNKNOWN);
     }
 }

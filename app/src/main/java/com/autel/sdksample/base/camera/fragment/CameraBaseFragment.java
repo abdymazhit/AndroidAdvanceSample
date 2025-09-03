@@ -138,17 +138,6 @@ public class CameraBaseFragment extends Fragment {
         view.findViewById(R.id.getTimeStamp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                baseCamera.getTimeStamp(new CallbackWithOneParam<Long>() {
-//                    @Override
-//                    public void onSuccess(Long data) {
-//                        logOut("getTimeStamp " + data);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(AutelError error) {
-//                        logOut("getTimeStamp " + error.getDescription());
-//                    }
-//                });
             }
         });
         view.findViewById(R.id.getProduct).setOnClickListener(new View.OnClickListener() {
