@@ -53,7 +53,7 @@ public class MapRectifyUtil {
                 }
             }
         }
-        return isInChina;
+        return !isInChina;
     }
 
     private static AutelLatLng delta(AutelLatLng paramAutelLatLng) {
@@ -76,7 +76,7 @@ public class MapRectifyUtil {
      * @return
      */
     public static AutelLatLng gcj2wgs(AutelLatLng paramAutelLatLng) {
-        if (!IsInsideChina(paramAutelLatLng))
+        if (IsInsideChina(paramAutelLatLng))
             return paramAutelLatLng;
         AutelLatLng mAutelLatLng = delta(paramAutelLatLng);
         return new AutelLatLng(paramAutelLatLng.latitude - mAutelLatLng.latitude, paramAutelLatLng.longitude
@@ -91,7 +91,7 @@ public class MapRectifyUtil {
      */
     public static AutelLatLng wgs2gcj(AutelLatLng paramAutelLatLng) {
 
-        if (!IsInsideChina(paramAutelLatLng))
+        if (IsInsideChina(paramAutelLatLng))
             return paramAutelLatLng;
         AutelLatLng localAutelLatLng = delta(paramAutelLatLng);
         return new AutelLatLng(paramAutelLatLng.latitude + localAutelLatLng.latitude, paramAutelLatLng.longitude

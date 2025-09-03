@@ -80,13 +80,12 @@ public class MapMarkerIconUtil {
         int markerHeight = markerBitmap.getHeight();
         String labelText = String.format(Locale.getDefault(), ALTITUDE_FORMAT, intAltitude, TransformUtils.changeRangeUnitForUnitFlag(intAltitude));
         float rectFWidth = labelText.length() * ALTITUDE_FONT_SIZE * FONT_WIDTH_RATIO;
-        float rectFHeight = LABEL_HEIGHT;
 
         Bitmap canvasBitmap = Bitmap.createBitmap((int)rectFWidth + markerWidth, markerHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(canvasBitmap);
         canvas.drawColor(Color.WHITE,PorterDuff.Mode.CLEAR);
 
-        RectF rectF = new RectF(markerWidth * 0.75f, markerHeight * 0.5f, (markerWidth * 0.75f) + rectFWidth, rectFHeight + (markerHeight * 0.5f));
+        RectF rectF = new RectF(markerWidth * 0.75f, markerHeight * 0.5f, (markerWidth * 0.75f) + rectFWidth, (float) LABEL_HEIGHT + (markerHeight * 0.5f));
         Paint paintBg = new Paint();
         paintBg.setColor(AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.waypoint_distance_background));
         paintBg.setStyle(Paint.Style.FILL);

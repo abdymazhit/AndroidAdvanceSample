@@ -242,16 +242,14 @@ public class OrbitExecuteView extends FrameLayout {
             down_tv.setText(R.string.orbit_radius_decrease);
             left_tv.setText(R.string.orbit_ccw);
             right_tv.setText(R.string.orbit_cw);
-            left_img.setVisibility(VISIBLE);
-            right_img.setVisibility(VISIBLE);
         }else{
             up_tv.setText(R.string.orbit_altitude_increase);
             down_tv.setText(R.string.orbit_altitude_decrease);
             left_tv.setText(R.string.orbit_rotate_left);
             right_tv.setText(R.string.orbit_rotate_right);
-            left_img.setVisibility(VISIBLE);
-            right_img.setVisibility(VISIBLE);
         }
+        left_img.setVisibility(VISIBLE);
+        right_img.setVisibility(VISIBLE);
     }
 
 

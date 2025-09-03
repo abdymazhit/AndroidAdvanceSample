@@ -161,21 +161,18 @@ public class TestApplication extends Application {
                 file.delete();
             }
 
-            FileOutputStream out = new FileOutputStream(file);
-            return out;
+            return new FileOutputStream(file);
         }
     }
 
     public static String getTimeStamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.US);
-        String timeStamp = sdf.format(new Date());
-        return timeStamp;
+        return sdf.format(new Date());
     }
 
     public static String getTimeStampForFileName() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US);
-        String timeStamp = sdf.format(new Date());
-        return timeStamp;
+        return sdf.format(new Date());
     }
 
     /**

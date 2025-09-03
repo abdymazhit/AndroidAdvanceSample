@@ -186,26 +186,23 @@ public class MapFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case MapConstant.LOCATION_PERMISSION_RESULT_CODE:
-                //Check to see if permission was granted
-                boolean granted = false;
-                for(int result : grantResults){
-                    if(result == PackageManager.PERMISSION_GRANTED){
-                        granted = true;
-                        break;
-                    }
+        if (requestCode == MapConstant.LOCATION_PERMISSION_RESULT_CODE) {//Check to see if permission was granted
+            boolean granted = false;
+            for (int result : grantResults) {
+                if (result == PackageManager.PERMISSION_GRANTED) {
+                    granted = true;
+                    break;
                 }
+            }
 
-                //If permission was granted start tracking gps
-                if(granted){
-                    if(permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION)){
-                        registerHighAccuracyGps();
-                    }else{
-                        registerLowAccuracyGps();
-                    }
+            //If permission was granted start tracking gps
+            if (granted) {
+                if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    registerHighAccuracyGps();
+                } else {
+                    registerLowAccuracyGps();
                 }
-                break;
+            }
         }
     }
 

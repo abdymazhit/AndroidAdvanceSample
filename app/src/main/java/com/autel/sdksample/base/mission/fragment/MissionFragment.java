@@ -27,8 +27,7 @@ public abstract class MissionFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = createView(R.layout.fragment_mission_menu);
-        return view;
+        return createView(R.layout.fragment_mission_menu);
     }
 
 

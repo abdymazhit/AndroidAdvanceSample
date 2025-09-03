@@ -21,8 +21,7 @@ public abstract class OrbitMissionFragment extends MissionFragment {
     AutelLatLng autelLatLng = null;
 
     public AutelLatLng getOrbitPoint() {
-        AutelLatLng latLng = MapRectifyUtil.gcj2wgs(autelLatLng);
-        return latLng;
+        return MapRectifyUtil.gcj2wgs(autelLatLng);
     }
 
     @Override

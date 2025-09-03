@@ -2,6 +2,7 @@ package com.autel.sdksample.base.album;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -533,12 +534,10 @@ public class AlbumActivity extends BaseActivity<AutelAlbum> {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 3:
-                if (android.os.Build.VERSION.SDK_INT >= 23 && (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-                    downloadVideo();
-                }
-                break;
+        if (requestCode == 3) {
+            if (Build.VERSION.SDK_INT >= 23 && (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                downloadVideo();
+            }
         }
     }
 

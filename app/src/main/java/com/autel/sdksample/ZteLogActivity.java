@@ -94,10 +94,7 @@ public class ZteLogActivity extends AppCompatActivity implements Handler.Callbac
 
     @Override
     public boolean handleMessage(Message msg) {
-        switch (msg.what){
-            case 1:
-
-                break;
+        if (msg.what == 1) {
         }
         return false;
     }

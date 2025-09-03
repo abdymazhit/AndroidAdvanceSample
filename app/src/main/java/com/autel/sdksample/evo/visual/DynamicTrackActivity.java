@@ -244,13 +244,8 @@ public class DynamicTrackActivity extends BaseActivity<AutelCameraManager> {
                 }
                 currentCamera = data2;
                 cameraType.setText(data1.toString());
-                switch (data1) {
-
-                    case XB015:
-                        initXB015Camera();
-                        break;
-                    default:
-                        break;
+                if (data1 == CameraProduct.XB015) {
+                    initXB015Camera();
                 }
 
             }

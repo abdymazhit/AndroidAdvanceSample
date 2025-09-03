@@ -347,14 +347,13 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 123:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
+        if (requestCode == 123) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
 
-                mLocationManager.requestLocationUpdates(getLowAccuracyProvider(), 500, 0, mLocationListener);
-                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0, netLocationListener);
+            mLocationManager.requestLocationUpdates(getLowAccuracyProvider(), 500, 0, mLocationListener);
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0, netLocationListener);
         }
     }
 

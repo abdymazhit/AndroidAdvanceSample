@@ -477,11 +477,10 @@ public class GMapModel implements MapModelImpl {
         if(homeMarker != null && homeMarker.getPosition() != null){
             if(limitCircle == null){
                 limitCircle = addCircle(homeMarker.getPosition(),circleRadius,AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.blue),7);
-                return true;
             }else{
                 limitCircle.setCenter(homeMarker.getPosition());
-                return true;
             }
+            return true;
         }
         return false;
     }
