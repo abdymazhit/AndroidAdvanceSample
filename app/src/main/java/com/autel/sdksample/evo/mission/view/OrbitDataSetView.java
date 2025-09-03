@@ -500,21 +500,18 @@ public class OrbitDataSetView extends FrameLayout {
     }
 
     private void onBasicAdvancedChanged(@IdRes int checkedId, ViewGroup orbitDataSetContainer, View baseView, View advanceView) {
-        switch (checkedId) {
-            case R.id.rb_left_btn:
-                orbitDataSetContainer.removeAllViews();
-                orbitDataSetContainer.addView(baseView);
-                if (orbitSetViewListener != null) {
-                    orbitSetViewListener.basicClick();
-                }
-                break;
-            case R.id.rb_right_btn:
-                orbitDataSetContainer.removeAllViews();
-                orbitDataSetContainer.addView(advanceView);
-                if (orbitSetViewListener != null) {
-                    orbitSetViewListener.advanceClick();
-                }
-                break;
+        if (checkedId == R.id.rb_left_btn) {
+            orbitDataSetContainer.removeAllViews();
+            orbitDataSetContainer.addView(baseView);
+            if (orbitSetViewListener != null) {
+                orbitSetViewListener.basicClick();
+            }
+        } else if (checkedId == R.id.rb_right_btn) {
+            orbitDataSetContainer.removeAllViews();
+            orbitDataSetContainer.addView(advanceView);
+            if (orbitSetViewListener != null) {
+                orbitSetViewListener.advanceClick();
+            }
         }
     }
 

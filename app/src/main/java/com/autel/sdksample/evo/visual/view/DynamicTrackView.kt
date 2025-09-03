@@ -251,7 +251,7 @@ class DynamicTrackView : View {
                     imageWidth = mBitmap?.width!!
                     imageHeight = mBitmap?.height!!
                     picture = IntArray(imageWidth * imageHeight)
-                    mBitmap?.getPixels(picture, 0, imageWidth, 0, 0, imageWidth, imageHeight)
+                    mBitmap?.getPixels(picture!!, 0, imageWidth, 0, 0, imageWidth, imageHeight)
                 }
                 callback?.onFingerDown()
                 resetState()

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.autel.sdksample">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,6 +23,7 @@
         <activity
             android:name=".ProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -76,7 +76,8 @@
             android:screenOrientation="sensorLandscape"
             android:theme="@style/CodecTheme" />
 
-        <receiver android:name=".UsbBroadCastReceiver">
+        <receiver android:name=".UsbBroadCastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.autel.sdk.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>

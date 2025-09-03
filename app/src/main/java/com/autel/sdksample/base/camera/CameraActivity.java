@@ -134,7 +134,7 @@ public class CameraActivity extends AppCompatActivity {
             public void onRenderFrameTimestamp(long pts) {
                 if (!state) {
                     state = true;
-                    AutelCodecView.setOverExposure(false, R.drawable.expo1280);
+                    AutelCodecView.setOverExposure(false, com.autel.sdk.R.drawable.expo1280);
                 }
 /*                if(VideoCacheManager.instance().ptsMap.containsKey(pts)){
                     //AutelLog.tag("DDL").b().d("每一帧cost Time:"+(System.currentTimeMillis() - VideoCacheManager.instance().ptsMap.get(pts))+"ms, pts:"+pts+" current Time:"+System.currentTimeMillis()+" size:"+VideoCacheManager.instance().ptsMap.size());
@@ -148,7 +148,7 @@ public class CameraActivity extends AppCompatActivity {
             }
 
         });
-        AutelCodecView.setOverExposure(false, R.drawable.expo1280);
+        AutelCodecView.setOverExposure(false, com.autel.sdk.R.drawable.expo1280);
     }
 
     public void onPause() {
