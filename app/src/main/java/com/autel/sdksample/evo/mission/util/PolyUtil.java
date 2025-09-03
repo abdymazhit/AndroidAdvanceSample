@@ -503,7 +503,7 @@ public class PolyUtil {
         if (n > 2) {
             int[] stackVal = new int[]{0, (n - 1)};
             stack.push(stackVal);
-            while (stack.size() > 0) {
+            while (!stack.isEmpty()) {
                 current = stack.pop();
                 maxDist = 0;
                 for (idx = current[0] + 1; idx < current[1]; ++idx) {

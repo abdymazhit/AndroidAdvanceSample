@@ -89,7 +89,7 @@ public class AMapMissionActivity extends MapActivity {
         }
     }
 
-    private List<Polyline> polyLines = new ArrayList<>();
+    private final List<Polyline> polyLines = new ArrayList<>();
 
 
 }

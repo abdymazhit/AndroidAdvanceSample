@@ -2,8 +2,8 @@ package com.autel.sdksample.base.mission;
 
 public class MapRectifyUtil {
 
-    private static Rectangle[] exclude;
-    private static Rectangle[] region;
+    private static final Rectangle[] exclude;
+    private static final Rectangle[] region;
 
     static {
         Rectangle[] arrayOfRectangle1 = new Rectangle[6];

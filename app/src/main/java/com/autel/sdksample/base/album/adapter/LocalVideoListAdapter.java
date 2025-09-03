@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LocalVideoListAdapter extends BaseAdapter {
     private List<File> mediaInfos = new ArrayList<>();
-    private Context mContext;
+    private final Context mContext;
 
 
     public LocalVideoListAdapter(Context context) {

@@ -18,11 +18,11 @@ public class VisualDialogToast {
 
     private final Context context;
     private final View mView;
-    private TextView mTextview3;
-    private TextView mTextview2;
-    private TextView mTextview1;
-    private TextView mTextViewTitle;
-    private Dialog dialog;
+    private final TextView mTextview3;
+    private final TextView mTextview2;
+    private final TextView mTextview1;
+    private final TextView mTextViewTitle;
+    private final Dialog dialog;
 
     public VisualDialogToast(Context mContext, final OnDialogClickListener listener) {
         this.context = mContext;

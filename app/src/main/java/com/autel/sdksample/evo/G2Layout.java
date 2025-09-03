@@ -19,8 +19,8 @@ import com.autel.sdksample.evo.visual.DynamicTrackActivity;
  */
 
 public class G2Layout {
-    private View mLayout;
-    private Context mContext;
+    private final View mLayout;
+    private final Context mContext;
 
     public G2Layout(Context context) {
         mContext = context;

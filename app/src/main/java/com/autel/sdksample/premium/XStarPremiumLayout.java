@@ -19,8 +19,8 @@ import com.autel.sdksample.evo.visual.DynamicTrackActivity;
  */
 
 public class XStarPremiumLayout {
-    private View mLayout;
-    private Context mContext;
+    private final View mLayout;
+    private final Context mContext;
     public XStarPremiumLayout(Context context) {
         mContext = context;
         mLayout = View.inflate(mContext, R.layout.activity_xstar, null);

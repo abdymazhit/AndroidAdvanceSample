@@ -48,7 +48,7 @@ public class WaypointSetView extends FrameLayout {
     private TextView totalDistanceTv;
     private int curAltitude = 60;
     private int curSpeed = 5;
-    private int curFinishType = 0;
+    private final int curFinishType = 0;
     private int curHeading = 0;
     private TextView curNumTv;
     private SeekBar altitudeSeekBar;

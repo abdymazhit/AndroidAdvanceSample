@@ -39,10 +39,10 @@ public class ProductActivity extends AppCompatActivity {
     private int index;
     private long timeStamp;
     static AtomicBoolean hasInitProductListener = new AtomicBoolean(false);
-    private String fileConfig1 = "/sdcard/anddev/autel288_7.cfg";
-    private String fileConfig2 = "/sdcard/anddev/autel288_7_final.weights";
-    private String fileConfig3 = "/sdcard/anddev/autel13.cfg";
-    private String fileConfig4 = "/sdcard/anddev/autel13.backup";
+    private final String fileConfig1 = "/sdcard/anddev/autel288_7.cfg";
+    private final String fileConfig2 = "/sdcard/anddev/autel288_7_final.weights";
+    private final String fileConfig3 = "/sdcard/anddev/autel13.cfg";
+    private final String fileConfig4 = "/sdcard/anddev/autel13.backup";
     private AutelProductType currentType = AutelProductType.UNKNOWN;
 
     public void onCreate(Bundle savedInstanceState) {

@@ -18,7 +18,7 @@ public class WaypointSettingDialog {
 
     private final Dialog waypointSettingDialog;
     private final int position;
-    private Waypoint mWaypoint;
+    private final Waypoint mWaypoint;
 
     public WaypointSettingDialog(Context context, int position, Waypoint waypoint){
         this.position = position;

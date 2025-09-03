@@ -68,7 +68,7 @@ public class SwipeMenuLayout extends ViewGroup {
 
     //private Scroller mScroller;//以前item的滑动动画靠它做，现在用属性动画做
     //上一次的xy
-    private PointF mLastP = new PointF();
+    private final PointF mLastP = new PointF();
     //2016 10 22 add , 仿QQ，侧滑菜单展开时，点击除侧滑菜单之外的区域，关闭侧滑菜单。
     //增加一个布尔值变量，dispatch函数里，每次down时，为true，move时判断，如果是滑动动作，设为false。
     //在Intercept函数的up时，判断这个变量，如果仍为true 说明是点击事件，则关闭菜单。 
@@ -76,7 +76,7 @@ public class SwipeMenuLayout extends ViewGroup {
 
     //2016 11 03 add,判断手指起始落点，如果距离属于滑动了，就屏蔽一切点击事件。
     //up-down的坐标，判断是否是滑动，如果是，则屏蔽一切点击事件
-    private PointF mFirstP = new PointF();
+    private final PointF mFirstP = new PointF();
     private boolean isUserSwiped;
 
     //存储的是当前正在展开的View

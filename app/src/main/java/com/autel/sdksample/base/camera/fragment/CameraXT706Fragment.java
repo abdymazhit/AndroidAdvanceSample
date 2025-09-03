@@ -271,7 +271,7 @@ public class CameraXT706Fragment extends CameraBaseFragment {
                         if (stringBuffer.length() > 1)
                             stringBuffer.deleteCharAt(stringBuffer.length() - 1);
                         stringBuffer.append("}");
-                        logOut("setHistogramListener  onSuccess  " + stringBuffer.toString());
+                        logOut("setHistogramListener  onSuccess  " + stringBuffer);
                     }
 
                     @Override

@@ -74,34 +74,34 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
     private final int ERROR_COUNT = 2;
     private final int RESPON_COUNT = 4;
     private TimeHandler timeHandler;
-    private int timeCount = 0;
+    private final int timeCount = 0;
     private TextView cameraText, dspText, dsp_rcText, rc_playerText, urlText, downLoadProgressText;
     private LinearLayout downloadLayout;
-    private static String UPGRADE_FILE_DIR = Environment.getExternalStorageDirectory().getPath() + File.separator + "explorer"
+    private static final String UPGRADE_FILE_DIR = Environment.getExternalStorageDirectory().getPath() + File.separator + "explorer"
             + File.separator + "upgrade";
     //    private static String FILE_NAME = "gt900_MODB_FW_1.0.1.01.bin";
-    private static String FILE_NAME = "EVO_FW_V1.3.3.25.bin";
-    private static String FILE_DIR = "MODB_FW_V1.0.9";
-    private static String JSON_HEAD = "header.json";
-    private static String testJsonHeadStr =
+    private static final String FILE_NAME = "EVO_FW_V1.3.3.25.bin";
+    private static final String FILE_DIR = "MODB_FW_V1.0.9";
+    private static final String JSON_HEAD = "header.json";
+    private static final String testJsonHeadStr =
             "{\"XB015_MODB_FW_\":{\"filepath\":\"XB015_MODB_FW_1.0.1.01.bin\",\"filesize\":\"26377713\",\"md5sum\":\"\"},\"at900_MODB_FW_\":{\"filepath\":\"at900_MODB_FW_1.0.1.01.bin\",\"filesize\":\"31536763\",\"md5sum\":\"\"},\"gt900_MODB_FW_\":{\"filepath\":\"gt900_MODB_FW_1.0.1.01.bin\",\"filesize\":\"28413253\",\"md5sum\":\"\"},\"rc_player_MODB_FW_\":{\"filepath\":\"rc_player_MODB_FW_1.0.1.01.bin\",\"filesize\":\"17926540\",\"md5sum\":\"\"}}";
-   private static String testJsonHeadStr1 =
+   private static final String testJsonHeadStr1 =
             "{\"XB015_MODB_FW_\":{\"filepath\":\"XB015_MODB_FW_V1.3.3.25.bin\",\"filesize\":\"24815244\",\"md5sum\":\"\"},\"at900_MODB_FW_\":{\"filepath\":\"at900_MODB_FW_V1.3.3.25.bin\",\"filesize\":\"30693857\",\"md5sum\":\"\"},\"gt900_MODB_FW_\":{\"filepath\":\"gt900_MODB_FW_V1.3.3.25.bin\",\"filesize\":\"27230407\",\"md5sum\":\"\"},\"rc_player_MODB_FW_\":{\"filepath\":\"rc_player_MODB_FW_V1.3.3.25.bin\",\"filesize\":\"17845063\",\"md5sum\":\"\"}}";
     private File upgradeFile;
-    private List<DownloadBeanInfo> downloadBeanInfos = new ArrayList<>();
-    private List<File> dirFiles = new ArrayList<>();
-    private List<DownloadTask> downloadTaskList = new ArrayList<>();
+    private final List<DownloadBeanInfo> downloadBeanInfos = new ArrayList<>();
+    private final List<File> dirFiles = new ArrayList<>();
+    private final List<DownloadTask> downloadTaskList = new ArrayList<>();
     private static HttpDownloadManager mHttpDownloadManager = null;
     private static Context mContext;
     //    private Map<Integer, String> progressMap = new HashMap<>();
-    private SparseArray<DownloadBeanInfo> downLoadMap = new SparseArray<>();
-    private Map<String, TextView> textViewMap = new HashMap<>();
+    private final SparseArray<DownloadBeanInfo> downLoadMap = new SparseArray<>();
+    private final Map<String, TextView> textViewMap = new HashMap<>();
     private Button btn;
     private boolean isEmpty = false;
-    private int errorCount = ERROR_COUNT;
+    private final int errorCount = ERROR_COUNT;
     private int startErrorCount = ERROR_COUNT;
     private int responeCount = RESPON_COUNT;
-    private long totalSize = 0;
+    private final long totalSize = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,7 +143,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
                         AutelLog.e("CYK", "getUpgradeInfo:version:" + data.get(0).getPackage_version());
                         downloadBeanInfos.addAll(data);
                         StringBuilder urlStr = new StringBuilder();
-                        if (data.size() > 0) {
+                        if (!data.isEmpty()) {
                             for (DownloadBeanInfo d : data) {
                                 String url = d.getItemurl();
 //                                urlStr.append(d.getItemurl() + "\n");
@@ -180,7 +180,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
                 getHttpDownloadManager(context).addDownloadCallback(XStarPremiumUpgradeActivity.this);
                 downloadLayout.removeAllViews();
                 textViewMap.clear();
-                if (downloadBeanInfos.size() > 0) {
+                if (!downloadBeanInfos.isEmpty()) {
                     for (DownloadBeanInfo d : downloadBeanInfos) {
                         TextView t = new TextView(context);
                         t.setTag(d.getItemurl());
@@ -190,7 +190,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
                     }
                 }
 
-                if (downloadTaskList.size() > 0) {
+                if (!downloadTaskList.isEmpty()) {
                     for (DownloadTask d : downloadTaskList) {
                         AutelLog.e("CYK:DownloadTask:" + d.toContentValues().toString());
                         getHttpDownloadManager(context).start(d);
@@ -513,7 +513,7 @@ public class XStarPremiumUpgradeActivity extends FragmentActivity implements Htt
                         break;
                     }
 
-                    if (url.length() == 0) {
+                    if (url.isEmpty()) {
                         break;
                     }
 

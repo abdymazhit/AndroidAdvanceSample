@@ -163,7 +163,7 @@ public abstract class DspActivity extends BaseActivity<AutelDsp> {
 
     static class RFListAdapter extends BaseAdapter {
         private List<RFData> rfData;
-        private Context mContext;
+        private final Context mContext;
 
         public RFListAdapter(Context context) {
             mContext = context;

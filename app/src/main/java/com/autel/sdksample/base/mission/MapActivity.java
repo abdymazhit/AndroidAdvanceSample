@@ -397,7 +397,7 @@ public abstract class MapActivity extends FragmentActivity implements MapOperato
 //        return wayPointList.indexOf(wp);
 //    }
 
-    private Handler handler = new Handler() {
+    private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             FlyControllerInfo flyControllerData = (FlyControllerInfo) msg.obj;

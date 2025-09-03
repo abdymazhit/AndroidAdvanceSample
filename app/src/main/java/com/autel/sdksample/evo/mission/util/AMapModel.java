@@ -63,15 +63,15 @@ public class AMapModel implements MapModelImpl {
     private Marker droneMarker;
     private Marker homeMarker;
     private Marker phoneMarker;
-    private ArrayList<LatLng> recordPoints = new ArrayList<>();
-    private ArrayList<Polyline> flylines = new ArrayList<>();
-    private ArrayList<Marker> waypoints = new ArrayList<>();
+    private final ArrayList<LatLng> recordPoints = new ArrayList<>();
+    private final ArrayList<Polyline> flylines = new ArrayList<>();
+    private final ArrayList<Marker> waypoints = new ArrayList<>();
     List<MissionWaypointBean.ParamsBean.WaypointsBean> waypointBeans = new ArrayList<>();
-    private ArrayList<Polyline> waypointLines = new ArrayList<>();
+    private final ArrayList<Polyline> waypointLines = new ArrayList<>();
     private boolean isFirstChangeToPhone = true;
     private boolean isFirstChangeToNet = true;
     private boolean isStartCameraMove;
-    private boolean isMoveZoomAuto = true;
+    private final boolean isMoveZoomAuto = true;
     private String curDescription;
     private int curWidth;
     private Polyline followLine;
@@ -81,8 +81,8 @@ public class AMapModel implements MapModelImpl {
     private int clickPolylineIndex;
     private int curWaypointProjectIndex;
     private WaypointAdvanceDataBean waypointAdvanceData = new WaypointAdvanceDataBean();
-    private MissionOrbitdBean missionOrbitdBean = new MissionOrbitdBean();
-    private OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
+    private final MissionOrbitdBean missionOrbitdBean = new MissionOrbitdBean();
+    private final OrbitAdvanceDataBean orbitAdvanceDataBean = new OrbitAdvanceDataBean();
     private int curWaypointIndex;
 
     public AMapModel(AMap aMap) {
@@ -332,12 +332,12 @@ public class AMapModel implements MapModelImpl {
 
     @Override
     public void clearFlyRoute() {
-        if (flylines.size() > 0) {
+        if (!flylines.isEmpty()) {
             for (int i = 0; i < flylines.size(); i++) {
                 flylines.get(i).remove();
             }
         }
-        if (recordPoints.size() > 0) {
+        if (!recordPoints.isEmpty()) {
             recordPoints.clear();
         }
     }
@@ -434,7 +434,7 @@ public class AMapModel implements MapModelImpl {
         Marker marker = addMarker(latLng, BitmapDescriptorFactory.fromBitmap(getWaypointBitmap(true)));
         marker.setAnchor(0.5f,1);
         marker.setDraggable(true);
-        if(waypoints.size() >= 1){
+        if(!waypoints.isEmpty()){
             PolylineOptions options = new PolylineOptions();
             options.add(waypoints.get(waypoints.size()-1).getPosition(), latLng);
             Polyline polyline = addPolyline(options,AutelConfigManager.instance().getAppContext().getResources().getColor(R.color.green_light),10);
@@ -551,7 +551,7 @@ public class AMapModel implements MapModelImpl {
     @Override
     public void projectMarker(List<AutelGPSLatLng> path) {
 
-        curWaypointProjectIndex = waypoints.size() == 0 ? 0 : waypoints.size() - 1;
+        curWaypointProjectIndex = waypoints.isEmpty() ? 0 : waypoints.size() - 1;
 
         if(path != null){
             Projection pj = aMap.getProjection();
@@ -563,7 +563,7 @@ public class AMapModel implements MapModelImpl {
 
             AutelLatLng homeLocation = null;
 
-            if(waypoints.size() == 0 && path.size() > 0){
+            if(waypoints.isEmpty() && !path.isEmpty()){
                 Point point = new Point((int) path.get(0).getLat4Drone(), (int) path.get(0).getLng4Drone());
                 LatLng homepoint = pj.fromScreenLocation(point);
                 homeLocation = new AutelLatLng(homepoint.latitude,homepoint.longitude);
@@ -651,7 +651,7 @@ public class AMapModel implements MapModelImpl {
     private void updatePolyline(Marker m, int position){
         List<LatLng> points;
 
-        if(waypointLines.size() ==0) return;
+        if(waypointLines.isEmpty()) return;
         if(position == 0){
             points = waypointLines.get(0).getPoints();
             points.set(0, m.getPosition());
@@ -690,7 +690,7 @@ public class AMapModel implements MapModelImpl {
 
 
     public void saveAlreadyUpdateFlyRoute() {
-        if(recordPoints.size() > 0){
+        if(!recordPoints.isEmpty()){
             recordPoints.clear();
         }
     }
@@ -736,12 +736,12 @@ public class AMapModel implements MapModelImpl {
 
     @Override
     public void waypointDelete() {
-        if(waypoints.size() > 0){
+        if(!waypoints.isEmpty()){
             waypoints.get(waypoints.size() - 1).remove();
             waypoints.remove(waypoints.size() - 1);
             waypointBeans.remove(waypoints.size() - 1);
         }
-        if(waypointLines.size() > 0){
+        if(!waypointLines.isEmpty()){
             waypointLines.get(waypoints.size() - 1).remove();
             waypointLines.remove(waypoints.size() - 1);
         }
@@ -754,7 +754,7 @@ public class AMapModel implements MapModelImpl {
 
     @Override
     public void setCurWaypointDataChange(WaypointAdvanceDataBean waypointAdvanceDataBean, int whichItem) {
-        if(waypointBeans.size() > 0){
+        if(!waypointBeans.isEmpty()){
             switch (whichItem){
                 case WaypointAdvanceDataBean.TYPE_BASIC:
                     waypointAdvanceDataBean.setAvoidance(waypointAdvanceDataBean.getAvoidance());
@@ -932,7 +932,7 @@ public class AMapModel implements MapModelImpl {
 
     private void addNewFlyLine(AutelLatLng autelLatLng) {
         LatLng tempLatLng;
-        if (this.recordPoints.size() > 0) {
+        if (!this.recordPoints.isEmpty()) {
             tempLatLng = this.recordPoints.get(-1 + this.recordPoints.size());
         } else {
             tempLatLng = null;

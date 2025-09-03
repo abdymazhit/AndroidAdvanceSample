@@ -28,7 +28,7 @@ import java.util.List;
 
 public class WaypointLoadView extends FrameLayout {
 
-    private Context context;
+    private final Context context;
     private LayoutInflater inflater;
     private FrameLayout titleContainer;
     private FrameLayout bottomContainer;
@@ -207,7 +207,7 @@ public class WaypointLoadView extends FrameLayout {
 
     public void showWaypointFileLists(List<MissionFileBean> missionFileBeans) {
         waypointLoadAdapter.setNames(missionFileBeans);
-        if(missionFileBeans.size() == 0){
+        if(missionFileBeans.isEmpty()){
             showHaveNoDataView();
         }else{
             waypointLoadAdapter.notifyDataSetChanged();

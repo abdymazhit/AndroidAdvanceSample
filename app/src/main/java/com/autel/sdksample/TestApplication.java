@@ -97,8 +97,8 @@ public class TestApplication extends Application {
     }
 
     public static class ExceptionWriter {
-        private Throwable exception;
-        private Context mContext;
+        private final Throwable exception;
+        private final Context mContext;
 
         public ExceptionWriter(Throwable ex, Context c) {
             this.exception = ex;

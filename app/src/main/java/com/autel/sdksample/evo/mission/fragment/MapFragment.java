@@ -55,8 +55,8 @@ public class MapFragment extends Fragment {
 
     private MapViewUtilImpl mapViewUtil;
     private boolean isMapReadyState = false;
-    private boolean isWaitForMapReadyState = false;
-    private boolean isCompassOpen = false;
+    private final boolean isWaitForMapReadyState = false;
+    private final boolean isCompassOpen = false;
 
     AutelCustomGestureOverlayView mGestureView;
 
@@ -74,7 +74,7 @@ public class MapFragment extends Fragment {
 
     private OnMapFragmentListener onMapFragmentListener;
     private LocationListener netLocationListener;
-    private int curMapType = MapConstant.MAP_TYPE_SATELLITE;
+    private final int curMapType = MapConstant.MAP_TYPE_SATELLITE;
 
     public void connect(AutelProductType type) {
         if(type != AutelProductType.UNKNOWN){

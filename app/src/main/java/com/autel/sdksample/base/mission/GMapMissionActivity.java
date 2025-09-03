@@ -29,7 +29,7 @@ public class GMapMissionActivity extends MapActivity {
     MapView gMapView;
     private GoogleMap mGmap;
     boolean isFirstChangeToPhone = true;
-    private int mIndex = 0;
+    private final int mIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -112,7 +112,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
+                if (s.toString().isEmpty()) {
                     return;
                 }
 
@@ -145,7 +145,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
+                if (s.toString().isEmpty()) {
                     return;
                 }
 
@@ -178,7 +178,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
+                if (s.toString().isEmpty()) {
                     return;
                 }
 
@@ -212,7 +212,7 @@ public abstract class FlyControllerActivity extends BaseActivity<AutelFlyControl
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
+                if (s.toString().isEmpty()) {
                     return;
                 }
 

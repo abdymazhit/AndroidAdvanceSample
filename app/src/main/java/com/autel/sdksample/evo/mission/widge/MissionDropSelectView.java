@@ -28,7 +28,7 @@ import java.util.List;
 public class MissionDropSelectView extends FrameLayout {
 
 
-    private Context mContext;
+    private final Context mContext;
     private View unpressView;
     private TextView selectTv;
     private List<String> datas;

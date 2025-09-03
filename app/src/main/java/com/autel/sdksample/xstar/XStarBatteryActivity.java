@@ -73,7 +73,7 @@ public class XStarBatteryActivity extends BatteryActivity {
                             sb.append(data[i]);
                             sb.append("   ");
                         }
-                        logOut("getVoltageCells  " + sb.toString());
+                        logOut("getVoltageCells  " + sb);
                     }
 
                     @Override

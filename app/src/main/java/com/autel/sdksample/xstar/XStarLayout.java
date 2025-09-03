@@ -20,8 +20,8 @@ import com.autel.sdksample.evo.visual.VisualActivity;
  */
 
 public class XStarLayout {
-    private View mLayout;
-    private Context mContext;
+    private final View mLayout;
+    private final Context mContext;
 
     public XStarLayout(Context context) {
         mContext = context;
